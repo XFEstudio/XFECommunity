@@ -1,6 +1,4 @@
-﻿using MauiPopup;
-using XCCChatRoom.Controls;
-using XFE各类拓展.StringExtension;
+﻿using XFE各类拓展.StringExtension;
 using XFE各类拓展.TaskExtension;
 
 namespace XCCChatRoom.AllImpl
@@ -11,7 +9,6 @@ namespace XCCChatRoom.AllImpl
         public static bool IsFirstShowException { get; set; } = false;
         public static void StartCheckUpdate(Page CurrentPage)
         {
-#if ANDROID
             new Action(async () =>
             {
                 while (!IsCheckUpdate)
@@ -84,7 +81,6 @@ namespace XCCChatRoom.AllImpl
                     Thread.Sleep(5000);
                 }
             }).StartNewTask();
-#endif
         }
     }
 }
