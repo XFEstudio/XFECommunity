@@ -1,10 +1,10 @@
-﻿namespace XFECommunity
+﻿namespace XFECommunity.ViewPage
 {
-    public partial class MainPage : ContentPage
+    public partial class CommunityPage : ContentPage
     {
         int count = 0;
 
-        public MainPage()
+        public CommunityPage()
         {
             InitializeComponent();
         }

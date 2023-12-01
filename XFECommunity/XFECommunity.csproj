@@ -60,6 +60,29 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="TencentCloudSDK.Common" Version="3.0.906" />
+		<PackageReference Include="TencentCloudSDK.Sms" Version="3.0.906" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="XFE各类拓展">
+	    <HintPath>DLLImport\XFEExtension\XFE各类拓展.dll</HintPath>
+	  </Reference>
+	  <Reference Include="XFE各类拓展.NetCore.XFEDataBase">
+	    <HintPath>DLLImport\XFEDataBase\XFE各类拓展.NetCore.XFEDataBase.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="ViewPage\CommunityPage.xaml.cs">
+	    <DependentUpon>CommunityPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="ViewPage\UserInfo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

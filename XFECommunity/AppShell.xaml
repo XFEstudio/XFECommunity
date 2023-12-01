@@ -3,13 +3,23 @@
     x:Class="XFECommunity.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:XFECommunity"
+    xmlns:view="clr-namespace:XFECommunity.ViewPage"
     Shell.FlyoutBehavior="Disabled"
     Title="XFECommunity">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Tab
+        Title="社区">
+        <ShellContent
+            Title="社区"
+            ContentTemplate="{DataTemplate view:CommunityPage}"
+            Route="MainPage" />
+    </Tab>
+    <Tab
+        Title="个人中心">
+        <ShellContent
+            Title="个人中心"
+            ContentTemplate="{DataTemplate view:UserInfo}"
+            Route="UserInfo" />
+    </Tab>
 
 </Shell>
