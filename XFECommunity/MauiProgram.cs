@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using XCCChatRoom.AllImpl;
 
 namespace XFECommunity
 {
@@ -6,6 +7,8 @@ namespace XFECommunity
     {
         public static MauiApp CreateMauiApp()
         {
+            XCCDataBase.Initialize();
+            TencentSms.Initialize();
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -14,9 +17,8 @@ namespace XFECommunity
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

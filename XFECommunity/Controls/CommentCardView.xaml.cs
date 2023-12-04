@@ -1,5 +1,5 @@
+using XFE各类拓展.NetCore.ObjectExtension;
 using XFE各类拓展.NetCore.XFEDataBase;
-using XFE各类拓展.ObjectExtension;
 
 namespace XCCChatRoom.Controls;
 
@@ -45,19 +45,19 @@ public partial class CommentCardView : ContentView
     }
     public string CommentID { get; set; }
     public XFEChatRoom_CommunityComment CurrentCommentData { get; set; }
-    public event EventHandler<CommentCardLikeClickEventArgs> LikeClick;
-    public event EventHandler<CommentCardQuoteClickEventArgs> QuoteClick;
-    public event EventHandler CommentCardTapped;
+    public event EventHandler<CommentCardLikeClickEventArgs>? LikeClick;
+    public event EventHandler<CommentCardQuoteClickEventArgs>? QuoteClick;
+    public event EventHandler? CommentCardTapped;
     public CommentCardView(XFEChatRoom_CommunityComment commentEntity, XFEChatRoom_CommunityComment commentQuoteEntity)
     {
         InitializeComponent();
         this.BindingContext = this;
         CurrentCommentData = commentEntity;
-        UserName = commentEntity.UName;
-        CommentContent = commentEntity.CommentContent;
+        UserName = commentEntity.UName!;
+        CommentContent = commentEntity.CommentContent!;
         LikeCount = commentEntity.CommentLike;
-        CommentID = commentEntity.CommentID;
-        CommentTime = commentEntity.CommentTime.ToString();
+        CommentID = commentEntity.CommentID!;
+        CommentTime = commentEntity.CommentTime.ToString()!;
         if (commentQuoteEntity is not null)
         {
             QuoteContent = $"{commentQuoteEntity.UName}：{commentQuoteEntity.CommentContent}";
@@ -76,8 +76,8 @@ public partial class CommentCardView : ContentView
             this.Dispatcher.Dispatch(() =>
             {
                 CurrentCommentData = xFEChatRoom_CommunityComment;
-                CommentContent = xFEChatRoom_CommunityComment.CommentContent;
-                CommentID = xFEChatRoom_CommunityComment.CommentID;
+                CommentContent = xFEChatRoom_CommunityComment.CommentContent!;
+                CommentID = xFEChatRoom_CommunityComment.CommentID!;
                 LikeCount = xFEChatRoom_CommunityComment.CommentLike;
                 if (xFEChatRoom_CommunityComment1 is not null)
                 {

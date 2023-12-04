@@ -1,7 +1,7 @@
-using XFE各类拓展.ArrayExtension;
+using XFE各类拓展.NetCore.ArrayExtension;
+using XFE各类拓展.NetCore.ObjectExtension;
+using XFE各类拓展.NetCore.TaskExtension;
 using XFE各类拓展.NetCore.XFEDataBase;
-using XFE各类拓展.ObjectExtension;
-using XFE各类拓展.TaskExtension;
 
 namespace XCCChatRoom.Controls;
 
@@ -43,15 +43,15 @@ public partial class PostCardView : ContentView
         get => (int)GetValue(LikeCountProperty);
         set => SetValue(LikeCountProperty, value);
     }
-    private string[] tags;
-    public string[] Tags
+    private string[]? tags;
+    public string[]? Tags
     {
         get => tags;
         set
         {
             tags = value;
             tagStackLayout.Clear();
-            if (value.Length == 0)
+            if (value!.Length == 0)
             {
                 tagBoxView.IsVisible = false;
             }
@@ -73,25 +73,25 @@ public partial class PostCardView : ContentView
             }
         }
     }
-    private XFEChatRoom_CommunityPost postEntity;
-    public XFEChatRoom_CommunityPost PostEntity
+    private XFEChatRoom_CommunityPost? postEntity;
+    public XFEChatRoom_CommunityPost? PostEntity
     {
         get => postEntity;
         set
         {
-            PostTitle = value.PostTitle;
-            PostContent = value.PostContent;
-            PostAuthor = value.UName;
-            PostTime = value.PostTime.ToString();
-            PostId = value.PostID;
-            LikeCount = value.PostLike;
-            Tags = value.PostTag.ToXFEArray<string>();
+            PostTitle = value?.PostTitle!;
+            PostContent = value?.PostContent!;
+            PostAuthor = value?.UName!;
+            PostTime = value?.PostTime.ToString()!;
+            PostId = value?.PostID!;
+            LikeCount = value!.PostLike;
+            Tags = value.PostTag!.ToXFEArray<string>();
             postEntity = value;
         }
     }
-    public event EventHandler<PostCardViewClickEventArgs> Click;
-    public event EventHandler<PostCardViewLikeClickEventArgs> LikeClick;
-    public event EventHandler<PostCardViewTagClickEventArgs> TagClick;
+    public event EventHandler<PostCardViewClickEventArgs>? Click;
+    public event EventHandler<PostCardViewLikeClickEventArgs>? LikeClick;
+    public event EventHandler<PostCardViewTagClickEventArgs>? TagClick;
     private bool isLike;
     public bool IsLike
     {
@@ -110,7 +110,7 @@ public partial class PostCardView : ContentView
         InitializeComponent();
         this.BindingContext = this;
     }
-    public PostCardView(XFEChatRoom_CommunityPost xFEChatRoom_CommunityPost = null, bool showAnimation = true)
+    public PostCardView(XFEChatRoom_CommunityPost? xFEChatRoom_CommunityPost = null, bool showAnimation = true)
     {
         if (showAnimation)
         {
@@ -131,9 +131,9 @@ public partial class PostCardView : ContentView
             }).StartNewTask();
     }
 
-    private void TagButton_Clicked(object sender, PostTagViewTagClickEventArgs e)
+    private void TagButton_Clicked(object? sender, PostTagViewTagClickEventArgs e)
     {
-        TagClick?.Invoke(this, new PostCardViewTagClickEventArgs(PostEntity, e.TagText[1..]));
+        TagClick?.Invoke(this, new PostCardViewTagClickEventArgs(PostEntity!, e.TagText[1..]));
     }
 
     public void ReloadData(XFEChatRoom_CommunityPost xFEChatRoom_CommunityPost)
@@ -144,35 +144,30 @@ public partial class PostCardView : ContentView
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        Click?.Invoke(this, new PostCardViewClickEventArgs(PostEntity, e));
+        Click?.Invoke(this, new PostCardViewClickEventArgs(PostEntity!, e));
     }
 
-    private void btnLike_Clicked(object sender, EventArgs e)
+    private void BtnLike_Clicked(object sender, EventArgs e)
     {
         if (IsLike)
         {
             isLike = false;
             LikeCount--;
-            LikeClick?.Invoke(this, new PostCardViewLikeClickEventArgs(PostEntity, false));
+            LikeClick?.Invoke(this, new PostCardViewLikeClickEventArgs(PostEntity!, false));
         }
         else
         {
             isLike = true;
             LikeCount++;
-            LikeClick?.Invoke(this, new PostCardViewLikeClickEventArgs(PostEntity, true));
+            LikeClick?.Invoke(this, new PostCardViewLikeClickEventArgs(PostEntity!, true));
         }
     }
 }
 
-public class PostCardViewTagClickEventArgs
+public class PostCardViewTagClickEventArgs(XFEChatRoom_CommunityPost postEntity, string tagString)
 {
-    public XFEChatRoom_CommunityPost PostEntity { get; init; }
-    public string TagString { get; init; }
-    public PostCardViewTagClickEventArgs(XFEChatRoom_CommunityPost postEntity, string tagString)
-    {
-        PostEntity = postEntity;
-        TagString = tagString;
-    }
+    public XFEChatRoom_CommunityPost PostEntity { get; init; } = postEntity;
+    public string TagString { get; init; } = tagString;
 }
 
 public class PostCardViewClickEventArgs : EventArgs
