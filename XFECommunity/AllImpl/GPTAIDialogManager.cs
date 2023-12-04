@@ -4,7 +4,7 @@ using XFE各类拓展.NetCore.FormatExtension;
 using XFE各类拓展.NetCore.XFEChatGPT;
 using XFE各类拓展.NetCore.XFEChatGPT.ChatGPTInnerClass.HelperClass;
 
-namespace XCCChatRoom.AllImpl
+namespace XFECommunity.AllImpl
 {
     public static class GPTAIDialogManager
     {

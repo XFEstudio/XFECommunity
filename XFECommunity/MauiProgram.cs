@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using XCCChatRoom.AllImpl;
+using XFECommunity.AllImpl;
 
 namespace XFECommunity
 {

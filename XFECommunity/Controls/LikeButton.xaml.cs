@@ -1,4 +1,4 @@
-namespace XCCChatRoom.Controls;
+namespace XFECommunity.Controls;
 
 public partial class LikeButton : ContentView
 {

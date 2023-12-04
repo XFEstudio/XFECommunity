@@ -1,4 +1,4 @@
-namespace XCCChatRoom.Controls;
+namespace XFECommunity.Controls;
 
 public partial class PostTagView : ContentView
 {
@@ -8,7 +8,7 @@ public partial class PostTagView : ContentView
         get => (string)GetValue(TagTextProperty);
         set => SetValue(TagTextProperty, value);
     }
-    public event EventHandler<PostTagViewTagClickEventArgs> Clicked;
+    public event EventHandler<PostTagViewTagClickEventArgs>? Clicked;
 
     public PostTagView()
     {

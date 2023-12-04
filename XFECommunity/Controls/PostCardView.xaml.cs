@@ -3,7 +3,7 @@ using XFE各类拓展.NetCore.ObjectExtension;
 using XFE各类拓展.NetCore.TaskExtension;
 using XFE各类拓展.NetCore.XFEDataBase;
 
-namespace XCCChatRoom.Controls;
+namespace XFECommunity.Controls;
 
 public partial class PostCardView : ContentView
 {

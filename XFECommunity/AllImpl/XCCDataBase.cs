@@ -2,7 +2,7 @@
 using XFE各类拓展.NetCore.XEAEncryption;
 using XFE各类拓展.NetCore.XFEDataBase;
 
-namespace XCCChatRoom.AllImpl
+namespace XFECommunity.AllImpl
 {
     public static class XCCDataBase
     {

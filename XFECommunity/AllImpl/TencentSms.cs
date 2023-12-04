@@ -5,7 +5,7 @@ using XFE各类拓展.NetCore.TaskExtension;
 using XFE各类拓展.NetCore.WebExtension;
 using XFE各类拓展.NetCore.XEAEncryption;
 
-namespace XCCChatRoom.AllImpl
+namespace XFECommunity.AllImpl
 {
     public class TencentSms
     {

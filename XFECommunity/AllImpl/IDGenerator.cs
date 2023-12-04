@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using XFE各类拓展.NetCore.XFEDataBase;
 
-namespace XCCChatRoom.AllImpl
+namespace XFECommunity.AllImpl
 {
     public class IDGenerator
     {

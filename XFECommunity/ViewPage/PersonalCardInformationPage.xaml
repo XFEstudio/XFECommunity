@@ -104,10 +104,6 @@
                 CornerRadius="25"
                 Grid.Column="1"
                 Grid.ColumnSpan="2">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer
-                            Tapped="UserNameEdit_Tapped"/>
-                </Frame.GestureRecognizers>
                 <Label
                     Text="修改昵称"
                     FontSize="25"
@@ -144,10 +140,6 @@
                 Grid.Row="1"
                 Grid.RowSpan="3"
                 Grid.Column="2">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer
-                        Tapped="FavoritePosts_Tapped"/>
-                </Frame.GestureRecognizers>
                 <Label
                     Text="收藏的帖子"
                     FontSize="60"

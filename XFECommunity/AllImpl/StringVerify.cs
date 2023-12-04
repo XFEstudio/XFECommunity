@@ -1,4 +1,4 @@
-﻿namespace XCCChatRoom.AllImpl
+﻿namespace XFECommunity.AllImpl
 {
     public static class StringVerify
     {

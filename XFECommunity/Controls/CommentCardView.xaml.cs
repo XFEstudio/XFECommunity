@@ -1,7 +1,7 @@
 using XFE各类拓展.NetCore.ObjectExtension;
 using XFE各类拓展.NetCore.XFEDataBase;
 
-namespace XCCChatRoom.Controls;
+namespace XFECommunity.Controls;
 
 public partial class CommentCardView : ContentView
 {

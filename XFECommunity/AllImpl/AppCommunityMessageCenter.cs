@@ -1,6 +1,6 @@
 ﻿using Timer = System.Timers.Timer;
 
-namespace XCCChatRoom.AllImpl
+namespace XFECommunity.AllImpl
 {
     public class AppCommunityMessageCenter
     {

@@ -1,7 +1,7 @@
 ﻿using XFE各类拓展.NetCore.FileExtension;
 using XFE各类拓展.NetCore.FormatExtension;
 
-namespace XCCChatRoom.AllImpl
+namespace XFECommunity.AllImpl
 {
     public enum LoginMethod
     {

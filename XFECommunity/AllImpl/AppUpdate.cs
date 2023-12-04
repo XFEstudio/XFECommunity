@@ -1,4 +1,4 @@
-﻿namespace XCCChatRoom.AllImpl;
+﻿namespace XFECommunity.AllImpl;
 
 public class AppUpdate
 {
@@ -31,7 +31,7 @@ public class AppUpdate
         //                            var popup = new UpdatePopup("更新啦！", $"版本：{versionInfo[0]}", $"更新内容：\n{versionInfo[2]}");
         //                            popup.UpdateButtonClicked += async (sender, e) =>
         //                            {
-        //                                await Launcher.OpenAsync(new Uri("https://www.xfegzs.com/com.xfegzs.xccchatroom.apk"));
+        //                                await Launcher.OpenAsync(new Uri("https://www.xfegzs.com/com.xfegzs.XFECommunity.apk"));
         //                            };
         //                            popup.CancelButtonClicked += async (sender, e) =>
         //                            {
@@ -54,7 +54,7 @@ public class AppUpdate
         //                            var popup = new UpdatePopup("更新啦！", $"版本：{versionInfo[0]}（强制更新）", $"更新内容：\n{versionInfo[2]}", false);
         //                            popup.UpdateButtonClicked += async (sender, e) =>
         //                            {
-        //                                await Launcher.OpenAsync(new Uri("https://www.xfegzs.com/com.xfegzs.xccchatroom.apk"));
+        //                                await Launcher.OpenAsync(new Uri("https://www.xfegzs.com/com.xfegzs.XFECommunity.apk"));
         //                            };
         //                            await PopupAction.DisplayPopup(popup);
         //                            System.Diagnostics.Process.GetCurrentProcess().Kill();
