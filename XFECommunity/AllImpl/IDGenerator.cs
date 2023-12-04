@@ -47,7 +47,7 @@ namespace XCCChatRoom.AllImpl
             var result = new StringBuilder();
             for (int i = 0; i < length; i++)
             {
-                result.Append(random.Next(0, 10).ToString());
+                result.Append(random.Next(0, 10));
             }
             return result.ToString();
         }

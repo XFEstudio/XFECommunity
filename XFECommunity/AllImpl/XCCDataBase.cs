@@ -1,6 +1,6 @@
-﻿using XFE各类拓展.NetCore.XFEDataBase;
-using XFE各类拓展.WebExtension;
-using XFE各类拓展.XEAEncryption;
+﻿using XFE各类拓展.NetCore.WebExtension;
+using XFE各类拓展.NetCore.XEAEncryption;
+using XFE各类拓展.NetCore.XFEDataBase;
 
 namespace XCCChatRoom.AllImpl
 {
@@ -12,7 +12,7 @@ namespace XCCChatRoom.AllImpl
             get { return dataBasePassword; }
             set
             {
-                dataBasePassword = value.XEADecrypt("早期测试版数据库密码")[..^2];
+                dataBasePassword = value!.XEADecrypt("早期测试版数据库密码")[..^2];
                 Console.WriteLine(dataBasePassword);
             }
         }
@@ -20,7 +20,7 @@ namespace XCCChatRoom.AllImpl
         public static void Initialize()
         {
             DataBasePassword = "https://www.xfegzs.com/XFEChatRoom/DBKey.xfe".GetFromURL();
-            XFEDataBase = new XFEDataBase("xfeaccount", "XFEaccount", DataBasePassword);
+            XFEDataBase = new XFEDataBase("xfeaccount", "XFEaccount", DataBasePassword!);
         }
     }
 }

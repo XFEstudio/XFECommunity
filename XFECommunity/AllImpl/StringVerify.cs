@@ -2,11 +2,11 @@
 {
     public static class StringVerify
     {
-        public static string[] ContrabandVocabulary = new string[] {  };
+        public static string[] contrabandVocabulary = [];
         public static bool VerifyString(this string verifyString)
         {
             int i = 1;
-            foreach (string word in ContrabandVocabulary)
+            foreach (string word in contrabandVocabulary)
             {
                 if (verifyString == word)
                 {
@@ -22,8 +22,8 @@
 
         public static bool UserNameEditor(this string NewUserName)
         {
-                if (!NewUserName.Contains(' ') && NewUserName.VerifyString()) { return true; }
-                else { return false; }
+            if (!NewUserName.Contains(' ') && NewUserName.VerifyString()) { return true; }
+            else { return false; }
         }
 
         public static bool PasswordEditor(this string NewPassword)

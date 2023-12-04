@@ -1,5 +1,5 @@
-﻿using XFE各类拓展.FileExtension;
-using XFE各类拓展.FormatExtension;
+﻿using XFE各类拓展.NetCore.FileExtension;
+using XFE各类拓展.NetCore.FormatExtension;
 
 namespace XCCChatRoom.AllImpl
 {
@@ -23,30 +23,33 @@ namespace XCCChatRoom.AllImpl
         }
         public static void LoadSystemProfile()
         {
-            if (AppPath.SystemProfilePath.ReadOut(out string profileString))
+            if (AppPath.SystemProfilePath.ReadOut(out var profileString))
             {
-                var profileProperty = new XFEDictionary(profileString);
-                foreach (var property in profileProperty)
+                if (profileString is not null)
                 {
-                    switch (property.Header)
+                    var profileProperty = new XFEDictionary(profileString);
+                    foreach (var property in profileProperty)
                     {
-                        case nameof(LoginMethod):
-                            switch (property.Content)
-                            {
-                                case "PasswordLogin":
-                                    LoginMethod = LoginMethod.PasswordLogin;
-                                    break;
-                                case "VerifyCodeLogin":
-                                    LoginMethod = LoginMethod.VerifyCodeLogin;
-                                    break;
-                                default:
-                                    try { Shell.Current?.DisplayAlert("错误", $"配置文件读取错误，未知的类型：{property.Content}", "我测"); } catch { }
-                                    break;
-                            }
-                            break;
-                        case nameof(IgnoreVersion):
-                            IgnoreVersion = property.Content;
-                            break;
+                        switch (property.Header)
+                        {
+                            case nameof(LoginMethod):
+                                switch (property.Content)
+                                {
+                                    case "PasswordLogin":
+                                        LoginMethod = LoginMethod.PasswordLogin;
+                                        break;
+                                    case "VerifyCodeLogin":
+                                        LoginMethod = LoginMethod.VerifyCodeLogin;
+                                        break;
+                                    default:
+                                        try { Shell.Current?.DisplayAlert("错误", $"配置文件读取错误，未知的类型：{property.Content}", "我测"); } catch { }
+                                        break;
+                                }
+                                break;
+                            case nameof(IgnoreVersion):
+                                IgnoreVersion = property.Content;
+                                break;
+                        }
                     }
                 }
             }
