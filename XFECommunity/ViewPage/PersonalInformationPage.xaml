@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XFECommunity.ViewPage.PersonalInformationPage"
+             Title="PersonalInformationPage">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Frame
+            Padding="20"
+            Margin="20"
+            BackgroundColor="#F6CE4B"
+            CornerRadius="25"
+            Grid.RowSpan="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                    Text="昵称    :"
+                    FontSize="25"
+                    Margin="0,20"
+                    HorizontalTextAlignment="End"/>
+                    <Label
+                    Margin="0,20"
+                    x:Name="CurrentUserNameLabel"
+                    FontSize="25"
+                    HorizontalTextAlignment="Center"
+                    Grid.Column="1"/>
+                    <Label
+                    Text="手机号:"
+                    FontSize="25"
+                    Margin="0,20"
+                    HorizontalTextAlignment="End"
+                    Grid.Row="1"/>
+                    <Label
+                    x:Name="CurrentTelLabel"
+                    Margin="0,20"
+                    FontSize="25"
+                    HorizontalTextAlignment="Center"
+                    Grid.Row="1"
+                    Grid.Column="1"/>
+                    <Label
+                    Text="邮箱    :"
+                    FontSize="25"
+                    Margin="0,20"
+                    HorizontalTextAlignment="End"
+                    Grid.Row="2"/>
+                    <Label
+                    x:Name="CurrentMailLabel"
+                    Margin="0,20"
+                    FontSize="25"
+                    HorizontalTextAlignment="Center"
+                    Grid.Row="2"
+                    Grid.Column="1"/>
+                    <Label
+                    Text="发帖数:"
+                    FontSize="25"
+                    Margin="0,20"
+                    HorizontalTextAlignment="End"
+                    Grid.Row="3"/>
+                    <Label
+                    x:Name="UserPostNumberLabel"
+                    Margin="0,20"
+                    FontSize="25"
+                    HorizontalTextAlignment="Center"
+                    Grid.Row="3"
+                    Grid.Column="1"/>
+                    <Label
+                    Text="被赞数:"
+                    FontSize="25"
+                    Margin="0,20"
+                    HorizontalTextAlignment="End"
+                    Grid.Row="4"/>
+                    <Label
+                    x:Name="UserNumberOfLikesLabel"
+                    Margin="0,20"
+                    FontSize="25"
+                    HorizontalTextAlignment="Center"
+                    Grid.Row="4"
+                    Grid.Column="1"/>
+                </Grid>
+            </Frame>
+            <Frame
+            Margin="20"
+            BackgroundColor="#41A952"
+            CornerRadius="25"
+            Grid.Column="1"
+            Grid.ColumnSpan="2">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                    x:Name="UserNameEdit" 
+                        Tapped="UserNameEdit_Tapped"/>
+                </Frame.GestureRecognizers>
+                <Label
+                Text="修改昵称"
+                FontSize="25"
+                HorizontalTextAlignment="Center"/>
+            </Frame>
+            <Frame
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.RowSpan="3"
+            BorderColor="Transparent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button
+                    Text="修改手机号"
+                    Margin="15"
+                    x:Name="UserTelEdit"
+                    Clicked="UserTelEdit_Clicked"/>
+                    <Button
+                    Text="修改邮箱"
+                    x:Name="UserMailEdit"
+                    Margin="15"
+                    Clicked="UserMailEdit_Clicked"
+                    Grid.Row="1"/>
+                    <Button
+                    Text="修改密码"
+                    Margin="15"
+                    x:Name="UserPasswordEdit"
+                    Clicked="UserPasswordEdit_Clicked"
+                    Grid.Row="2"/>
+                </Grid>
+            </Frame>
+            <Frame
+            Padding="20"
+            Margin="20"
+            BackgroundColor="#1998D3"
+            CornerRadius="25"
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Grid.Column="2">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                    x:Name="GetFavoritePosts"
+                    Tapped="GetFavoritePosts_Tapped"/>
+                </Frame.GestureRecognizers>
+                <Label
+                Text="收藏的帖子"
+                FontSize="60"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"/>
+            </Frame>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
