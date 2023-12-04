@@ -375,7 +375,7 @@ public partial class PostViewPage : ContentPage
                     SendButton.BackgroundColor = Color.FromArgb("#512BD4");
                     InputEditor.IsEnabled = true;
                     SendButton.IsEnabled = true;
-                    await PopupAction.DisplayPopup(new ErrorPopup("评论失败", "请检查网络设置"));
+                    await DisplayAlert("评论失败", "请检查网络设置", "确认");
                     return;
                 }
             }
@@ -386,14 +386,13 @@ public partial class PostViewPage : ContentPage
             InputEditor.Text = string.Empty;
             CloseQuote();
             await CommentScrollView.ScrollToAsync(CommentStack, ScrollToPosition.End, false);
-            await PopupAction.DisplayPopup(new TipPopup("评论成功", 1));
         }
         catch (Exception ex)
         {
             SendButton.BackgroundColor = Color.FromArgb("#512BD4");
             InputEditor.IsEnabled = true;
             SendButton.IsEnabled = true;
-            await PopupAction.DisplayPopup(new ErrorPopup("评论失败", $"请检查网络设置\n{ex.Message}"));
+            await DisplayAlert("评论失败", $"请检查网络设置\n{ex.Message}", "确认");
             await Console.Out.WriteLineAsync(ex.ToString());
             return;
         }

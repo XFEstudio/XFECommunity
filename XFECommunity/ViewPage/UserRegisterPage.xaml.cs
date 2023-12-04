@@ -1,15 +1,13 @@
-using MauiPopup;
 using XFECommunity.AllImpl;
-using XFECommunity.Controls;
+using XFE各类拓展.NetCore.StringExtension;
+using XFE各类拓展.NetCore.TaskExtension;
 using XFE各类拓展.NetCore.XFEDataBase;
-using XFE各类拓展.StringExtension;
-using XFE各类拓展.TaskExtension;
 
 namespace XFECommunity.ViewPage;
 
 public partial class UserRegisterPage : ContentPage
 {
-    private XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
+    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
     private bool IsTelEditor = false, IsMailEditor = false, IsNameEditor = false, IsPasswordEditor = false, IsPasswordEnsureEditor = false;
     private string randomCode = string.Empty;
     private string currentPhoneNum = string.Empty;
@@ -245,7 +243,7 @@ public partial class UserRegisterPage : ContentPage
             });
             if (result == 0)
             {
-                await PopupAction.DisplayPopup(new ErrorPopup("注册失败", "未能成功注册，请重试"));
+                await DisplayAlert("注册失败", "未能成功注册，请重试", "确认");
                 e.Continue();
                 return;
             }

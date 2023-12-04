@@ -286,6 +286,6 @@ public partial class UserInfo : ContentPage
     //    if (IsLoginSuccessful)
     //        Shell.Current.GoToAsync(nameof(UserPropertyEditPage));
     //    else
-    //        PopupAction.DisplayPopup(new TipPopup("ÇëÏÈµÇÂ¼"));
+    //        DisplayAlert("ÇëÏÈµÇÂ¼"));
     //}
 }

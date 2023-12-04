@@ -60,7 +60,7 @@
                     </Ellipse.Fill>
                 </Ellipse>
                 <ImageButton
-                    Source="edit"
+                    Source="edit.svg"
                     WidthRequest="30"
                     HeightRequest="30"
                     Clicked="ImageButton_Clicked"/>

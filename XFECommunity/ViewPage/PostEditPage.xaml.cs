@@ -1,18 +1,16 @@
-using MauiPopup;
 using XFECommunity.AllImpl;
-using XFECommunity.Controls;
-using XFE各类拓展.ArrayExtension;
-using XFE各类拓展.ListExtension;
+using XFE各类拓展.NetCore.ArrayExtension;
+using XFE各类拓展.NetCore.ListExtension;
+using XFE各类拓展.NetCore.TaskExtension;
 using XFE各类拓展.NetCore.XFEDataBase;
-using XFE各类拓展.TaskExtension;
 
 namespace XFECommunity.ViewPage;
 
 public partial class PostEditPage : ContentPage
 {
     public XFEChatRoom_CommunityPost CurrentPostData { get; set; }
-    private XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
-    private List<string> tags = new List<string>();
+    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
+    private readonly List<string> tags = [];
     private bool BackTrigger = false;
     private bool SecTrigger = false;
     private bool Posting = false;
@@ -56,19 +54,16 @@ public partial class PostEditPage : ContentPage
                     if (await DisplayAlert("删除帖子", "确认删除吗？删除后的帖子不可恢复", "确认", "取消"))
                         try
                         {
-                            var task = PopupAction.DisplayPopup(new TipPopup("删除中...", 300));
                             var tarPost = await XFEExecuter.ExecuteGetFirst<XFEChatRoom_CommunityPost>(x => x.PostID == CurrentPostData.PostID);
                             var result = await XFEExecuter.ExecuteDelete(tarPost);
                             if (result == 0)
                             {
-                                await PopupAction.ClosePopup();
                                 BackTrigger = false;
                                 Deleting = false;
-                                await PopupAction.DisplayPopup(new ErrorPopup("删除失败", "请检查网络设置并尝试重新发布"));
+                                await DisplayAlert("删除失败", "请检查网络设置并尝试重新发布", "确认");
                                 return;
                             }
                             await Task.Delay(800);
-                            await PopupAction.ClosePopup();
                             await this.Content.FadeTo(0, 300, Easing.CubicInOut);
                             var successfulLabel = new Label
                             {
@@ -87,16 +82,15 @@ public partial class PostEditPage : ContentPage
                             PostViewPage.Current.CurrentPostData = null;
                             await Shell.Current.GoToAsync("../..");
                             CommunityPage.Current.RemovePostByID(CurrentPostData?.PostID);
-                            CommunityPage.Current.postRefreshView_Refreshing(null, null);
+                            CommunityPage.Current.PostRefreshView_Refreshing(null, null);
                             BackTrigger = false;
                             Deleting = false;
                         }
                         catch (Exception ex)
                         {
-                            await PopupAction.ClosePopup();
                             BackTrigger = false;
                             Deleting = false;
-                            await PopupAction.DisplayPopup(new ErrorPopup("删除失败", $"请检查网络设置并尝试重新发布{ex.Message}"));
+                            await DisplayAlert("删除失败", $"请检查网络设置并尝试重新发布{ex.Message}", "确认");
                             return;
                         }
                     else
@@ -130,7 +124,6 @@ public partial class PostEditPage : ContentPage
                 }
                 BackTrigger = true;
                 Posting = true;
-                var task = PopupAction.DisplayPopup(new TipPopup("发布中...", 300));
                 var timeSpend = new Action(async () =>
                 {
                     if (CurrentPostData is null)
@@ -148,19 +141,17 @@ public partial class PostEditPage : ContentPage
                             });
                             if (result == 0)
                             {
-                                await PopupAction.ClosePopup();
                                 BackTrigger = false;
                                 Posting = false;
-                                await PopupAction.DisplayPopup(new ErrorPopup("发布失败", "请检查网络设置并尝试重新发布"));
+                                await DisplayAlert("发布失败", "请检查网络设置并尝试重新发布", "确认");
                                 return;
                             }
                         }
                         catch (Exception ex)
                         {
-                            await PopupAction.ClosePopup();
                             BackTrigger = false;
                             Posting = false;
-                            await PopupAction.DisplayPopup(new ErrorPopup("发布失败", $"请检查网络设置并尝试重新发布{ex.Message}"));
+                            await DisplayAlert("发布失败", $"请检查网络设置并尝试重新发布{ex.Message}", "确认");
                             return;
                         }
                     }
@@ -175,27 +166,24 @@ public partial class PostEditPage : ContentPage
                             var result = await XFEExecuter.ExecuteUpdate(CurrentPostData);
                             if (result == 0)
                             {
-                                await PopupAction.ClosePopup();
                                 BackTrigger = false;
                                 Posting = false;
-                                await PopupAction.DisplayPopup(new ErrorPopup("发布编辑失败", "请检查网络设置并尝试重新发布"));
+                                await DisplayAlert("发布编辑失败", "请检查网络设置并尝试重新发布", "确认");
                                 return;
                             }
                             await PostViewPage.Current.Refresh();
                         }
                         catch (Exception ex)
                         {
-                            await PopupAction.ClosePopup();
                             BackTrigger = false;
                             Posting = false;
-                            await PopupAction.DisplayPopup(new ErrorPopup("发布失败", $"请检查网络设置并尝试重新发布{ex.Message}"));
+                            await DisplayAlert("发布失败", $"请检查网络设置并尝试重新发布{ex.Message}", "确认");
                             return;
                         }
                     }
                 }).CTime(true, "发布花费").TotalSeconds;
                 if (timeSpend < 1)
                     await Task.Delay(800);
-                await PopupAction.ClosePopup();
                 await this.Content.FadeTo(0, 300, Easing.CubicInOut);
                 var successfulLabel = new Label
                 {
@@ -211,7 +199,7 @@ public partial class PostEditPage : ContentPage
                 await successfulLabel.FadeTo(1, 300, Easing.CubicInOut);
                 await Task.Delay(1000);
                 await successfulLabel.FadeTo(0, 300, Easing.CubicInOut);
-                CommunityPage.Current.postRefreshView_Refreshing(null, null);
+                CommunityPage.Current.PostRefreshView_Refreshing(null, null);
                 if (CurrentPostData is not null)
                 {
                     PostViewPage.Current?.Refresh();
@@ -296,7 +284,7 @@ public partial class PostEditPage : ContentPage
         button.Clicked += TagButton_Clicked;
         TagStackLayout.Children.Add(button);
     }
-    private void TagButton_Clicked(object sender, EventArgs e)
+    private void TagButton_Clicked(object? sender, EventArgs e)
     {
         TagStackLayout.Children.Remove(sender as Button);
     }

@@ -1,8 +1,8 @@
 using XFECommunity.AllImpl;
 using XFECommunity.Controls;
+using XFE各类拓展.NetCore.StringExtension;
+using XFE各类拓展.NetCore.TaskExtension;
 using XFE各类拓展.NetCore.XFEDataBase;
-using XFE各类拓展.StringExtension;
-using XFE各类拓展.TaskExtension;
 
 namespace XFECommunity.ViewPage;
 
@@ -47,17 +47,6 @@ public partial class UserLoginPage : ContentPage
             Console.WriteLine(ex);
         }
     }
-    protected override void OnHandlerChanged()
-    {
-        base.OnHandlerChanged();
-#if ANDROID
-        (UserAccountEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (UserPasswordEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (UserTelEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (TelVerifyCodeEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-#endif
-    }
-
     #region 焦点事件
     private void UserAccountEditor_Focused(object sender, FocusEventArgs e)
     {
@@ -412,14 +401,15 @@ public partial class UserLoginPage : ContentPage
             UserInfo.CurrentPage.UUID = userInfo.ID;
             UserInfo.CurrentUser = userInfo;
             UserInfo.CurrentPage.SwitchToLoginStyle();
-            CommunityPage.Current?.postRefreshView_Refreshing(null, null);
+            CommunityPage.Current?.PostRefreshView_Refreshing(null, null);
         }
-        GroupContactPage.Current.groupRefreshView.IsRefreshing = true;
         await Task.Delay(600);
         await successfulLabel.FadeTo(0, 500, Easing.CubicOut);
-        UserInfo.CurrentPage.Opacity = 0;
+        if (UserInfo.CurrentPage is not null)
+            UserInfo.CurrentPage.Opacity = 0;
         Shell.Current.SendBackButtonPressed();
-        await UserInfo.CurrentPage.FadeTo(1, 300, Easing.CubicOut);
+        if (UserInfo.CurrentPage is not null)
+            await UserInfo.CurrentPage.FadeTo(1, 300, Easing.CubicOut);
     }
 
     private async void SwitchToRegisterPageButton_WaitClick(object sender, WaitButtonClickedEventArgs e)
@@ -673,7 +663,7 @@ public partial class UserLoginPage : ContentPage
 
     private void ForgotPasswordButton_Click(object sender, TappedEventArgs e)
     {
-        Shell.Current.GoToAsync(nameof(ForgetPasswordPage));
+        //Shell.Current.GoToAsync(nameof(ForgetPasswordPage));
     }
     #endregion
 }

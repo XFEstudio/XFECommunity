@@ -11,9 +11,9 @@ public partial class LikeButton : ContentView
         {
             isLike = value;
             if (isLike)
-                likeButton.Source = "like";
+                likeButton.Source = "like.svg";
             else
-                likeButton.Source = "unlike";
+                likeButton.Source = "unlike.svg";
         }
     }
     private int targetSize;
