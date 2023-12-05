@@ -5,10 +5,10 @@
              x:Class="XFECommunity.Controls.PostCardView">
     <Border
         x:Name="mainBorder"
-        Stroke="#512BD4"
+        Stroke="{DynamicResource MainColor}"
         StrokeThickness="2"
         StrokeShape="RoundRectangle 5,5,5,5"
-        BackgroundColor="White"
+        BackgroundColor="{DynamicResource BackGroundColor}"
         Padding="10,10,10,10">
         <Border.GestureRecognizers>
             <TapGestureRecognizer
@@ -69,9 +69,9 @@
                 Grid.Column="1"
                 HorizontalTextAlignment="End"
                 FontSize="Caption"
-                TextColor="#512BD4"/>
+                TextColor="{DynamicResource MainColor}"/>
             <BoxView
-                Color="#512BD4"
+                Color="{DynamicResource MainColor}"
                 Opacity="0.5"
                 WidthRequest="4"
                 MinimumHeightRequest="80"

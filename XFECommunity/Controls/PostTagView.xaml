@@ -6,7 +6,7 @@
         x:Name="mainBorder"
         StrokeThickness="0"
         StrokeShape="RoundRectangle 30"
-        BackgroundColor="#F0ECFE"
+        BackgroundColor="{DynamicResource LightMainColor}"
         Padding="10,5,10,5">
         <Border.GestureRecognizers>
             <TapGestureRecognizer
@@ -14,7 +14,7 @@
         </Border.GestureRecognizers>
         <Label
             Text="{Binding TagText}"
-            TextColor="#512BD4"
+            TextColor="{DynamicResource MainColor}"
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
     </Border>

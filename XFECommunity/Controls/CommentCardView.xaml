@@ -7,7 +7,7 @@
         x:Name="mainBorder"
         StrokeThickness="0"
         StrokeShape="RoundRectangle 5,5,5,5"
-        BackgroundColor="White"
+        BackgroundColor="{DynamicResource BackGroundColor}"
         Padding="10,10,10,10">
         <Border.GestureRecognizers>
             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
@@ -20,8 +20,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Ellipse
-                    Stroke="#512BD4"
-                    Fill="#F0ECFE"
+                    Stroke="{DynamicResource MainColor}"
+                    Fill="{DynamicResource LightMainColor}"
                     x:Name="ellipse"
                     StrokeThickness="2"
                     WidthRequest="30"
@@ -31,7 +31,7 @@
                 <Label
                     x:Name="charLabel"
                     Text="{Binding UserName[0]}"
-                    TextColor="#512BD4"
+                    TextColor="{DynamicResource MainColor}"
                     FontSize="20"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
@@ -42,27 +42,26 @@
                     Grid.Column="1"
                     x:Name="AuthorLabel"
                     FontSize="20"
-                    TextColor="#512BD4"/>
+                    TextColor="{DynamicResource MainColor}"/>
             </Grid>
             <Border
                 x:Name="quoteBorder"
                 StrokeThickness="0"
                 Margin="20,0"
                 StrokeShape="RoundRectangle 5,5,5,5"
-                BackgroundColor="#F0ECFE"
+                BackgroundColor="{DynamicResource LightMainColor}"
                 Padding="5">
                 <Label
                     x:Name="QutoLabel"
                     Text="{Binding QuoteContent}"
                     FontSize="18"
-                    TextColor="#512BD4"/>
+                    TextColor="{DynamicResource MainColor}"/>
             </Border>
             <Label
                 x:Name="CommentLabel"
                 Text="{Binding CommentContent}"
                 Margin="20,0"
-                FontSize="18"
-                TextColor="Black"/>
+                FontSize="18"/>
             <Label
                 x:Name="DateLabel"
                 Text="{Binding CommentTime}"
@@ -76,7 +75,7 @@
                 HeightRequest="2"
                 CornerRadius="30"
                 Opacity="0.5"
-                Color="#512BD4"/>
+                Color="{DynamicResource MainColor}"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -96,7 +95,6 @@
                 <Label
                     Grid.Row="1"
                     x:Name="LikeCountLabel"
-                    TextColor="Black"
                     Text="{Binding LikeCount}"
                     FontSize="Caption"
                     HorizontalOptions="Center"

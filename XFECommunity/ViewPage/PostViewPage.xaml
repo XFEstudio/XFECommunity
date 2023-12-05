@@ -4,7 +4,7 @@
              xmlns:ctr="clr-namespace:XFECommunity.Controls"
              x:Class="XFECommunity.ViewPage.PostViewPage"
              Title="小窝帖子详情"
-             BackgroundColor="#f0f0f0">
+             BackgroundColor="{DynamicResource SecondBackGroundColor}">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior x:Name="backButton" IsEnabled="True"/>
     </Shell.BackButtonBehavior>
@@ -17,7 +17,7 @@
                 <Border
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 0,0,10,10"
-                    BackgroundColor="White" >
+                    BackgroundColor="{DynamicResource BackGroundColor}" >
                     <StackLayout
                         Margin="0,0,0,40">
                         <Label
@@ -32,7 +32,7 @@
                             HeightRequest="2"
                             CornerRadius="30"
                             Opacity="0.5"
-                            Color="#512BD4"/>
+                            Color="{DynamicResource MainColor}"/>
                         <Grid
                             Margin="10,5">
                             <Grid.ColumnDefinitions>
@@ -40,8 +40,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Ellipse
-                                Stroke="#512BD4"
-                                Fill="#F0ECFE"
+                                Stroke="{DynamicResource MainColor}"
+                                Fill="{DynamicResource LightMainColor}"
                                 x:Name="ellipse"
                                 StrokeThickness="2"
                                 WidthRequest="30"
@@ -50,7 +50,7 @@
                                 VerticalOptions="Center"/>
                             <Label
                                 x:Name="charLabel"
-                                TextColor="#512BD4"
+                                TextColor="{DynamicResource MainColor}"
                                 FontSize="20"
                                 FontAttributes="Bold"
                                 HorizontalOptions="Center"
@@ -60,13 +60,12 @@
                                 Grid.Column="1"
                                 x:Name="AuthorLabel"
                                 FontSize="20"
-                                TextColor="#512BD4"/>
+                                TextColor="{DynamicResource MainColor}"/>
                         </Grid>
                         <Label
                             Margin="10,0,10,10"
                             x:Name="ContentLabel"
                             FontSize="Subtitle"
-                            TextColor="Black"
                             Opacity="0.85"
                             HorizontalOptions="Fill"
                             VerticalOptions="Start"/>
@@ -74,7 +73,6 @@
                             Margin="10,0,10,10"
                             x:Name="TimeLabel"
                             FontSize="Caption"
-                            TextColor="Black"
                             Opacity="0.85"
                             HorizontalOptions="End"
                             VerticalOptions="End"/>
@@ -88,7 +86,7 @@
                             HeightRequest="5"
                             CornerRadius="30"
                             Opacity="0.5"
-                            Color="#512BD4"/>
+                            Color="{DynamicResource MainColor}"/>
                         <Grid
                             Margin="0,20,0,0">
                             <Grid.ColumnDefinitions>
@@ -103,7 +101,6 @@
                                 <Label
                                     x:Name="LikeCountLabel"
                                     Text="{Binding LikeCount}"
-                                    TextColor="Black"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>
                             </VerticalStackLayout>
@@ -115,7 +112,6 @@
                                 <Label
                                     x:Name="StarCountLabel"
                                     Text="{Binding StarCount}"
-                                    TextColor="Black"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>
                             </VerticalStackLayout>
@@ -145,14 +141,14 @@
                     HorizontalOptions="Fill"
                     VerticalOptions="End"
                     FontSize="18"
-                    TextColor="#512BD4"
-                    BackgroundColor="#F0ECFE"/>
+                    TextColor="{DynamicResource MainColor}"
+                    BackgroundColor="{DynamicResource LightMainColor}"/>
             </StackLayout>
         </ScrollView>
         <StackLayout
             x:Name="InputStack">
             <Grid
-                BackgroundColor="White"
+                BackgroundColor="{DynamicResource BackGroundColor}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="End"
                 Padding="5,5,5,0">
@@ -169,7 +165,7 @@
                         x:Name="QuoteBorder"
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 10"
-                        BackgroundColor="#F0ECFE"
+                        BackgroundColor="{DynamicResource LightMainColor}"
                         IsVisible="False"
                         Margin="0,0,5,10"
                         HorizontalOptions="Start"
@@ -179,7 +175,7 @@
                                 x:Name="QuoteLabel"
                                 Margin="10,3"
                                 FontSize="Caption"
-                                TextColor="#512BD4"
+                                TextColor="{DynamicResource MainColor}"
                                 MaxLines="3"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="Center"/>
@@ -197,7 +193,7 @@
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 10"
-                        BackgroundColor="#F0ECFE"
+                        BackgroundColor="{DynamicResource LightMainColor}"
                         Margin="0,0,5,0"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="Center">
@@ -218,7 +214,7 @@
                     Source="send"
                     HorizontalOptions="End"
                     VerticalOptions="End"
-                    BackgroundColor="#A491E8"
+                    BackgroundColor="{DynamicResource DisabledMainColor}"
                     Grid.Column="1"
                     Clicked="SendButton_Clicked"
                     CornerRadius="4"
@@ -230,11 +226,11 @@
                     HeightRequest="2"
                     CornerRadius="30"
                     Opacity="0.5"
-                    Color="#512BD4"/>
+                    Color="{DynamicResource MainColor}"/>
             </Grid>
             <StackLayout.Shadow>
                 <Shadow
-                    Brush="#512BD4"
+                    Brush="{DynamicResource MainColor}"
                     Opacity="0.5"
                     Radius="10"
                     Offset="0,-10"/>

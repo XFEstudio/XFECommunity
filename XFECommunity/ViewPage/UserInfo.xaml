@@ -4,7 +4,7 @@
              xmlns:ctr="clr-namespace:XFECommunity.Controls;assembly=XFECommunity"
              x:Class="XFECommunity.ViewPage.UserInfo"
              Title="个人空间"
-             Background="#F0ECFE">
+             Background="{DynamicResource LightMainColor}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,7 +17,7 @@
         <BoxView
             VerticalOptions="Fill"
             HorizontalOptions="Fill"
-            Color="White"
+            Color="{DynamicResource BackGroundColor}"
             Opacity="0.2"/>
         <Grid
                 Margin="50,20,50,20"
@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Ellipse
-                    Stroke="#512BD4"
+                    Stroke="{DynamicResource MainColor}"
                     x:Name="ellipse"
                     StrokeThickness="4"
                     Grid.RowSpan="2"
@@ -45,7 +45,7 @@
                     x:Name="charLabel"
                     x:FieldModifier="public"
                     Grid.RowSpan="2"
-                    TextColor="#512BD4"
+                    TextColor="{DynamicResource MainColor}"
                     FontSize="40"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
@@ -55,7 +55,7 @@
                     Margin="10,0,0,0"
                     x:Name="nameLabel"
                     x:FieldModifier="public"
-                    TextColor="#512BD4"
+                    TextColor="{DynamicResource MainColor}"
                     FontSize="24"
                     FontAttributes="Bold"
                     Grid.Column="1"
@@ -66,7 +66,7 @@
                     Margin="10,0,0,0"
                     x:Name="uuidLabel"
                     x:FieldModifier="public"
-                    TextColor="#512BD4"
+                    TextColor="{DynamicResource MainColor}"
                     FontSize="12"
                     Opacity="0.8"
                     Grid.Row="1"
@@ -82,7 +82,7 @@
             VerticalOptions="Start"
             HorizontalOptions="FillAndExpand">
             <Grid
-                Background="#f0f0f0">
+                Background="{DynamicResource SecondBackGroundColor}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

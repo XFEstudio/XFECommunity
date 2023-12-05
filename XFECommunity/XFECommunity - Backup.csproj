@@ -40,8 +40,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="{DynamicResource MainColor}" />
 
 		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="{DynamicResource MainColor}" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -59,7 +61,6 @@
 
 	<ItemGroup>
 	  <None Remove="Controls\vnlaizcf.ijs~" />
-	  <None Remove="Resources\AppIcon\logoicon.png" />
 	  <None Remove="Resources\Images\biglogoicon.png" />
 	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\home.svg" />
@@ -69,16 +70,10 @@
 	  <None Remove="Resources\Images\starcircle.svg" />
 	  <None Remove="Resources\Images\unlike.svg" />
 	  <None Remove="Resources\Images\unstar.svg" />
-	  <None Remove="Resources\Splash\biglogoicon.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\logoicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiSplashScreen Include="Resources\Images\biglogoicon.png" />
-	  <MauiSplashScreen Include="Resources\Splash\biglogoicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>

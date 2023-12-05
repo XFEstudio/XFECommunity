@@ -24,13 +24,12 @@
                 HeightRequest="2"
                 CornerRadius="30"
                 Opacity="0.5"
-                Color="#512BD4" />
+                Color="{DynamicResource MainColor}" />
             <Editor
                 x:Name="ContentEditor"
                 Placeholder="请输入内容"
                 FontSize="Subtitle"
                 AutoSize="TextChanges"
-                TextColor="Black"
                 Opacity="0.85"
                 TextChanged="ContentEditor_TextChanged"
                 IsSpellCheckEnabled="False"
@@ -47,9 +46,9 @@
                     <Button
                         x:Name="AddTagButton"
                         Text="#添加标签"
-                        TextColor="#F0ECFE"
+                        TextColor="{DynamicResource LightMainColor}"
                         FontAttributes="Bold"
-                        BackgroundColor="#512BD4"
+                        BackgroundColor="{DynamicResource MainColor}"
                         CornerRadius="30"
                         Clicked="AddTagButton_Clicked"/>
                 </HorizontalStackLayout>
@@ -59,14 +58,13 @@
                 HeightRequest="2"
                 CornerRadius="30"
                 Opacity="0.5"
-                Color="#512BD4" />
+                Color="{DynamicResource MainColor}" />
             <Label
                 Margin="0,10,0,0"
                 x:Name="WordCountLabel"
                 Text="字数：0/3000"
                 FontSize="Micro"
                 Opacity="0.5"
-                TextColor="Black"
                 HorizontalOptions="End" />
             <Label
                 Text="更多功能开发中"
