@@ -1,6 +1,7 @@
 
 using XFECommunity.AllImpl;
 using XFE各类拓展.NetCore.StringExtension;
+using XFE各类拓展.NetCore.XFEDataBase;
 
 namespace XFECommunity.ViewPage;
 
@@ -112,5 +113,37 @@ public partial class PersonalInformationPage : ContentPage
                 await DisplayAlert("非法昵称", "请输入合法昵称", "明白了");
             }
         }
+    }
+    public async void ForgetPassword()
+    {
+        string userTel = await DisplayPromptAsync("忘记密码", "请输入您的手机号", "确定", "取消");
+        if (userTel is not null && userTel != string.Empty)
+        {
+            var xFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
+            var result = await xFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Atel == userTel);
+            if (result is not null && result.Count == 1)
+            {
+                ChangeForgetPassword();
+            }
+            elsev
+            {
+                await DisplayAlert("绑定异常", "该手机号未注册或绑定账号数异常", "明白了");
+            }
+        }
+    }
+
+    public async void ChangeForgetPassword()
+    {
+        string userPassword = await DisplayPromptAsync("忘记密码", "请输入您的新密码", "确定");
+        if (userPassword is not null && userPassword.PasswordEditor())
+        {
+            UserInfo.EditUserProperty(UserPropertyToEdit.Password, userPassword, this);
+            if (await UserInfo.UpLoadUserInfo() == 1)
+            {
+                await DisplayAlert("修改成功", "您的密码已修改", "明白了");
+            }
+            else { await DisplayAlert("修改失败", "您的密码修改异常", "明白了"); }
+        }
+        else { await DisplayAlert("输入异常", "您输入的密码不合规", "明白了"); }
     }
 }
