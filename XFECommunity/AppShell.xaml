@@ -5,17 +5,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:view="clr-namespace:XFECommunity.ViewPage"
     Shell.FlyoutBehavior="Disabled"
-    Title="XFECommunity">
+    Title="XFECommunity"
+    FlyoutBackgroundColor="{DynamicResource SecondBackGroundColor}"
+    BackgroundColor="{DynamicResource SecondBackGroundColor}">
 
     <Tab
-        Title="社区">
+        Title="社区"
+        Icon="home.png">
         <ShellContent
             Title="社区"
             ContentTemplate="{DataTemplate view:CommunityPage}"
             Route="MainPage" />
     </Tab>
     <Tab
-        Title="个人中心">
+        Title="个人中心"
+        Icon="user.png">
         <ShellContent
             Title="个人中心"
             ContentTemplate="{DataTemplate view:UserInfo}"

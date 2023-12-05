@@ -12,12 +12,14 @@ namespace XFECommunity.AllImpl
     {
         public static LoginMethod LoginMethod { get; set; } = LoginMethod.PasswordLogin;
         public static string IgnoreVersion { get; set; } = string.Empty;
+        public static AppTheme Theme { get; set; } = Application.Current is null ? AppTheme.Unspecified : Application.Current.UserAppTheme;
         public static void SaveSystemProfile()
         {
             string saveString = new XFEDictionary(new string[]
             {
                 nameof(LoginMethod), LoginMethod.ToString(),
-                nameof(IgnoreVersion), IgnoreVersion
+                nameof(IgnoreVersion), IgnoreVersion,
+                nameof(Theme), Theme.ToString()
             }).ToString();
             saveString.WriteIn(AppPath.SystemProfilePath);
         }
@@ -33,21 +35,13 @@ namespace XFECommunity.AllImpl
                         switch (property.Header)
                         {
                             case nameof(LoginMethod):
-                                switch (property.Content)
-                                {
-                                    case "PasswordLogin":
-                                        LoginMethod = LoginMethod.PasswordLogin;
-                                        break;
-                                    case "VerifyCodeLogin":
-                                        LoginMethod = LoginMethod.VerifyCodeLogin;
-                                        break;
-                                    default:
-                                        try { Shell.Current?.DisplayAlert("错误", $"配置文件读取错误，未知的类型：{property.Content}", "我测"); } catch { }
-                                        break;
-                                }
+                                LoginMethod = Enum.Parse<LoginMethod>(property.Content);
                                 break;
                             case nameof(IgnoreVersion):
                                 IgnoreVersion = property.Content;
+                                break;
+                            case nameof(Theme):
+                                Theme = Enum.Parse<AppTheme>(property.Content);
                                 break;
                         }
                     }

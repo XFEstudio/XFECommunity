@@ -1,4 +1,5 @@
-﻿using XFECommunity.Resources.Styles;
+﻿using XFECommunity.AllImpl;
+using XFECommunity.Resources.Styles;
 
 namespace XFECommunity
 {
@@ -8,11 +9,16 @@ namespace XFECommunity
         {
             Current!.RequestedThemeChanged += (s, a) =>
             {
+                if (Current!.UserAppTheme != AppTheme.Unspecified)
+                    AppSystemProfile.Theme = a.RequestedTheme;
                 AutoSwitchByTheme(a.RequestedTheme);
             };
             InitializeComponent();
+            AppSystemProfile.Theme = Current!.RequestedTheme;
+            Console.WriteLine(Current!.RequestedTheme);
+            AppSystemProfile.LoadSystemProfile();
             MainPage = new AppShell();
-            AutoSwitchByTheme(Current!.RequestedTheme);
+            AutoSwitchByTheme(AppSystemProfile.Theme);
         }
         public static void SwitchToTheme(ResourceDictionary resourceDictionary)
         {
@@ -27,7 +33,20 @@ namespace XFECommunity
             switch (appTheme)
             {
                 case AppTheme.Unspecified:
-                    SwitchToTheme(new LightTheme());
+                    switch (Current!.RequestedTheme)
+                    {
+                        case AppTheme.Unspecified:
+                            SwitchToTheme(new LightTheme());
+                            break;
+                        case AppTheme.Light:
+                            SwitchToTheme(new LightTheme());
+                            break;
+                        case AppTheme.Dark:
+                            SwitchToTheme(new DarkTheme());
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case AppTheme.Light:
                     SwitchToTheme(new LightTheme());

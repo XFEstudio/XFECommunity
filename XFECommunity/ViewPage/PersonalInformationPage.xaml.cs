@@ -53,7 +53,7 @@ public partial class PersonalInformationPage : ContentPage
         {
             if (userTelEdit.IsMobPhoneNumber())
             {
-                UserInfo.EditUserProperty(UserPropertyToEdit.PhoneNum, userTelEdit, this);
+                UserInfo.EditUserProperty(UserPropertyToEdit.PhoneNum, userTelEdit);
                 await DisplayAlert("修改成功", "您的手机号已修改", "明白了");
             }
             else
@@ -70,7 +70,7 @@ public partial class PersonalInformationPage : ContentPage
         {
             if (userMailEdit.IsValidEmail())
             {
-                UserInfo.EditUserProperty(UserPropertyToEdit.Mail, userMailEdit, this);
+                UserInfo.EditUserProperty(UserPropertyToEdit.Mail, userMailEdit);
                 await DisplayAlert("修改成功", "您的邮箱已修改", "明白了");
             }
             else
@@ -87,7 +87,7 @@ public partial class PersonalInformationPage : ContentPage
         {
             if(userPasswordEdit.PasswordEditor())
             {
-                UserInfo.EditUserProperty(UserPropertyToEdit.Password, userPasswordEdit, this);
+                UserInfo.EditUserProperty(UserPropertyToEdit.Password, userPasswordEdit);
                 await DisplayAlert("修改成功", "您的密码已修改", "明白了");
             }
             else
@@ -104,7 +104,7 @@ public partial class PersonalInformationPage : ContentPage
         {
             if (userNameEdit.UserNameEditor())
             {
-                UserInfo.EditUserProperty(UserPropertyToEdit.UserName, userNameEdit, this);
+                UserInfo.EditUserProperty(UserPropertyToEdit.UserName, userNameEdit);
                 await DisplayAlert("修改成功", "您的密码已修改", "明白了");
             }
             else

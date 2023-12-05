@@ -37,6 +37,7 @@
             <Label
                 x:Name="lblTitle"
                 Text="{Binding PostTitle}"
+                TextColor="{DynamicResource NormalTextColor}"
                 FontSize="Title"
                 HorizontalOptions="Start"
                 VerticalOptions="Center"
@@ -45,6 +46,7 @@
             <Label
                 x:Name="lblContent"
                 Text="{Binding PostContent}"
+                TextColor="{DynamicResource NormalTextColor}"
                 HorizontalOptions="Start"
                 VerticalOptions="Center"
                 MaxLines="6"
@@ -91,6 +93,7 @@
                 <Label
                     x:Name="lblLikeCount"
                     Text="{Binding LikeCount}"
+                    TextColor="{DynamicResource NormalTextColor}"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
             </StackLayout>

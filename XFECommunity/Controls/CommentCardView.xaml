@@ -60,6 +60,7 @@
             <Label
                 x:Name="CommentLabel"
                 Text="{Binding CommentContent}"
+                TextColor="{DynamicResource NormalTextColor}"
                 Margin="20,0"
                 FontSize="18"/>
             <Label
@@ -96,6 +97,7 @@
                     Grid.Row="1"
                     x:Name="LikeCountLabel"
                     Text="{Binding LikeCount}"
+                    TextColor="{DynamicResource NormalTextColor}"
                     FontSize="Caption"
                     HorizontalOptions="Center"
                     VerticalOptions="End"/>

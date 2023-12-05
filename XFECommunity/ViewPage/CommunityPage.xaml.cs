@@ -16,6 +16,7 @@ public partial class CommunityPage : ContentPage
     private long totalHeight = 0;
     private bool firstRefresh = true;
     private bool refreshingIsBusy = false;
+    private ToolbarItem switchColorButton = new();
     private bool RefreshingIsBusy
     {
         get => refreshingIsBusy;
@@ -37,7 +38,64 @@ public partial class CommunityPage : ContentPage
         InitializeComponent();
         Task.Run(async () => await UserInfo.ReadUserData(this));
         Current = this;
+        switchColorButton.Command = new Command(() =>
+        {
+            SwitchToNextTheme();
+        });
+        SwitchToTheme(AppSystemProfile.Theme);
+        ToolbarItems.Add(switchColorButton);
         postRefreshView.IsRefreshing = true;
+    }
+    public static void SwitchToNextTheme()
+    {
+        switch (AppSystemProfile.Theme)
+        {
+            case AppTheme.Unspecified:
+                Current?.SwitchToTheme(AppTheme.Light);
+                AppSystemProfile.Theme = AppTheme.Light;
+                Application.Current!.UserAppTheme = AppTheme.Light;
+                UserInfo.CurrentPage?.SwitchToTheme(AppTheme.Light);
+                AppSystemProfile.SaveSystemProfile();
+                break;
+            case AppTheme.Light:
+                Current?.SwitchToTheme(AppTheme.Dark);
+                AppSystemProfile.Theme = AppTheme.Dark;
+                Application.Current!.UserAppTheme = AppTheme.Dark;
+                UserInfo.CurrentPage?.SwitchToTheme(AppTheme.Dark);
+                App.AutoSwitchByTheme(Application.Current!.RequestedTheme);
+                AppSystemProfile.SaveSystemProfile();
+                break;
+            case AppTheme.Dark:
+                Current?.SwitchToTheme(AppTheme.Unspecified);
+                AppSystemProfile.Theme = AppTheme.Unspecified;
+                Application.Current!.UserAppTheme = AppTheme.Unspecified;
+                UserInfo.CurrentPage?.SwitchToTheme(AppTheme.Unspecified);
+                App.AutoSwitchByTheme(Application.Current!.RequestedTheme);
+                AppSystemProfile.SaveSystemProfile();
+                break;
+            default:
+                break;
+        }
+    }
+    public void SwitchToTheme(AppTheme appTheme)
+    {
+        switch (appTheme)
+        {
+            case AppTheme.Unspecified:
+                switchColorButton.IconImageSource = "sunandmoon.png";
+                switchColorButton.Text = "跟随系统";
+                break;
+            case AppTheme.Light:
+                switchColorButton.IconImageSource = "sun.png";
+                switchColorButton.Text = "浅色主题";
+                break;
+            case AppTheme.Dark:
+                switchColorButton.IconImageSource = "moon.png";
+                switchColorButton.Text = "深色主题";
+                break;
+            default:
+                break;
+        }
     }
     public void Refresh()
     {
@@ -207,6 +265,14 @@ public partial class CommunityPage : ContentPage
     }
     private async void ImageButton_Clicked(object sender, EventArgs e)
     {
+        if (!UserInfo.IsLoginSuccessful)
+        {
+            if (await DisplayAlert("诶嘿", "请先登录哦", "前往登录", "取消"))
+            {
+                await Shell.Current.GoToAsync(nameof(UserLoginPage));
+            }
+            return;
+        }
         if (tapped)
         {
             return;
@@ -219,6 +285,14 @@ public partial class CommunityPage : ContentPage
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
+        if (!UserInfo.IsLoginSuccessful)
+        {
+            if (await DisplayAlert("诶嘿", "请先登录哦", "前往登录", "取消"))
+            {
+                await Shell.Current.GoToAsync(nameof(UserLoginPage));
+            }
+            return;
+        }
         if (tapped)
         {
             return;

@@ -59,11 +59,12 @@ public partial class UserInfo : ContentPage
         }
     }
     public static UserInfo? CurrentPage { get; private set; }
-    private static XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase!.CreateExecuter();
+    private static readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase!.CreateExecuter();
     public UserInfo()
     {
         InitializeComponent();
         this.BindingContext = this;
+        SwitchToTheme(AppSystemProfile.Theme);
         CurrentPage = this;
         if (IsLoginSuccessful)
         {
@@ -94,6 +95,28 @@ public partial class UserInfo : ContentPage
             return 0;
         }
     }
+
+    public void SwitchToTheme(AppTheme appTheme)
+    {
+        switch (appTheme)
+        {
+            case AppTheme.Unspecified:
+                ThemeShowImage.Source = "sunandmoon.png";
+                ThemeShowLabel.Text = "跟随系统";
+                break;
+            case AppTheme.Light:
+                ThemeShowImage.Source = "sun.png";
+                ThemeShowLabel.Text = "浅色";
+                break;
+            case AppTheme.Dark:
+                ThemeShowImage.Source = "moon.png";
+                ThemeShowLabel.Text = "深色";
+                break;
+            default:
+                break;
+        }
+    }
+
     public void SwitchToLoginStyle()
     {
         LoginButton.SetDynamicResource(Button.BackgroundColorProperty, "WhiteInLightAndTransparentInDarkColor");
@@ -148,7 +171,7 @@ public partial class UserInfo : ContentPage
             CurrentPage.DisplayAlert("错误", ex.Message, "确认");
         }
     }
-    public static async void EditUserProperty(UserPropertyToEdit userPropertyToEdit, string newProperty, Page page)
+    public static async void EditUserProperty(UserPropertyToEdit userPropertyToEdit, string newProperty)
     {
         switch (userPropertyToEdit)
         {
@@ -276,16 +299,45 @@ public partial class UserInfo : ContentPage
         }
         e.Continue();
     }
-    //private void WhiteChoiceButton_Click(object sender, TappedEventArgs e)
-    //{
-    //    Shell.Current.GoToAsync(nameof(UserPrivacyListPage));
-    //}
 
-    //private void WhiteChoiceUserPropertyEditorButton_Click(object sender, TappedEventArgs e)
-    //{
-    //    if (IsLoginSuccessful)
-    //        Shell.Current.GoToAsync(nameof(UserPropertyEditPage));
-    //    else
-    //        DisplayAlert("请先登录"));
-    //}
+    private void SwitchThemeGesture_Tapped(object sender, TappedEventArgs e)
+    {
+        CommunityPage.SwitchToNextTheme();
+    }
+
+    private async void PasswordEditGesture_Tapped(object sender, TappedEventArgs e)
+    {
+        if (IsLoginSuccessful)
+        {
+            //ToDo...
+        }
+        else
+        {
+            await DisplayAlert("未登录", "请先登录", "确认");
+        }
+    }
+
+    private async void MailEditGesture_Tapped(object sender, TappedEventArgs e)
+    {
+        if (IsLoginSuccessful)
+        {
+            //ToDo...
+        }
+        else
+        {
+            await DisplayAlert("未登录", "请先登录", "确认");
+        }
+    }
+
+    private async void TelEditGesture_Tapped(object sender, TappedEventArgs e)
+    {
+        if (IsLoginSuccessful)
+        {
+            //ToDo...
+        }
+        else
+        {
+            await DisplayAlert("未登录", "请先登录", "确认");
+        }
+    }
 }
