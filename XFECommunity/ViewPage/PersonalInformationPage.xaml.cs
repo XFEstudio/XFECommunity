@@ -1,4 +1,7 @@
 
+using XFECommunity.AllImpl;
+using XFE各类拓展.NetCore.StringExtension;
+
 namespace XFECommunity.ViewPage;
 
 public partial class PersonalInformationPage : ContentPage
@@ -38,21 +41,71 @@ public partial class PersonalInformationPage : ContentPage
             CurrentTelLabelText = UserInfo.CurrentUser.Atel!;
             CurrentEmailLabelText = UserInfo.CurrentUser.Amail!;
             UserUUIDLabelText = UserInfo.CurrentUser.ID!;
-
         }
         
         
     }
 
-    private async void UserNameEdit_Tapped(object sender, TappedEventArgs e)
+    private async void UserTelEdit_Clicked(object sender, EventArgs e)
     {
-        string userNameEdit = await DisplayPromptAsync("修改昵称", "请输入要修改的昵称", "确定","取消");
+        string userTelEdit = await DisplayPromptAsync("修改手机号", "请输入您要修改的手机号", "确定", "取消");
+        if (userTelEdit is not null && userTelEdit != string.Empty)
+        {
+            if (userTelEdit.IsMobPhoneNumber())
+            {
+                UserInfo.EditUserProperty(UserPropertyToEdit.PhoneNum, userTelEdit, this);
+                await DisplayAlert("修改成功", "您的手机号已修改", "明白了");
+            }
+            else
+            {
+                await DisplayAlert("非法手机号", "请输入合法手机号", "明白了");
+            }
+        }
+    }
+
+    private async void UserMailEdit_Clicked(object sender, EventArgs e)
+    {
+        string userMailEdit = await DisplayPromptAsync("修改邮箱", "请输入您要修改的邮箱", "确定", "取消");
+        if (userMailEdit is not null && userMailEdit != string.Empty)
+        {
+            if (userMailEdit.IsValidEmail())
+            {
+                UserInfo.EditUserProperty(UserPropertyToEdit.Mail, userMailEdit, this);
+                await DisplayAlert("修改成功", "您的邮箱已修改", "明白了");
+            }
+            else
+            {
+                await DisplayAlert("邮箱不合理", "请输入合理邮箱", "明白了");
+            }
+        }
+    }
+
+    private async void UserPasswordEdit_Clicked(object sender, EventArgs e)
+    {
+        string userPasswordEdit = await DisplayPromptAsync("修改密码", "请输入您要修改的密码", "确定", "取消");
+        if (userPasswordEdit is not null && userPasswordEdit != string.Empty) 
+        {
+            if(userPasswordEdit.PasswordEditor())
+            {
+                UserInfo.EditUserProperty(UserPropertyToEdit.Password, userPasswordEdit, this);
+                await DisplayAlert("修改成功", "您的密码已修改", "明白了");
+            }
+            else
+            {
+                await DisplayAlert("非法密码", "请输入合法密码", "明白了");
+            }
+        }
+    }
+
+    private async void UserNameEdit_Clicked(object sender, EventArgs e)
+    {
+        string userNameEdit = await DisplayPromptAsync("修改昵称", "请您输入要修改的昵称", "确定", "取消");
         if (userNameEdit is not null && userNameEdit != string.Empty)
         {
-            if (false)
+            if (userNameEdit.UserNameEditor())
             {
-                /*UserInfo.*/
-                await DisplayAlert("修改成功", "内容合法", "明白了");
+                UserInfo.EditUserProperty(UserPropertyToEdit.UserName, userNameEdit, this);
+                await DisplayAlert("修改成功", "您的密码已修改", "明白了");
             }
             else
             {
@@ -60,20 +113,4 @@ public partial class PersonalInformationPage : ContentPage
             }
         }
     }
-
-    private void UserTelEdit_Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void UserMailEdit_Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void UserPasswordEdit_Clicked(object sender, EventArgs e)
-    {
-
-    }
-
 }
