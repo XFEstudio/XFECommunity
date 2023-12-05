@@ -7,7 +7,7 @@ namespace XFECommunity.ViewPage;
 
 public partial class UserRegisterPage : ContentPage
 {
-    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
+    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase!.CreateExecuter();
     private bool IsTelEditor = false, IsMailEditor = false, IsNameEditor = false, IsPasswordEditor = false, IsPasswordEnsureEditor = false;
     private string randomCode = string.Empty;
     private string currentPhoneNum = string.Empty;
@@ -20,23 +20,12 @@ public partial class UserRegisterPage : ContentPage
             Thread.Sleep(500);
             while (!UserTelEditor.IsFocused)
             {
-                UserTelEditor.Focus();
+                UserTelEditor.Dispatcher.Dispatch(() => UserTelEditor.Focus());
                 Thread.Sleep(100);
             }
         }).StartNewTask();
     }
-    protected override void OnHandlerChanged()
-    {
-        base.OnHandlerChanged();
-#if ANDROID
-        (UserNameEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (UserPasswordEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (UserTelEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (UserMailEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (UserPasswordEnsureEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (TelVerifyCodeEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-#endif
-    }
+
     private async void NextStepButton_WaitClick(object sender, Controls.WaitButtonClickedEventArgs e)
     {
         try
@@ -52,7 +41,7 @@ public partial class UserRegisterPage : ContentPage
                 if (UserTelEditor.Text == currentPhoneNum)
                 {
                     var telResult = await XFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Atel == UserTelEditor.Text);
-                    if (telResult.Count > 0)
+                    if (telResult!.Count > 0)
                     {
                         UserTelLabel.Text = "手机号已存在";
                         UserTelLabel.TextColor = Color.Parse("Red");
@@ -220,11 +209,11 @@ public partial class UserRegisterPage : ContentPage
     }
     private async void UserRegisterButton_WaitClick(object sender, Controls.WaitButtonClickedEventArgs e)
     {
-        string UUID = await IDGenerator.GetCorrectUserUID(XCCDataBase.XFEDataBase.CreateExecuter());
+        string UUID = await IDGenerator.GetCorrectUserUID(XCCDataBase.XFEDataBase!.CreateExecuter());
         try
         {
             var mailResult = await XFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Amail == UserMailEditor.Text);
-            if (mailResult.Count > 0)
+            if (mailResult!.Count > 0)
             {
                 UserMailLabel.Text = "邮箱已存在";
                 UserMailLabel.TextColor = Color.Parse("Red");
@@ -414,7 +403,7 @@ public partial class UserRegisterPage : ContentPage
                 NextStepButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
                 NextStepButton.IsEnabled = true;
             }
-            TelVerifyCodeEditor_Unfocused(null, null);
+            TelVerifyCodeEditor_Unfocused(null, null!);
         }
         else
         {
@@ -443,7 +432,7 @@ public partial class UserRegisterPage : ContentPage
     }
     #endregion
     #region 编辑框焦点事件
-    private void UserTelEditor_Focused(object sender, FocusEventArgs e)
+    private void UserTelEditor_Focused(object? sender, FocusEventArgs e)
     {
         UserTelLabel.FadeTo(1, 300, Easing.CubicOut);
         UserTelLabel.ScaleTo(1.2, 300, Easing.CubicOut);
@@ -451,7 +440,7 @@ public partial class UserRegisterPage : ContentPage
         UserTelBorder.ScaleTo(1.2, 300, Easing.CubicOut);
     }
 
-    private void UserTelEditor_Unfocused(object sender, FocusEventArgs e)
+    private void UserTelEditor_Unfocused(object? sender, FocusEventArgs e)
     {
         UserTelLabel.FadeTo(0.5, 300, Easing.CubicOut);
         UserTelLabel.ScaleTo(1, 300, Easing.CubicOut);
@@ -459,7 +448,7 @@ public partial class UserRegisterPage : ContentPage
         UserTelBorder.ScaleTo(1, 300, Easing.CubicOut);
     }
 
-    private void UserMailEditor_Focused(object sender, FocusEventArgs e)
+    private void UserMailEditor_Focused(object? sender, FocusEventArgs e)
     {
         UserMailLabel.FadeTo(1, 300, Easing.CubicOut);
         UserMailLabel.ScaleTo(1.2, 300, Easing.CubicOut);
@@ -467,7 +456,7 @@ public partial class UserRegisterPage : ContentPage
         UserMailBorder.ScaleTo(1.2, 300, Easing.CubicOut);
     }
 
-    private void UserMailEditor_Unfocused(object sender, FocusEventArgs e)
+    private void UserMailEditor_Unfocused(object? sender, FocusEventArgs e)
     {
         UserMailLabel.FadeTo(0.5, 300, Easing.CubicOut);
         UserMailLabel.ScaleTo(1, 300, Easing.CubicOut);
@@ -475,7 +464,7 @@ public partial class UserRegisterPage : ContentPage
         UserMailBorder.ScaleTo(1, 300, Easing.CubicOut);
     }
 
-    private void UserNameEditor_Focused(object sender, FocusEventArgs e)
+    private void UserNameEditor_Focused(object? sender, FocusEventArgs e)
     {
         UserNameLabel.FadeTo(1, 300, Easing.CubicOut);
         UserNameLabel.ScaleTo(1.2, 300, Easing.CubicOut);
@@ -483,7 +472,7 @@ public partial class UserRegisterPage : ContentPage
         UserNameBorder.ScaleTo(1.2, 300, Easing.CubicOut);
     }
 
-    private void UserNameEditor_Unfocused(object sender, FocusEventArgs e)
+    private void UserNameEditor_Unfocused(object? sender, FocusEventArgs e)
     {
         UserNameLabel.FadeTo(0.5, 300, Easing.CubicOut);
         UserNameLabel.ScaleTo(1, 300, Easing.CubicOut);
@@ -491,7 +480,7 @@ public partial class UserRegisterPage : ContentPage
         UserNameBorder.ScaleTo(1, 300, Easing.CubicOut);
     }
 
-    private void TelVerifyCodeEditor_Focused(object sender, FocusEventArgs e)
+    private void TelVerifyCodeEditor_Focused(object? sender, FocusEventArgs e)
     {
         TelVerifyCodeLabel.FadeTo(1, 300, Easing.CubicOut);
         TelVerifyCodeLabel.ScaleTo(1.2, 300, Easing.CubicOut);
@@ -500,7 +489,7 @@ public partial class UserRegisterPage : ContentPage
         TelVerifyCodeButton.ScaleTo(0.8, 300, Easing.CubicOut);
     }
 
-    private void TelVerifyCodeEditor_Unfocused(object sender, FocusEventArgs e)
+    private void TelVerifyCodeEditor_Unfocused(object? sender, FocusEventArgs e)
     {
         TelVerifyCodeLabel.FadeTo(0.5, 300, Easing.CubicOut);
         TelVerifyCodeLabel.ScaleTo(1, 300, Easing.CubicOut);
@@ -509,7 +498,7 @@ public partial class UserRegisterPage : ContentPage
         TelVerifyCodeButton.ScaleTo(1, 300, Easing.CubicOut);
     }
 
-    private void UserPasswordEditor_Focused(object sender, FocusEventArgs e)
+    private void UserPasswordEditor_Focused(object? sender, FocusEventArgs e)
     {
         UserPasswordLabel.FadeTo(1, 300, Easing.CubicOut);
         UserPasswordLabel.ScaleTo(1.2, 300, Easing.CubicOut);
@@ -517,7 +506,7 @@ public partial class UserRegisterPage : ContentPage
         UserPasswordBorder.ScaleTo(1.2, 300, Easing.CubicOut);
     }
 
-    private void UserPasswordEditor_Unfocused(object sender, FocusEventArgs e)
+    private void UserPasswordEditor_Unfocused(object? sender, FocusEventArgs e)
     {
         UserPasswordLabel.FadeTo(0.5, 300, Easing.CubicOut);
         UserPasswordLabel.ScaleTo(1, 300, Easing.CubicOut);
@@ -525,7 +514,7 @@ public partial class UserRegisterPage : ContentPage
         UserPasswordBorder.ScaleTo(1, 300, Easing.CubicOut);
     }
 
-    private void UserPasswordEnsureEditor_Focused(object sender, FocusEventArgs e)
+    private void UserPasswordEnsureEditor_Focused(object? sender, FocusEventArgs e)
     {
         UserPasswordEnsureLabel.FadeTo(1, 300, Easing.CubicOut);
         UserPasswordEnsureLabel.ScaleTo(1.2, 300, Easing.CubicOut);
@@ -533,7 +522,7 @@ public partial class UserRegisterPage : ContentPage
         UserPasswordEnsureBorder.ScaleTo(1.2, 300, Easing.CubicOut);
     }
 
-    private void UserPasswordEnsureEditor_Unfocused(object sender, FocusEventArgs e)
+    private void UserPasswordEnsureEditor_Unfocused(object? sender, FocusEventArgs e)
     {
         UserPasswordEnsureLabel.FadeTo(0.5, 300, Easing.CubicOut);
         UserPasswordEnsureLabel.ScaleTo(1, 300, Easing.CubicOut);

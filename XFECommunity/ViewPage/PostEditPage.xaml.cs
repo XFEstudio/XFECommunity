@@ -8,8 +8,8 @@ namespace XFECommunity.ViewPage;
 
 public partial class PostEditPage : ContentPage
 {
-    public XFEChatRoom_CommunityPost CurrentPostData { get; set; }
-    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
+    public required XFEChatRoom_CommunityPost CurrentPostData { get; set; }
+    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase!.CreateExecuter();
     private readonly List<string> tags = [];
     private bool BackTrigger = false;
     private bool SecTrigger = false;
@@ -18,12 +18,12 @@ public partial class PostEditPage : ContentPage
     public PostEditPage()
     {
         InitializeComponent();
-        CurrentPostData = PostViewPage.Current?.CurrentPostData;
+        CurrentPostData = PostViewPage.Current!.CurrentPostData!;
         if (CurrentPostData is not null)
         {
             TitleEditor.Text = CurrentPostData.PostTitle;
             ContentEditor.Text = CurrentPostData.PostContent;
-            foreach (var tag in CurrentPostData.PostTag.ToXFEArray<string>())
+            foreach (var tag in CurrentPostData.PostTag!.ToXFEArray<string>())
             {
                 if (tags.Contains(tag))
                     continue;
@@ -31,7 +31,7 @@ public partial class PostEditPage : ContentPage
                 var button = new Button
                 {
                     Text = $"#{tag}",
-                    CornerRadius = 30,
+                    CornerRadius = 20,
                     Margin = new Thickness(10, 0, 0, 0)
                 };
                 button.SetDynamicResource(Button.TextColorProperty, "MainColor");
@@ -54,8 +54,8 @@ public partial class PostEditPage : ContentPage
                     if (await DisplayAlert("删除帖子", "确认删除吗？删除后的帖子不可恢复", "确认", "取消"))
                         try
                         {
-                            var tarPost = await XFEExecuter.ExecuteGetFirst<XFEChatRoom_CommunityPost>(x => x.PostID == CurrentPostData.PostID);
-                            var result = await XFEExecuter.ExecuteDelete(tarPost);
+                            var tarPost = await XFEExecuter!.ExecuteGetFirst<XFEChatRoom_CommunityPost>(x => x.PostID == CurrentPostData.PostID);
+                            var result = await XFEExecuter.ExecuteDelete(tarPost!);
                             if (result == 0)
                             {
                                 BackTrigger = false;
@@ -79,10 +79,10 @@ public partial class PostEditPage : ContentPage
                             await successfulLabel.FadeTo(1, 300, Easing.CubicInOut);
                             await Task.Delay(1000);
                             await successfulLabel.FadeTo(0, 300, Easing.CubicInOut);
-                            PostViewPage.Current.CurrentPostData = null;
+                            PostViewPage.Current!.CurrentPostData = null;
                             await Shell.Current.GoToAsync("../..");
-                            CommunityPage.Current.RemovePostByID(CurrentPostData?.PostID);
-                            CommunityPage.Current.PostRefreshView_Refreshing(null, null);
+                            CommunityPage.Current!.RemovePostByID(CurrentPostData.PostID!);
+                            CommunityPage.Current.Refresh();
                             BackTrigger = false;
                             Deleting = false;
                         }
@@ -124,66 +124,61 @@ public partial class PostEditPage : ContentPage
                 }
                 BackTrigger = true;
                 Posting = true;
-                var timeSpend = new Action(async () =>
+                if (CurrentPostData is null)
                 {
-                    if (CurrentPostData is null)
+                    try
                     {
-                        try
+                        var result = await XFEExecuter.ExecuteAdd(new XFEChatRoom_CommunityPost
                         {
-                            var result = await XFEExecuter.ExecuteAdd(new XFEChatRoom_CommunityPost
-                            {
-                                PostTitle = TitleEditor.Text,
-                                PostContent = ContentEditor.Text,
-                                UName = UserInfo.StaticUserName,
-                                UID = UserInfo.StaticUUID,
-                                PostID = await IDGenerator.GetCorrectPostID(XFEExecuter),
-                                PostTag = tags.ToXFEString()
-                            });
-                            if (result == 0)
-                            {
-                                BackTrigger = false;
-                                Posting = false;
-                                await DisplayAlert("发布失败", "请检查网络设置并尝试重新发布", "确认");
-                                return;
-                            }
-                        }
-                        catch (Exception ex)
+                            PostTitle = TitleEditor.Text,
+                            PostContent = ContentEditor.Text,
+                            UName = UserInfo.StaticUserName,
+                            UID = UserInfo.StaticUUID,
+                            PostID = await IDGenerator.GetCorrectPostID(XFEExecuter),
+                            PostTag = tags.ToXFEString()
+                        });
+                        if (result == 0)
                         {
                             BackTrigger = false;
                             Posting = false;
-                            await DisplayAlert("发布失败", $"请检查网络设置并尝试重新发布{ex.Message}", "确认");
+                            await DisplayAlert("发布失败", "请检查网络设置并尝试重新发布", "确认");
                             return;
                         }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        CurrentPostData = await XFEExecuter.ExecuteGetFirst<XFEChatRoom_CommunityPost>(x => x.PostID == CurrentPostData.PostID);
-                        CurrentPostData.PostTitle = TitleEditor.Text;
-                        CurrentPostData.PostContent = ContentEditor.Text;
-                        CurrentPostData.PostTag = tags.ToXFEString();
-                        try
-                        {
-                            var result = await XFEExecuter.ExecuteUpdate(CurrentPostData);
-                            if (result == 0)
-                            {
-                                BackTrigger = false;
-                                Posting = false;
-                                await DisplayAlert("发布编辑失败", "请检查网络设置并尝试重新发布", "确认");
-                                return;
-                            }
-                            await PostViewPage.Current.Refresh();
-                        }
-                        catch (Exception ex)
+                        BackTrigger = false;
+                        Posting = false;
+                        await DisplayAlert("发布失败", $"请检查网络设置并尝试重新发布{ex.Message}", "确认");
+                        return;
+                    }
+                }
+                else
+                {
+                    CurrentPostData = (await XFEExecuter.ExecuteGetFirst<XFEChatRoom_CommunityPost>(x => x.PostID == CurrentPostData.PostID))!;
+                    CurrentPostData.PostTitle = TitleEditor.Text;
+                    CurrentPostData.PostContent = ContentEditor.Text;
+                    CurrentPostData.PostTag = tags.ToXFEString();
+                    try
+                    {
+                        var result = await XFEExecuter.ExecuteUpdate(CurrentPostData);
+                        if (result == 0)
                         {
                             BackTrigger = false;
                             Posting = false;
-                            await DisplayAlert("发布失败", $"请检查网络设置并尝试重新发布{ex.Message}", "确认");
+                            await DisplayAlert("发布编辑失败", "请检查网络设置并尝试重新发布", "确认");
                             return;
                         }
+                        await PostViewPage.Current!.Refresh();
                     }
-                }).CTime(true, "发布花费").TotalSeconds;
-                if (timeSpend < 1)
-                    await Task.Delay(800);
+                    catch (Exception ex)
+                    {
+                        BackTrigger = false;
+                        Posting = false;
+                        await DisplayAlert("发布失败", $"请检查网络设置并尝试重新发布{ex.Message}", "确认");
+                        return;
+                    }
+                }
                 await this.Content.FadeTo(0, 300, Easing.CubicInOut);
                 var successfulLabel = new Label
                 {
@@ -199,25 +194,13 @@ public partial class PostEditPage : ContentPage
                 await successfulLabel.FadeTo(1, 300, Easing.CubicInOut);
                 await Task.Delay(1000);
                 await successfulLabel.FadeTo(0, 300, Easing.CubicInOut);
-                CommunityPage.Current.PostRefreshView_Refreshing(null, null);
-                if (CurrentPostData is not null)
-                {
-                    PostViewPage.Current?.Refresh();
-                }
+                CommunityPage.Current!.Refresh();
                 SendBackButtonPressed();
                 Posting = false;
             })
         });
     }
 
-    protected override void OnHandlerChanged()
-    {
-        base.OnHandlerChanged();
-#if ANDROID
-        (TitleEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-        (ContentEditor.Handler.PlatformView as Android.Widget.EditText).Background = null;
-#endif
-    }
     protected override bool OnBackButtonPressed()
     {
         if (!BackTrigger && !SecTrigger)
@@ -238,6 +221,9 @@ public partial class PostEditPage : ContentPage
         }
         else
         {
+#if WINDOWS
+            Shell.Current.GoToAsync("..");
+#endif
             return base.OnBackButtonPressed();
         }
     }
@@ -276,7 +262,7 @@ public partial class PostEditPage : ContentPage
         var button = new Button
         {
             Text = $"#{str}",
-            CornerRadius = 30,
+            CornerRadius = 20,
             Margin = new Thickness(10, 0, 0, 0)
         };
         button.SetDynamicResource(Button.TextColorProperty, "MainColor");

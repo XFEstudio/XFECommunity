@@ -17,13 +17,13 @@ public partial class StarButton : ContentView
         }
     }
 
-    public event EventHandler Clicked;
+    public event EventHandler? Clicked;
     public StarButton()
     {
         InitializeComponent();
     }
 
-    private async void starButton_Clicked(object sender, EventArgs e)
+    private async void StarButton_Clicked(object sender, EventArgs e)
     {
         starButton.IsEnabled = false;
         if (IsStar)

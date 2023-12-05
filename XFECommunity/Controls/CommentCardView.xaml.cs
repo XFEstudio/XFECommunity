@@ -48,7 +48,7 @@ public partial class CommentCardView : ContentView
     public event EventHandler<CommentCardLikeClickEventArgs>? LikeClick;
     public event EventHandler<CommentCardQuoteClickEventArgs>? QuoteClick;
     public event EventHandler? CommentCardTapped;
-    public CommentCardView(XFEChatRoom_CommunityComment commentEntity, XFEChatRoom_CommunityComment commentQuoteEntity)
+    public CommentCardView(XFEChatRoom_CommunityComment commentEntity, XFEChatRoom_CommunityComment? commentQuoteEntity)
     {
         InitializeComponent();
         this.BindingContext = this;
@@ -69,7 +69,7 @@ public partial class CommentCardView : ContentView
         }
     }
 
-    public void ReloadData(XFEChatRoom_CommunityComment xFEChatRoom_CommunityComment, XFEChatRoom_CommunityComment xFEChatRoom_CommunityComment1)
+    public void ReloadData(XFEChatRoom_CommunityComment xFEChatRoom_CommunityComment, XFEChatRoom_CommunityComment? xFEChatRoom_CommunityComment1)
     {
         if (CurrentCommentData.AboutEqual(xFEChatRoom_CommunityComment))
         {

@@ -39,8 +39,12 @@ public partial class CommunityPage : ContentPage
         Current = this;
         postRefreshView.IsRefreshing = true;
     }
-
-    public async void PostRefreshView_Refreshing(object? sender, EventArgs e)
+    public void Refresh()
+    {
+        if (!refreshingIsBusy)
+            postRefreshView.IsRefreshing = true;
+    }
+    private async void PostRefreshView_Refreshing(object? sender, EventArgs e)
     {
         await new Action(async () =>
         {
@@ -54,7 +58,7 @@ public partial class CommunityPage : ContentPage
                         tarPostCard.Dispatcher.Dispatch(() =>
                         {
                             tarPostCard.ReloadData(postData);
-                            if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser.LikedPostID.Contains(tarPostCard.PostId))
+                            if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser!.LikedPostID!.Contains(tarPostCard.PostId))
                             {
                                 tarPostCard.IsLike = true;
                             }
@@ -77,7 +81,7 @@ public partial class CommunityPage : ContentPage
                         post.LikeClick += Post_LikeClick;
                         post.Click += Post_Click;
                         post.TagClick += Post_TagClick;
-                        if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser.LikedPostID.Contains(postData.PostID))
+                        if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser!.LikedPostID!.Contains(postData.PostID!))
                         {
                             post.IsLike = true;
                         }
@@ -86,7 +90,6 @@ public partial class CommunityPage : ContentPage
                         postRefreshView.Dispatcher.Dispatch(() =>
                         {
                             postStackLayout.Children.Insert(0, post);
-                            //postListView.chi
                         });
                         totalHeight = GetTotalHeight();
                         await Console.Out.WriteLineAsync($"滚动：{postScrollView.Height}\t当前：{totalHeight}");
@@ -113,12 +116,12 @@ public partial class CommunityPage : ContentPage
                 post.LikeClick += Post_LikeClick;
                 post.Click += Post_Click;
                 post.TagClick += Post_TagClick;
-                if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser.LikedPostID.Contains(postData.PostID))
+                if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser!.LikedPostID!.Contains(postData.PostID!))
                 {
                     post.IsLike = true;
                 }
                 postCardList.Add(post);
-                postIdList.Add(postData.PostID);
+                postIdList.Add(postData.PostID!);
                 postRefreshView.Dispatcher.Dispatch(() =>
                 {
                     postStackLayout.Children.Add(post);
@@ -159,7 +162,7 @@ public partial class CommunityPage : ContentPage
         var post = sender as PostCardView;
         if (!UserInfo.IsLoginSuccessful)
         {
-            post.LikeCount--;
+            post!.LikeCount--;
             post.IsLike = false;
             if (await DisplayAlert("诶嘿", "请先登录哦", "前往登录", "取消"))
             {
@@ -170,12 +173,12 @@ public partial class CommunityPage : ContentPage
         if (e.IsLike)
         {
             e.PostEntity.PostLike++;
-            UserInfo.CurrentUser.LikedPostID += new string[] { e.PostEntity.PostID }.ToXFEString();
+            UserInfo.CurrentUser!.LikedPostID += new string[] { e.PostEntity.PostID! }.ToXFEString();
             await UserInfo.UpLoadUserInfo();
             if (await e.PostEntity.ExecuteUpdate(XFEExecuter) == 0)
             {
                 e.PostEntity.PostLike--;
-                post.LikeCount--;
+                post!.LikeCount--;
                 post.IsLike = false;
                 await DisplayAlert("点赞失败", "请检查网络设置", "确定");
             }
@@ -184,12 +187,12 @@ public partial class CommunityPage : ContentPage
         {
             if (e.PostEntity.PostLike >= 0)
                 e.PostEntity.PostLike--;
-            UserInfo.CurrentUser.LikedPostID = UserInfo.CurrentUser.LikedPostID.Replace($"[+-{e.PostEntity.PostID}-+]", string.Empty);
+            UserInfo.CurrentUser!.LikedPostID = UserInfo.CurrentUser!.LikedPostID!.Replace($"[+-{e.PostEntity.PostID}-+]", string.Empty);
             await UserInfo.UpLoadUserInfo();
             if (await e.PostEntity.ExecuteUpdate(XFEExecuter) == 0)
             {
                 e.PostEntity.PostLike++;
-                post.LikeCount--;
+                post!.LikeCount--;
                 post.IsLike = true;
                 await DisplayAlert("取消点赞失败", "请检查网络设置", "确定");
             }

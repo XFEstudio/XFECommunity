@@ -29,7 +29,7 @@ public partial class LikeButton : ContentView
             circleImage.HeightRequest = targetSize;
         }
     }
-    public event EventHandler Clicked;
+    public event EventHandler? Clicked;
     public LikeButton()
     {
         InitializeComponent();

@@ -7,7 +7,7 @@
             Source="unstar.png"
             Background="Transparent"
             x:Name="starButton"
-            Clicked="starButton_Clicked"/>
+            Clicked="StarButton_Clicked"/>
         <Image
             Source="starcircle.png"
             Background="Transparent"

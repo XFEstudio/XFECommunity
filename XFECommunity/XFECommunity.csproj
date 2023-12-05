@@ -85,7 +85,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="TencentCloudSDK.Common" Version="3.0.909" />
 		<PackageReference Include="TencentCloudSDK.Sms" Version="3.0.909" />
-		<PackageReference Include="XFE各类拓展.NetCore" Version="1.1.1" />
+		<PackageReference Include="XFE各类拓展.NetCore" Version="1.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

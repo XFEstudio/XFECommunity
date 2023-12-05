@@ -5,7 +5,7 @@ public partial class SuperLinkLabel : Label
     public Color ClickedColor { get; set; } = Color.FromArgb("#444654");
     public bool EnableClick { get; set; } = true;
     public bool Underline { get; set; } = true;
-    public event EventHandler<TappedEventArgs> Click;
+    public event EventHandler<TappedEventArgs>? Click;
     public SuperLinkLabel()
     {
         if (Underline)

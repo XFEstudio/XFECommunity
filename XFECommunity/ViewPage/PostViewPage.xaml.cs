@@ -21,11 +21,11 @@ public partial class PostViewPage : ContentPage
         get => (int)GetValue(StarCountProperty);
         set => SetValue(StarCountProperty, value);
     }
-    private string postID;
+    private string? postID;
 
-    public string PostID
+    public required string PostID
     {
-        get { return postID; }
+        get { return postID is null ? string.Empty : postID; }
         set
         {
             if (string.IsNullOrEmpty(value))
@@ -44,7 +44,7 @@ public partial class PostViewPage : ContentPage
     private bool RefreshingIsBusy = false;
     private long totalHeight = 0;
     private string QuoteID = string.Empty;
-    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
+    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase!.CreateExecuter();
     public PostViewPage()
     {
         InitializeComponent();
@@ -70,7 +70,7 @@ public partial class PostViewPage : ContentPage
     {
         Initialized = true;
         await Refresh();
-        if (CurrentPostData.UID == UserInfo.CurrentUser.ID)
+        if (CurrentPostData!.UID == UserInfo.CurrentUser!.ID)
         {
             ToolbarItems.Add(new ToolbarItem
             {
@@ -101,9 +101,9 @@ public partial class PostViewPage : ContentPage
                 await DisplayAlert("哦不", "无法获取帖子信息\n帖子ID：" + PostID, "啊？");
                 return;
             }
-            this.Title = "小窝：" + (CurrentPostData.PostTitle.Length > 10 ? CurrentPostData.PostTitle[..10] + "..." : CurrentPostData.PostTitle);
+            this.Title = "小窝：" + (CurrentPostData.PostTitle!.Length > 10 ? CurrentPostData.PostTitle[..10] + "..." : CurrentPostData.PostTitle);
             TitleLabel.Text = CurrentPostData.PostTitle;
-            charLabel.Text = CurrentPostData.UName[0].ToString();
+            charLabel.Text = CurrentPostData.UName![0].ToString();
             ContentLabel.Text = CurrentPostData.PostContent;
             AuthorLabel.Text = CurrentPostData.UName;
             TimeLabel.Text = CurrentPostData.PostTime.ToString();
@@ -111,16 +111,16 @@ public partial class PostViewPage : ContentPage
             StarCount = CurrentPostData.PostStar;
             if (UserInfo.IsLoginSuccessful)
             {
-                LikeButton.IsLike = UserInfo.CurrentUser.LikedPostID.Contains(CurrentPostData.PostID);
-                StarButton.IsStar = UserInfo.CurrentUser.StarredPostID.Contains(CurrentPostData.PostID);
+                LikeButton.IsLike = UserInfo.CurrentUser!.LikedPostID!.Contains(CurrentPostData.PostID!);
+                StarButton.IsStar = UserInfo.CurrentUser!.StarredPostID!.Contains(CurrentPostData.PostID!);
             }
             tagStackLayout.Clear();
-            foreach (var tag in CurrentPostData.PostTag.ToXFEArray<string>())
+            foreach (var tag in CurrentPostData.PostTag!.ToXFEArray<string>())
             {
                 var button = new Button
                 {
                     Text = $"#{tag}",
-                    CornerRadius = 30,
+                    CornerRadius = 20,
                     Margin = new Thickness(5, 3, 0, 3)
                 };
                 button.SetDynamicResource(Button.TextColorProperty, "MainColor");
@@ -144,9 +144,9 @@ public partial class PostViewPage : ContentPage
         int getQuoteRetryTime = 0;
         await new Action(async () =>
         {
-            using (var Executer = XCCDataBase.XFEDataBase.CreateExecuter())
+            using (var executer = XCCDataBase.XFEDataBase!.CreateExecuter())
             {
-                List<XFEChatRoom_CommunityComment> commentDataList = new List<XFEChatRoom_CommunityComment>();
+                List<XFEChatRoom_CommunityComment>? commentDataList = [];
                 while (getCommentRetryTime < 30)
                 {
                     try
@@ -172,12 +172,12 @@ public partial class PostViewPage : ContentPage
                         foreach (var commentData in commentDataList)
                         {
                             var tarCommentCard = commentCardList.Find(x => x.CommentID == commentData.CommentID);
-                            XFEChatRoom_CommunityComment quoteCommentData = null;
+                            XFEChatRoom_CommunityComment? quoteCommentData = null;
                             while (getQuoteRetryTime < 30)
                             {
                                 try
                                 {
-                                    quoteCommentData = await Executer.ExecuteGetFirst<XFEChatRoom_CommunityComment>(x => x.CommentID == commentData.QuoteID);
+                                    quoteCommentData = await executer.ExecuteGetFirst<XFEChatRoom_CommunityComment>(x => x.CommentID == commentData.QuoteID);
                                     break;
                                 }
                                 catch (Exception)
@@ -197,7 +197,7 @@ public partial class PostViewPage : ContentPage
                                 tarCommentCard.ReloadData(commentData, quoteCommentData);
                                 tarCommentCard.Dispatcher.Dispatch(() =>
                                 {
-                                    if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser.LikedCommentID.Contains(tarCommentCard.CommentID))
+                                    if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser!.LikedCommentID!.Contains(tarCommentCard.CommentID))
                                     {
                                         tarCommentCard.IsLike = true;
                                     }
@@ -205,12 +205,14 @@ public partial class PostViewPage : ContentPage
                             }
                             else
                             {
-                                var commentCard = new CommentCardView(commentData, quoteCommentData);
-                                commentCard.Margin = new Thickness(0, 5);
+                                var commentCard = new CommentCardView(commentData, quoteCommentData)
+                                {
+                                    Margin = new Thickness(0, 5)
+                                };
                                 commentCard.LikeClick += CommentCard_LikeClick;
                                 commentCard.QuoteClick += CommentCard_QuoteClick;
                                 commentCard.CommentCardTapped += CommentCard_CommentCardTapped;
-                                if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser.LikedCommentID.Contains(commentData.CommentID))
+                                if (UserInfo.IsLoginSuccessful && UserInfo.CurrentUser!.LikedCommentID!.Contains(commentData.CommentID!))
                                 {
                                     commentCard.IsLike = true;
                                 }
@@ -241,7 +243,7 @@ public partial class PostViewPage : ContentPage
         }).StartNewTask();
     }
 
-    private void CommentCard_CommentCardTapped(object sender, EventArgs e)
+    private void CommentCard_CommentCardTapped(object? sender, EventArgs e)
     {
         if (sender is CommentCardView commentCard)
         {
@@ -250,7 +252,7 @@ public partial class PostViewPage : ContentPage
         }
     }
 
-    private void CommentCard_QuoteClick(object sender, CommentCardQuoteClickEventArgs e)
+    private void CommentCard_QuoteClick(object? sender, CommentCardQuoteClickEventArgs e)
     {
         if (sender is CommentCardView commentCard)
         {
@@ -259,7 +261,7 @@ public partial class PostViewPage : ContentPage
         }
     }
 
-    private async void CommentCard_LikeClick(object sender, CommentCardLikeClickEventArgs e)
+    private async void CommentCard_LikeClick(object? sender, CommentCardLikeClickEventArgs e)
     {
         if (!UserInfo.IsLoginSuccessful)
         {
@@ -274,7 +276,7 @@ public partial class PostViewPage : ContentPage
             {
                 try
                 {
-                    UserInfo.CurrentUser.LikedCommentID += new string[] { commentCard.CommentID }.ToXFEString();
+                    UserInfo.CurrentUser!.LikedCommentID += new string[] { commentCard.CommentID }.ToXFEString();
                     await UserInfo.UpLoadUserInfo();
                     if (await commentCard.CurrentCommentData.ExecuteUpdate(XFEExecuter) == 0)
                     {
@@ -292,7 +294,7 @@ public partial class PostViewPage : ContentPage
             {
                 try
                 {
-                    UserInfo.CurrentUser.LikedCommentID = UserInfo.CurrentUser.LikedCommentID.Replace($"[+-{commentCard.CommentID}-+]", string.Empty);
+                    UserInfo.CurrentUser!.LikedCommentID = UserInfo.CurrentUser!.LikedCommentID!.Replace($"[+-{commentCard.CommentID}-+]", string.Empty);
                     await UserInfo.UpLoadUserInfo();
                     if (await commentCard.CurrentCommentData.ExecuteUpdate(XFEExecuter) == 0)
                     {
@@ -318,9 +320,10 @@ public partial class PostViewPage : ContentPage
         return totalHeight;
     }
 
-    private async void TagButton_Clicked(object sender, EventArgs e)
+    private async void TagButton_Clicked(object? sender, EventArgs e)
     {
-        await DisplayAlert("标签", $"{(sender as Button).Text[1..]}", "确定");
+        if (sender is Button button)
+            await DisplayAlert("标签", $"{button.Text[1..]}", "确定");
     }
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
@@ -341,7 +344,7 @@ public partial class PostViewPage : ContentPage
     {
         QuoteID = quoteID;
         var tarComment = commentCardList.Find(x => x.CommentID == quoteID);
-        QuoteLabel.Text = $"{tarComment.UserName}：{tarComment.CommentContent}";
+        QuoteLabel.Text = $"{tarComment!.UserName}：{tarComment.CommentContent}";
         QuoteBorder.IsVisible = true;
     }
 
@@ -368,7 +371,7 @@ public partial class PostViewPage : ContentPage
                     CommentID = tarCommentId,
                     PostID = PostID,
                     CommentContent = InputEditor.Text,
-                    UID = UserInfo.CurrentUser.ID,
+                    UID = UserInfo.CurrentUser!.ID,
                     UName = UserInfo.CurrentUser.Aname,
                     FloorCount = await AppAlgorithm.GetCommentFloor(PostID, XFEExecuter),
                     QuoteID = QuoteID
@@ -415,9 +418,9 @@ public partial class PostViewPage : ContentPage
         {
             try
             {
-                CurrentPostData.PostLike++;
+                CurrentPostData!.PostLike++;
                 LikeCount++;
-                UserInfo.CurrentUser.LikedPostID += new string[] { CurrentPostData.PostID }.ToXFEString();
+                UserInfo.CurrentUser!.LikedPostID += new string[] { CurrentPostData.PostID! }.ToXFEString();
                 await UserInfo.UpLoadUserInfo();
                 if (await CurrentPostData.ExecuteUpdate(XFEExecuter) == 0)
                 {
@@ -428,7 +431,7 @@ public partial class PostViewPage : ContentPage
             }
             catch (Exception ex)
             {
-                CurrentPostData.PostLike--;
+                CurrentPostData!.PostLike--;
                 LikeButton.IsLike = false;
                 await DisplayAlert("点赞失败", "请检查网络设置" + ex.Message, "确定");
             }
@@ -437,12 +440,12 @@ public partial class PostViewPage : ContentPage
         {
             try
             {
-                if (CurrentPostData.PostLike >= 0)
+                if (CurrentPostData!.PostLike >= 0)
                 {
                     CurrentPostData.PostLike--;
                     LikeCount--;
                 }
-                UserInfo.CurrentUser.LikedPostID = UserInfo.CurrentUser.LikedPostID.Replace($"[+-{CurrentPostData.PostID}-+]", string.Empty);
+                UserInfo.CurrentUser!.LikedPostID = UserInfo.CurrentUser.LikedPostID!.Replace($"[+-{CurrentPostData.PostID}-+]", string.Empty);
                 await UserInfo.UpLoadUserInfo();
                 if (await CurrentPostData.ExecuteUpdate(XFEExecuter) == 0)
                 {
@@ -454,7 +457,7 @@ public partial class PostViewPage : ContentPage
             }
             catch (Exception ex)
             {
-                CurrentPostData.PostLike++;
+                CurrentPostData!.PostLike++;
                 LikeCount++;
                 LikeButton.IsLike = true;
                 await DisplayAlert("取消点赞失败", "请检查网络设置" + ex.Message, "确定");
@@ -476,9 +479,9 @@ public partial class PostViewPage : ContentPage
         {
             try
             {
-                CurrentPostData.PostStar++;
+                CurrentPostData!.PostStar++;
                 StarCount++;
-                UserInfo.CurrentUser.StarredPostID += new string[] { CurrentPostData.PostID }.ToXFEString();
+                UserInfo.CurrentUser!.StarredPostID += new string[] { CurrentPostData.PostID! }.ToXFEString();
                 await UserInfo.UpLoadUserInfo();
                 if (await CurrentPostData.ExecuteUpdate(XFEExecuter) == 0)
                 {
@@ -489,7 +492,7 @@ public partial class PostViewPage : ContentPage
             }
             catch (Exception ex)
             {
-                CurrentPostData.PostStar--;
+                CurrentPostData!.PostStar--;
                 StarButton.IsStar = false;
                 await DisplayAlert("收藏失败", "请检查网络设置" + ex.Message, "确定");
             }
@@ -498,12 +501,12 @@ public partial class PostViewPage : ContentPage
         {
             try
             {
-                if (CurrentPostData.PostStar >= 0)
+                if (CurrentPostData!.PostStar >= 0)
                 {
                     CurrentPostData.PostStar--;
                     StarCount--;
                 }
-                UserInfo.CurrentUser.StarredPostID = UserInfo.CurrentUser.StarredPostID.Replace($"[+-{CurrentPostData.PostID}-+]", string.Empty);
+                UserInfo.CurrentUser!.StarredPostID = UserInfo.CurrentUser.StarredPostID!.Replace($"[+-{CurrentPostData.PostID}-+]", string.Empty);
                 await UserInfo.UpLoadUserInfo();
                 if (await CurrentPostData.ExecuteUpdate(XFEExecuter) == 0)
                 {
@@ -515,7 +518,7 @@ public partial class PostViewPage : ContentPage
             }
             catch (Exception ex)
             {
-                CurrentPostData.PostStar++;
+                CurrentPostData!.PostStar++;
                 StarCount++;
                 StarButton.IsStar = true;
                 await DisplayAlert("取消收藏失败", "请检查网络设置" + ex.Message, "确定");

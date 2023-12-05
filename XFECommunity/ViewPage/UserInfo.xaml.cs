@@ -67,8 +67,8 @@ public partial class UserInfo : ContentPage
         CurrentPage = this;
         if (IsLoginSuccessful)
         {
-            UserName = StaticUserName;
-            UUID = StaticUUID;
+            UserName = StaticUserName!;
+            UUID = StaticUUID!;
             SwitchToLoginStyle();
         }
         else
@@ -86,7 +86,7 @@ public partial class UserInfo : ContentPage
     {
         try
         {
-            return await CurrentUser.ExecuteUpdate(XFEExecuter);
+            return await CurrentUser!.ExecuteUpdate(XFEExecuter);
         }
         catch (Exception ex)
         {
@@ -135,11 +135,11 @@ public partial class UserInfo : ContentPage
         {
             string Locality = new XFEDictionary(new string[]
             {
-                "UUID", StaticUUID,
-                "UserName", StaticUserName,
-                "Mail", StaticMail,
-                "Password", StaticPassword,
-                "PhoneNum", StaticPhoneNum
+                "UUID", StaticUUID!,
+                "UserName", StaticUserName!,
+                "Mail", StaticMail!,
+                "Password", StaticPassword!,
+                "PhoneNum", StaticPhoneNum!
             }).ToString();
             Locality.WriteIn(AppPath.UserInfoPath);
         }
@@ -154,29 +154,29 @@ public partial class UserInfo : ContentPage
         {
             case UserPropertyToEdit.UserName:
                 StaticUserName = newProperty;
-                CurrentPage.UserName = newProperty;
-                CurrentUser.Aname = newProperty;
+                CurrentPage!.UserName = newProperty;
+                CurrentUser!.Aname = newProperty;
                 break;
 
             case UserPropertyToEdit.Password:
                 StaticPassword = newProperty;
-                CurrentUser.Apassword = newProperty;
+                CurrentUser!.Apassword = newProperty;
                 break;
 
             case UserPropertyToEdit.PhoneNum:
                 StaticMail = newProperty;
-                CurrentUser.Atel = newProperty;
+                CurrentUser!.Atel = newProperty;
                 break;
 
             case UserPropertyToEdit.Mail:
                 StaticMail = newProperty;
-                CurrentUser.Amail = newProperty;
+                CurrentUser!.Amail = newProperty;
                 break;
             default:
                 await ProcessException.ShowEnumException();
                 break;
         }
-        await CurrentUser.ExecuteUpdate(XFEExecuter);
+        await CurrentUser!.ExecuteUpdate(XFEExecuter);
     }
     public static async Task ReadUserData(Page CurrentPage)
     {

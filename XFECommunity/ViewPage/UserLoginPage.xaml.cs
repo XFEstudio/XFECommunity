@@ -8,7 +8,7 @@ namespace XFECommunity.ViewPage;
 
 public partial class UserLoginPage : ContentPage
 {
-    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
+    private readonly XFEExecuter XFEExecuter = XCCDataBase.XFEDataBase!.CreateExecuter();
     private bool isAccountChanged = false, isPasswordChanged = false, isTelChanged = false;
     private bool isPasswordEditorEmpty = true, isAccountEditorEmpty = true, isTelEditorEmpty = true;
     private bool isCoolDown = false;
@@ -110,7 +110,7 @@ public partial class UserLoginPage : ContentPage
         }
     }
 
-    private void TelVerifyCodeEditor_Focused(object sender, FocusEventArgs e)
+    private void TelVerifyCodeEditor_Focused(object? sender, FocusEventArgs e)
     {
         TelVerifyCodeLabel.FadeTo(1, 300, Easing.CubicOut);
         TelVerifyCodeLabel.ScaleTo(1.2, 300, Easing.CubicOut);
@@ -119,7 +119,7 @@ public partial class UserLoginPage : ContentPage
         TelVerifyCodeButton.ScaleTo(0.8, 300, Easing.CubicOut);
     }
 
-    private void TelVerifyCodeEditor_Unfocused(object sender, FocusEventArgs e)
+    private void TelVerifyCodeEditor_Unfocused(object? sender, FocusEventArgs e)
     {
         TelVerifyCodeLabel.FadeTo(0.5, 300, Easing.CubicOut);
         TelVerifyCodeLabel.ScaleTo(1, 300, Easing.CubicOut);
@@ -127,7 +127,7 @@ public partial class UserLoginPage : ContentPage
         TelVerifyCodeBorder.ScaleTo(1, 300, Easing.CubicOut);
         TelVerifyCodeButton.ScaleTo(1, 300, Easing.CubicOut);
     }
-    private void UserTelEditor_Focused(object sender, FocusEventArgs e)
+    private void UserTelEditor_Focused(object? sender, FocusEventArgs e)
     {
         if (!isTelChanged)
         {
@@ -141,7 +141,7 @@ public partial class UserLoginPage : ContentPage
         }
     }
 
-    private void UserTelEditor_Unfocused(object sender, FocusEventArgs e)
+    private void UserTelEditor_Unfocused(object? sender, FocusEventArgs e)
     {
         if (UserTelEditor.Text is null || UserTelEditor.Text == string.Empty)
         {
@@ -159,7 +159,7 @@ public partial class UserLoginPage : ContentPage
     }
     #endregion
     #region 编辑框文本改变事件
-    private void UserAccountEditor_TextChanged(object sender, TextChangedEventArgs e)
+    private void UserAccountEditor_TextChanged(object? sender, TextChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(UserAccountEditor.Text))
         {
@@ -180,7 +180,7 @@ public partial class UserLoginPage : ContentPage
         }
     }
 
-    private void UserPasswordEditor_TextChanged(object sender, TextChangedEventArgs e)
+    private void UserPasswordEditor_TextChanged(object? sender, TextChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(UserPasswordEditor.Text))
         {
@@ -201,7 +201,7 @@ public partial class UserLoginPage : ContentPage
         }
     }
 
-    private void TelVerifyCodeEditor_TextChanged(object sender, TextChangedEventArgs e)
+    private void TelVerifyCodeEditor_TextChanged(object? sender, TextChangedEventArgs e)
     {
         if (!isTelEditorEmpty && TelVerifyCodeEditor.Text.Length == 6)
         {
@@ -210,7 +210,7 @@ public partial class UserLoginPage : ContentPage
                 UserLoginButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
                 UserLoginButton.IsEnabled = true;
             }
-            TelVerifyCodeEditor_Unfocused(null, null);
+            TelVerifyCodeEditor_Unfocused(null, null!);
         }
         else
         {
@@ -221,7 +221,7 @@ public partial class UserLoginPage : ContentPage
             }
         }
     }
-    private void UserTelEditor_TextChanged(object sender, TextChangedEventArgs e)
+    private void UserTelEditor_TextChanged(object? sender, TextChangedEventArgs e)
     {
         if (UserTelEditor.Text.IsMobPhoneNumber())
         {
@@ -246,7 +246,7 @@ public partial class UserLoginPage : ContentPage
     }
     #endregion
     #region 按钮点击事件
-    private async void UserLoginButton_WaitClick(object sender, Controls.WaitButtonClickedEventArgs e)
+    private async void UserLoginButton_WaitClick(object? sender, WaitButtonClickedEventArgs e)
     {
         try
         {
@@ -262,9 +262,9 @@ public partial class UserLoginPage : ContentPage
                     var mailResult = await XFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Amail == UserAccountEditor.Text);
                     var telResult = await XFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Atel == UserAccountEditor.Text);
                     if (mailResult is not null && mailResult.Count > 0)
-                        await ProcessLoginInfo(mailResult.FirstOrDefault(), e);
+                        await ProcessLoginInfo(mailResult.FirstOrDefault()!, e);
                     else if (telResult is not null && telResult.Count > 0)
-                        await ProcessLoginInfo(telResult.FirstOrDefault(), e);
+                        await ProcessLoginInfo(telResult.FirstOrDefault()!, e);
                     else
                     {
                         ControlExtension.BorderShake(UserAccountBorder);
@@ -292,9 +292,9 @@ public partial class UserLoginPage : ContentPage
                         if (UserTelEditor.Text == currentPhoneNum)
                         {
                             var verifyTelResult = await XFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Atel == UserTelEditor.Text);
-                            if (verifyTelResult.Count > 0)
+                            if (verifyTelResult!.Count > 0)
                             {
-                                await ProcessLoginInfo(verifyTelResult.FirstOrDefault(), e);
+                                await ProcessLoginInfo(verifyTelResult.FirstOrDefault()!, e);
                                 return;
                             }
                             else
@@ -327,7 +327,7 @@ public partial class UserLoginPage : ContentPage
                     break;
 
                 default:
-                    ProcessException.ShowEnumException();
+                    await ProcessException.ShowEnumException();
                     break;
             }
         }
@@ -363,7 +363,7 @@ public partial class UserLoginPage : ContentPage
                 e.Continue();
                 break;
             default:
-                ProcessException.ShowEnumException();
+                await ProcessException.ShowEnumException();
                 break;
         }
     }
@@ -397,11 +397,11 @@ public partial class UserLoginPage : ContentPage
         {
             UserInfo.CurrentPage.charLabel.SetBinding(Label.TextProperty, new Binding("UserName[0]", source: UserInfo.CurrentPage));
             UserInfo.CurrentPage.nameLabel.SetBinding(Label.TextProperty, new Binding("UserName", source: UserInfo.CurrentPage));
-            UserInfo.CurrentPage.UserName = userInfo.Aname;
-            UserInfo.CurrentPage.UUID = userInfo.ID;
+            UserInfo.CurrentPage.UserName = userInfo.Aname!;
+            UserInfo.CurrentPage.UUID = userInfo.ID!;
             UserInfo.CurrentUser = userInfo;
             UserInfo.CurrentPage.SwitchToLoginStyle();
-            CommunityPage.Current?.PostRefreshView_Refreshing(null, null);
+            CommunityPage.Current?.Refresh();
         }
         await Task.Delay(600);
         await successfulLabel.FadeTo(0, 500, Easing.CubicOut);

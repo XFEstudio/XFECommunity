@@ -24,7 +24,8 @@
                 }
                 else
                 {
-                    this.BackgroundColor = this.BackgroundColor.MultiplyAlpha(2f);
+                    if (BackgroundColor is not null)
+                        this.BackgroundColor = this.BackgroundColor.MultiplyAlpha(2f);
                     if (UseLoadingAnimation)
                         this.ImageSource = null;
                     this.IsEnabled = true;
