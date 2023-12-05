@@ -4,7 +4,9 @@
              x:Class="XFECommunity.ViewPage.PersonalInformationPage"
              Title="PersonalInformationPage">
     <VerticalStackLayout>
-        <Grid>
+        <Grid
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -13,7 +15,6 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Frame
@@ -24,10 +25,13 @@
                 <Frame.Background>
                     <LinearGradientBrush EndPoint="1,1">
                         <GradientStop
-                            Color="#FFFFE0"
-                            Offset="0.25"/>
+                            Color="#F209F5"
+                            Offset="0.1"/>
                         <GradientStop
-                            Color="#FF0"
+                            Color="#E362E5"
+                            Offset="0.35"/>
+                        <GradientStop
+                            Color="#F7A9F9"
                             Offset="0.75"/>
                     </LinearGradientBrush>
                 </Frame.Background>
@@ -44,133 +48,109 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Label
-                    Text="昵称    :"
-                    FontSize="25"
-                    Margin="0,20"
-                    HorizontalTextAlignment="End"/>
+                        Text="昵称    :"
+                        FontSize="25"
+                        Margin="0,20"
+                        HorizontalTextAlignment="End"/>
                     <Label
-                    Margin="0,20"
-                    x:Name="CurrentUserNameLabel"
-                    FontSize="25"
-                    HorizontalTextAlignment="Center"
-                    Grid.Column="1"/>
+                        Margin="0,20"
+                        x:Name="CurrentUserNameLabel"
+                        FontSize="25"
+                        HorizontalTextAlignment="Center"
+                        Grid.Column="1"/>
                     <Label
-                    Text="手机号:"
-                    FontSize="25"
-                    Margin="0,20"
-                    HorizontalTextAlignment="End"
-                    Grid.Row="1"/>
+                        Text="手机号:"
+                        FontSize="25"
+                        Margin="0,20"
+                        HorizontalTextAlignment="End"
+                        Grid.Row="1"/>
                     <Label
-                    x:Name="CurrentTelLabel"
-                    Margin="0,20"
-                    FontSize="25"
-                    HorizontalTextAlignment="Center"
-                    Grid.Row="1"
-                    Grid.Column="1"/>
+                        x:Name="CurrentTelLabel"
+                        Margin="0,20"
+                        FontSize="25"
+                        HorizontalTextAlignment="Center"
+                        Grid.Row="1"
+                        Grid.Column="1"/>
                     <Label
-                    Text="邮箱    :"
-                    FontSize="25"
-                    Margin="0,20"
-                    HorizontalTextAlignment="End"
-                    Grid.Row="2"/>
+                        Text="邮箱    :"
+                        FontSize="25"
+                        Margin="0,20"
+                        HorizontalTextAlignment="End"
+                        Grid.Row="2"/>
                     <Label
-                    x:Name="CurrentMailLabel"
-                    Margin="0,20"
-                    FontSize="25"
-                    HorizontalTextAlignment="Center"
-                    Grid.Row="2"
-                    Grid.Column="1"/>
+                        x:Name="CurrentMailLabel"
+                        Margin="0,20"
+                        FontSize="25"
+                        HorizontalTextAlignment="Center"
+                        Grid.Row="2"
+                        Grid.Column="1"/>
                     <Label
-                    Text="UUID  :"
-                    FontSize="25"
-                    Margin="0,20"
-                    HorizontalTextAlignment="End"
-                    Grid.Row="3"/>
+                        Text="UUID  :"
+                        FontSize="25"
+                        Margin="0,20"
+                        HorizontalTextAlignment="End"
+                        Grid.Row="3"/>
                     <Label
-                    x:Name="UserUUIDLabel"
-                    Margin="0,20"
-                    FontSize="25"
-                    HorizontalTextAlignment="Center"
-                    Grid.Row="3"
-                    Grid.Column="1"/>
-                    <Label
-                    Text="状态    :"
-                    FontSize="25"
-                    Margin="0,20"
-                    HorizontalTextAlignment="End"
-                    Grid.Row="4"/>
-                    <Label
-                    x:Name="UserLoginStateLabel"
-                    Margin="0,20"
-                    FontSize="25"
-                    HorizontalTextAlignment="Center"
-                    Grid.Row="4"
-                    Grid.Column="1"/>
+                        x:Name="UserUUIDLabel"
+                        Margin="0,20"
+                        FontSize="25"
+                        HorizontalTextAlignment="Center"
+                        Grid.Row="3"
+                        Grid.Column="1"/>
                 </Grid>
             </Frame>
-            <Frame
-            Margin="20"
-            CornerRadius="25"
-            Grid.Column="1"
-            Grid.ColumnSpan="2">
-                <Frame.Background>
-                    <LinearGradientBrush EndPoint="1,1">
-                        <GradientStop
-                            Color="#41A952"
-                            Offset="0.25"/>
-                        <GradientStop
-                            Color="#1998D3"
-                            Offset="0.75"/>
-                    </LinearGradientBrush>
-                </Frame.Background>
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer
-                    x:Name="UserNameEdit" 
-                        Tapped="UserNameEdit_Tapped"/>
-                </Frame.GestureRecognizers>
-                <Label
-                Text="修改昵称"
-                FontSize="25"
-                HorizontalTextAlignment="Center"/>
-            </Frame>
-            <Frame
-            Grid.Row="1"
-            Grid.Column="1"
-            Grid.RowSpan="3"
-            BorderColor="Transparent">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Button
+            <Grid
+                    Grid.Column="1"
+                    Grid.RowSpan="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Button
+                    Text="修改昵称"
+                    x:Name="UserNameEdit"
+                    Margin="20"
+                    CornerRadius="12"
+                    HeightRequest="60"
+                    WidthRequest="120"
+                    VerticalOptions="End"
+                    Clicked="UserNameEdit_Clicked"/>
+                <Button
                     Text="修改手机号"
-                    Margin="15"
+                    Margin="20"
+                    CornerRadius="12"
+                    HeightRequest="60"
+                    WidthRequest="120"
                     x:Name="UserTelEdit"
-                    Clicked="UserTelEdit_Clicked"/>
-                    <Button
+                    Clicked="UserTelEdit_Clicked"
+                    Grid.Row="1"/>
+                <Button
                     Text="修改邮箱"
                     x:Name="UserMailEdit"
-                    Margin="15"
+                    Margin="20"
+                    CornerRadius="12"
+                    HeightRequest="60"
+                    WidthRequest="120"
                     Clicked="UserMailEdit_Clicked"
-                    Grid.Row="1"/>
-                    <Button
+                    Grid.Row="2"/>
+                <Button
                     Text="修改密码"
-                    Margin="15"
+                    Margin="20"
+                    CornerRadius="12"
+                    HeightRequest="60"
+                    WidthRequest="120"
                     x:Name="UserPasswordEdit"
                     Clicked="UserPasswordEdit_Clicked"
-                    Grid.Row="2"/>
-                </Grid>
-            </Frame>
-            
+                    Grid.Row="3"/>
+            </Grid>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

@@ -2,7 +2,7 @@
 {
     public static class StringVerify
     {
-        public static string[] contrabandVocabulary = [];
+        public static string[] contrabandVocabulary = ["脏话1","脏话2","脏话3"];
         public static bool VerifyString(this string verifyString)
         {
             int i = 1;
