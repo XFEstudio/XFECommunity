@@ -23,6 +23,12 @@ public partial class PersonalInformationPage : ContentPage
         set { CurrentMailLabel.Dispatcher.Dispatch(() => CurrentMailLabel.Text = value); }
     }
 
+    public string UserUUIDLabelText
+    {
+        get { return UserUUIDLabel.Text; }
+        set { UserUUIDLabel.Dispatcher.Dispatch(() => UserUUIDLabel.Text = value); }
+    }
+
     public PersonalInformationPage()
     {
         InitializeComponent();
@@ -31,6 +37,8 @@ public partial class PersonalInformationPage : ContentPage
             CurrentUserNameLabelText = UserInfo.CurrentUser.Aname!;
             CurrentTelLabelText = UserInfo.CurrentUser.Atel!;
             CurrentEmailLabelText = UserInfo.CurrentUser.Amail!;
+            UserUUIDLabelText = UserInfo.CurrentUser.ID!;
+
         }
         
         
@@ -68,8 +76,4 @@ public partial class PersonalInformationPage : ContentPage
 
     }
 
-    private void GetFavoritePosts_Tapped(object sender, TappedEventArgs e)
-    {
-
-    }
 }

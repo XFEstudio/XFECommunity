@@ -19,9 +19,25 @@
             <Frame
             Padding="20"
             Margin="20"
-            BackgroundColor="#F6CE4B"
             CornerRadius="25"
             Grid.RowSpan="4">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,1">
+                        <GradientStop
+                            Color="#FFFFE0"
+                            Offset="0.25"/>
+                        <GradientStop
+                            Color="#FF0"
+                            Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Frame.Background>
+                <Frame.Shadow>
+                    <Shadow 
+                        Brush="Black"
+                        Offset="0.25,0.25"
+                        Opacity="0.8"
+                        Radius="40"/>
+                </Frame.Shadow>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -32,7 +48,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Label
                     Text="昵称    :"
@@ -72,26 +88,26 @@
                     Grid.Row="2"
                     Grid.Column="1"/>
                     <Label
-                    Text="发帖数:"
+                    Text="UUID  :"
                     FontSize="25"
                     Margin="0,20"
                     HorizontalTextAlignment="End"
                     Grid.Row="3"/>
                     <Label
-                    x:Name="UserPostNumberLabel"
+                    x:Name="UserUUIDLabel"
                     Margin="0,20"
                     FontSize="25"
                     HorizontalTextAlignment="Center"
                     Grid.Row="3"
                     Grid.Column="1"/>
                     <Label
-                    Text="被赞数:"
+                    Text="状态    :"
                     FontSize="25"
                     Margin="0,20"
                     HorizontalTextAlignment="End"
                     Grid.Row="4"/>
                     <Label
-                    x:Name="UserNumberOfLikesLabel"
+                    x:Name="UserLoginStateLabel"
                     Margin="0,20"
                     FontSize="25"
                     HorizontalTextAlignment="Center"
@@ -101,10 +117,19 @@
             </Frame>
             <Frame
             Margin="20"
-            BackgroundColor="#41A952"
             CornerRadius="25"
             Grid.Column="1"
             Grid.ColumnSpan="2">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,1">
+                        <GradientStop
+                            Color="#41A952"
+                            Offset="0.25"/>
+                        <GradientStop
+                            Color="#1998D3"
+                            Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Frame.Background>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer
                     x:Name="UserNameEdit" 
@@ -145,25 +170,7 @@
                     Grid.Row="2"/>
                 </Grid>
             </Frame>
-            <Frame
-            Padding="20"
-            Margin="20"
-            BackgroundColor="#1998D3"
-            CornerRadius="25"
-            Grid.Row="1"
-            Grid.RowSpan="3"
-            Grid.Column="2">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer
-                    x:Name="GetFavoritePosts"
-                    Tapped="GetFavoritePosts_Tapped"/>
-                </Frame.GestureRecognizers>
-                <Label
-                Text="收藏的帖子"
-                FontSize="60"
-                HorizontalTextAlignment="Center"
-                VerticalTextAlignment="Center"/>
-            </Frame>
+            
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
