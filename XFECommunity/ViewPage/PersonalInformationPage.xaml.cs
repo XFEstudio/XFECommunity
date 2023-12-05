@@ -1,5 +1,3 @@
-using XCCChatRoom.AllImpl;
-
 namespace XFECommunity.ViewPage;
 
 public partial class PersonalInformationPage : ContentPage

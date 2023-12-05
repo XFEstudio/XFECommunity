@@ -276,7 +276,6 @@ public partial class PostEditPage : ContentPage
         var button = new Button
         {
             Text = $"#{str}",
-            BackgroundColor = Color.FromArgb("#F0ECFE"),
             CornerRadius = 30,
             Margin = new Thickness(10, 0, 0, 0)
         };

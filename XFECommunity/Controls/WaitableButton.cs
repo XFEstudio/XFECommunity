@@ -15,9 +15,12 @@
                     this.IsEnabled = false;
                     if (UseLoadingAnimation)
                         this.ImageSource = "whiteloader";
-                    TextColor ??= Color.Parse("White");
-                    BackgroundColor ??= Color.FromArgb("#512BD4");
-                    this.BackgroundColor = this.BackgroundColor.MultiplyAlpha(0.5f);
+                    if (TextColor is null)
+                        SetDynamicResource(TextColorProperty, "PureBackGroundColor");
+                    if (BackgroundColor is null)
+                        SetDynamicResource(TextColorProperty, "MainColor");
+                    else
+                        this.BackgroundColor = this.BackgroundColor.MultiplyAlpha(0.5f);
                 }
                 else
                 {
@@ -30,8 +33,8 @@
         }
 
         public bool UseLoadingAnimation { get; set; } = true;
-        public event EventHandler<WaitButtonClickedEventArgs> WaitClick;
-        private void WaitButton_Clicked(object sender, EventArgs e)
+        public event EventHandler<WaitButtonClickedEventArgs>? WaitClick;
+        private void WaitButton_Clicked(object? sender, EventArgs e)
         {
             IsWaiting = true;
             this.WaitClick?.Invoke(this, new WaitButtonClickedEventArgs(e, this));

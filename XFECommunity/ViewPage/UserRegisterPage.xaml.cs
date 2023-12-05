@@ -251,11 +251,11 @@ public partial class UserRegisterPage : ContentPage
             {
                 Text = "×¢²á³É¹¦",
                 Opacity = 0,
-                TextColor = Color.Parse("White"),
                 FontSize = 40,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };
+            successfulLabel.SetDynamicResource(Label.TextColorProperty, "PureBackGroundColor");
             this.Content = successfulLabel;
             await successfulLabel.FadeTo(1, 800, Easing.CubicOut);
             await Task.Delay(500);
