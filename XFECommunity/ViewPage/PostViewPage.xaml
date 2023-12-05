@@ -124,7 +124,7 @@
                 </Border>
                 <Label
                     Margin="0,40,0,0"
-                    Text="期待你的第一题评论哦~"
+                    Text="期待你的第一条评论哦~"
                     IsVisible="False"
                     Opacity="0.2"
                     FontSize="24"

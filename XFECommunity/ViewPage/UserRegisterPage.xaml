@@ -8,7 +8,7 @@
     <StackLayout>
         <Label 
             Margin="0,30"
-            Text="XFE聊天室"
+            Text="社交管理平台"
             CharacterSpacing="2"
             FontAttributes="Bold"
             TextColor="White"
