@@ -4,11 +4,11 @@
              x:Class="XFECommunity.Controls.LikeButton">
     <Grid>
         <ImageButton
-            Source="unlike"
+            Source="unlike.svg"
             x:Name="likeButton"
             Clicked="likeButton_Clicked"/>
         <Image
-            Source="likecircle"
+            Source="likecircle.svg"
             x:Name="circleImage"
             Aspect="Center"
             IsVisible="False"/>

@@ -1,11 +1,108 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XFECommunity.ViewPage.UserInfo">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:ctr="clr-namespace:XFECommunity.Controls;assembly=XFECommunity"
+             x:Class="XFECommunity.ViewPage.UserInfo"
+             Title="个人空间"
+             Background="#F0ECFE">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Image
+            Source="designer_desk"
+            Grid.RowSpan="3"/>
+        <BoxView
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
+            Color="White"
+            Opacity="0.2"/>
+        <Grid
+                Margin="50,20,50,20"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse
+                    Stroke="#512BD4"
+                    x:Name="ellipse"
+                    StrokeThickness="4"
+                    Grid.RowSpan="2"
+                    WidthRequest="60"
+                    HeightRequest="60"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            <Label
+                    Text="{Binding UserName[0],FallbackValue=?}"
+                    x:Name="charLabel"
+                    x:FieldModifier="public"
+                    Grid.RowSpan="2"
+                    TextColor="#512BD4"
+                    FontSize="40"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            <Label
+                    Text="{Binding UserName,FallbackValue=未登录}"
+                    Margin="10,0,0,0"
+                    x:Name="nameLabel"
+                    x:FieldModifier="public"
+                    TextColor="#512BD4"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    Grid.Column="1"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"/>
+            <Label
+                    Text="{Binding UUID,FallbackValue=暂无UID}"
+                    Margin="10,0,0,0"
+                    x:Name="uuidLabel"
+                    x:FieldModifier="public"
+                    TextColor="#512BD4"
+                    FontSize="12"
+                    Opacity="0.8"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"/>
+        </Grid>
+        <Border
+            Margin="50,50,50,0"
+            StrokeThickness="0"
+            Grid.Row="1"
+            StrokeShape="RoundRectangle 5,5,5,5"
+            VerticalOptions="Start"
+            HorizontalOptions="FillAndExpand">
+            <Grid
+                Background="#f0f0f0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
+        <ctr:WaitableButton
+            Margin="50,0,50,20"
+            Grid.Row="2"
+            x:Name="LoginButton"
+            Text="登录"
+            UseLoadingAnimation="False"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End"
+            WaitClick="LoginButton_WaitClick"
+            CornerRadius="30"/>
+    </Grid>
 </ContentPage>
