@@ -185,7 +185,7 @@ public partial class UserRegisterPage : ContentPage
         randomCode = IDGenerator.SummonRandomID(6);
         currentPhoneNum = UserTelEditor.Text;
         TelVerifyCodeButton.IsEnabled = false;
-        TelVerifyCodeButton.BackgroundColor = Color.FromArgb("#A491E8");
+        TelVerifyCodeButton.SetDynamicResource(Button.TextColorProperty, "DisabledMainColor");
         TelVerifyCodeButton.Text = "发送中...";
         IsCoolDown = true;
         var resp = await TencentSms.SendVerifyCode("1922756", "+86" + UserTelEditor.Text, new string[] { randomCode, "2" });
@@ -193,7 +193,7 @@ public partial class UserRegisterPage : ContentPage
         {
             await DisplayAlert("出错啦！", $"验证码发送失败：{resp?.SendStatusSet.First().Message}\n手机号：{UserTelEditor.Text}", "啊？");
             TelVerifyCodeButton.IsEnabled = true;
-            TelVerifyCodeButton.BackgroundColor = Color.FromArgb("#512BD4");
+            TelVerifyCodeButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
             TelVerifyCodeButton.Text = "重新发送";
         }
         else
@@ -210,7 +210,7 @@ public partial class UserRegisterPage : ContentPage
                         TelVerifyCodeButton.Text = "重新发送";
                         TelVerifyCodeButton.IsEnabled = true;
                         IsCoolDown = false;
-                        TelVerifyCodeButton.BackgroundColor = Color.FromArgb("#512BD4");
+                        TelVerifyCodeButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
                         return false;
                     }
                     return true;
@@ -251,11 +251,11 @@ public partial class UserRegisterPage : ContentPage
             {
                 Text = "注册成功",
                 Opacity = 0,
-                TextColor = Color.Parse("White"),
                 FontSize = 40,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };
+            successfulLabel.SetDynamicResource(Label.TextColorProperty, "PureBackGroundColor");
             this.Content = successfulLabel;
             await successfulLabel.FadeTo(1, 800, Easing.CubicOut);
             await Task.Delay(500);
@@ -306,7 +306,7 @@ public partial class UserRegisterPage : ContentPage
             if (!IsCoolDown)
             {
                 TelVerifyCodeButton.IsEnabled = true;
-                TelVerifyCodeButton.BackgroundColor = Color.FromArgb("#512BD4");
+                TelVerifyCodeButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
             }
         }
         else
@@ -315,7 +315,7 @@ public partial class UserRegisterPage : ContentPage
             UserTelLabel.Text = "手机号格式不正确";
             UserTelLabel.TextColor = Color.Parse("Red");
             TelVerifyCodeButton.IsEnabled = false;
-            TelVerifyCodeButton.BackgroundColor = Color.FromArgb("#A491E8");
+            TelVerifyCodeButton.SetDynamicResource(Button.TextColorProperty, "DisabledMainColor");
         }
     }
 
@@ -411,7 +411,7 @@ public partial class UserRegisterPage : ContentPage
         {
             if (!NextStepButton.IsWaiting)
             {
-                NextStepButton.BackgroundColor = Color.Parse("#512BD4");
+                NextStepButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
                 NextStepButton.IsEnabled = true;
             }
             TelVerifyCodeEditor_Unfocused(null, null);
@@ -420,7 +420,7 @@ public partial class UserRegisterPage : ContentPage
         {
             if (!NextStepButton.IsWaiting)
             {
-                NextStepButton.BackgroundColor = Color.Parse("#A491E8");
+                NextStepButton.SetDynamicResource(Button.TextColorProperty, "DisabledMainColor");
                 NextStepButton.IsEnabled = false;
             }
         }
@@ -430,13 +430,13 @@ public partial class UserRegisterPage : ContentPage
     {
         if (IsTelEditor && IsMailEditor && IsNameEditor && IsPasswordEditor && IsPasswordEnsureEditor)
         {
-            UserRegisterButton.BackgroundColor = Color.Parse("#512BD4");
+            UserRegisterButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
             if (!UserRegisterButton.IsWaiting)
                 UserRegisterButton.IsEnabled = true;
         }
         else
         {
-            UserRegisterButton.BackgroundColor = Color.Parse("#A491E8");
+            UserRegisterButton.SetDynamicResource(Button.TextColorProperty, "DisabledMainColor");
             if (!UserRegisterButton.IsWaiting)
                 UserRegisterButton.IsEnabled = false;
         }

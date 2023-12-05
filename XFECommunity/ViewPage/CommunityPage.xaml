@@ -5,12 +5,12 @@
              xmlns:local="clr-namespace:XFECommunity.ViewPage"
              x:Class="XFECommunity.ViewPage.CommunityPage"
              Title="社区小窝"
-             BackgroundColor="#f0f0f0">
+             BackgroundColor="{DynamicResource SecondBackGroundColor}">
     <RefreshView
         x:Name="postRefreshView"
         Refreshing="PostRefreshView_Refreshing"
         RefreshColor="#414aff"
-        BackgroundColor="White">
+        BackgroundColor="{DynamicResource BackGroundColor}">
         <AbsoluteLayout>
             <ScrollView
                 x:Name="postScrollView"
@@ -31,8 +31,8 @@
                         HorizontalOptions="Fill"
                         VerticalOptions="End"
                         FontSize="18"
-                        TextColor="#512BD4"
-                        BackgroundColor="#F0ECFE"/>
+                        TextColor="{DynamicResource MainColor}"
+                        BackgroundColor="{DynamicResource LightMainColor}"/>
                 </StackLayout>
             </ScrollView>
             <Grid
@@ -51,7 +51,7 @@
                     <Ellipse.Fill>
                         <RadialGradientBrush>
                             <GradientStop
-                                Color="#512BD4"
+                                Color="{DynamicResource MainColor}"
                                 Offset="0.8"/>
                             <GradientStop
                                 Color="#7248ff"

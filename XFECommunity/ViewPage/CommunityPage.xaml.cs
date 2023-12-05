@@ -35,6 +35,7 @@ public partial class CommunityPage : ContentPage
     public CommunityPage()
     {
         InitializeComponent();
+        Task.Run(async () => await UserInfo.ReadUserData(this));
         Current = this;
         postRefreshView.IsRefreshing = true;
     }

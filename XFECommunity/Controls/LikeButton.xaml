@@ -6,7 +6,7 @@
         <ImageButton
             Source="unlike.svg"
             x:Name="likeButton"
-            Clicked="likeButton_Clicked"/>
+            Clicked="LikeButton_Clicked"/>
         <Image
             Source="likecircle.svg"
             x:Name="circleImage"

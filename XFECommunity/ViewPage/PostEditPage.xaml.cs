@@ -31,11 +31,11 @@ public partial class PostEditPage : ContentPage
                 var button = new Button
                 {
                     Text = $"#{tag}",
-                    BackgroundColor = Color.FromArgb("#F0ECFE"),
-                    TextColor = Color.FromArgb("#512BD4"),
                     CornerRadius = 30,
                     Margin = new Thickness(10, 0, 0, 0)
                 };
+                button.SetDynamicResource(Button.TextColorProperty, "MainColor");
+                button.SetDynamicResource(Button.BackgroundColorProperty, "LightMainColor");
                 button.Clicked += TagButton_Clicked;
                 TagStackLayout.Children.Add(button);
             }
@@ -69,12 +69,12 @@ public partial class PostEditPage : ContentPage
                             {
                                 Text = "删除成功",
                                 Opacity = 0,
-                                TextColor = Color.FromArgb("#512BD4"),
                                 FontAttributes = FontAttributes.Bold,
                                 FontSize = 40,
                                 VerticalOptions = LayoutOptions.Center,
                                 HorizontalOptions = LayoutOptions.Center
                             };
+                            successfulLabel.SetDynamicResource(Label.TextColorProperty, "MainColor");
                             this.Content = successfulLabel;
                             await successfulLabel.FadeTo(1, 300, Easing.CubicInOut);
                             await Task.Delay(1000);
@@ -189,12 +189,12 @@ public partial class PostEditPage : ContentPage
                 {
                     Text = "发布成功",
                     Opacity = 0,
-                    TextColor = Color.FromArgb("#512BD4"),
                     FontAttributes = FontAttributes.Bold,
                     FontSize = 40,
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center
                 };
+                successfulLabel.SetDynamicResource(Label.TextColorProperty, "MainColor");
                 this.Content = successfulLabel;
                 await successfulLabel.FadeTo(1, 300, Easing.CubicInOut);
                 await Task.Delay(1000);
@@ -276,11 +276,11 @@ public partial class PostEditPage : ContentPage
         var button = new Button
         {
             Text = $"#{str}",
-            BackgroundColor = Color.FromArgb("#F0ECFE"),
-            TextColor = Color.FromArgb("#512BD4"),
             CornerRadius = 30,
             Margin = new Thickness(10, 0, 0, 0)
         };
+        button.SetDynamicResource(Button.TextColorProperty, "MainColor");
+        button.SetDynamicResource(Button.BackgroundColorProperty, "LightMainColor");
         button.Clicked += TagButton_Clicked;
         TagStackLayout.Children.Add(button);
     }

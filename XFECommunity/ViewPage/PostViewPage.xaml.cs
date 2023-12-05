@@ -117,11 +117,11 @@ public partial class PostViewPage : ContentPage
                 var button = new Button
                 {
                     Text = $"#{tag}",
-                    BackgroundColor = Color.FromArgb("#F0ECFE"),
-                    TextColor = Color.FromArgb("#512BD4"),
                     CornerRadius = 30,
                     Margin = new Thickness(5, 3, 0, 3)
                 };
+                button.SetDynamicResource(Button.TextColorProperty, "MainColor");
+                button.SetDynamicResource(Button.BackgroundColorProperty, "LightMainColor");
                 button.Clicked += TagButton_Clicked;
                 tagStackLayout.Children.Add(button);
             }
@@ -324,12 +324,12 @@ public partial class PostViewPage : ContentPage
     {
         if (string.IsNullOrWhiteSpace(InputEditor.Text))
         {
-            SendButton.BackgroundColor = Color.FromArgb("#A491E8");
+            SendButton.SetDynamicResource(Button.TextColorProperty, "DisabledMainColor");
             SendButton.IsEnabled = false;
         }
         else
         {
-            SendButton.BackgroundColor = Color.FromArgb("#512BD4");
+            SendButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
             SendButton.IsEnabled = true;
         }
     }
@@ -355,7 +355,7 @@ public partial class PostViewPage : ContentPage
                 return;
             }
             SendButton.IsEnabled = false;
-            SendButton.BackgroundColor = Color.FromArgb("#A491E8");
+            SendButton.SetDynamicResource(Button.TextColorProperty, "DisabledMainColor");
             InputEditor.IsEnabled = false;
             var tarCommentId = await IDGenerator.GetCorrectCommentId(XFEExecuter);
             try
@@ -372,7 +372,7 @@ public partial class PostViewPage : ContentPage
                 });
                 if (result == 0)
                 {
-                    SendButton.BackgroundColor = Color.FromArgb("#512BD4");
+                    SendButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
                     InputEditor.IsEnabled = true;
                     SendButton.IsEnabled = true;
                     await DisplayAlert("评论失败", "请检查网络设置", "确认");
@@ -389,7 +389,7 @@ public partial class PostViewPage : ContentPage
         }
         catch (Exception ex)
         {
-            SendButton.BackgroundColor = Color.FromArgb("#512BD4");
+            SendButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
             InputEditor.IsEnabled = true;
             SendButton.IsEnabled = true;
             await DisplayAlert("评论失败", $"请检查网络设置\n{ex.Message}", "确认");

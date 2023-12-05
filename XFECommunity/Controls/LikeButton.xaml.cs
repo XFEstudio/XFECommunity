@@ -35,7 +35,7 @@ public partial class LikeButton : ContentView
         InitializeComponent();
     }
 
-    private async void likeButton_Clicked(object sender, EventArgs e)
+    private async void LikeButton_Clicked(object sender, EventArgs e)
     {
         likeButton.IsEnabled = false;
         if (IsLike)

@@ -96,7 +96,7 @@ public partial class UserInfo : ContentPage
     }
     public void SwitchToLoginStyle()
     {
-        LoginButton.BackgroundColor = Color.Parse("White");
+        LoginButton.SetDynamicResource(Button.BackgroundColorProperty, "PureBackGroundColor");
         LoginButton.Text = "ÍË³öµÇÂ¼";
         LoginButton.BorderColor = Color.Parse("Red");
         LoginButton.BorderWidth = 1;
@@ -114,11 +114,11 @@ public partial class UserInfo : ContentPage
         StaticUUID = string.Empty;
         StaticPassword = string.Empty;
         StaticPhoneNum = string.Empty;
-        LoginButton.BackgroundColor = Color.FromArgb("#512BD4");
+        LoginButton.SetDynamicResource(Button.BackgroundColorProperty, "MainColor");
         LoginButton.Text = "µÇÂ¼";
         LoginButton.BorderColor = null;
         LoginButton.BorderWidth = 0;
-        LoginButton.TextColor = Color.Parse("White");
+        LoginButton.SetDynamicResource(Button.TextColorProperty, "BackGroundColor");
         CommunityPage.Current?.ChangeToUnLoginStyle();
         try
         {

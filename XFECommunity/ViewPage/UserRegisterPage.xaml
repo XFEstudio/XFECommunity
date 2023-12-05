@@ -4,14 +4,14 @@
              xmlns:ctr="clr-namespace:XFECommunity.Controls"
              x:Class="XFECommunity.ViewPage.UserRegisterPage"
              Title="注册"
-             Background="#512BD4">
+             Background="{DynamicResource MainColor}">
     <StackLayout>
         <Label 
             Margin="0,30"
             Text="社交管理平台"
             CharacterSpacing="2"
             FontAttributes="Bold"
-            TextColor="White"
+            TextColor="{DynamicResource BackGroundColor}"
             FontSize="40"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
@@ -19,7 +19,7 @@
             VerticalOptions="FillAndExpand"
             StrokeThickness="-1"
             StrokeShape="RoundRectangle 50,50,0,0"
-            BackgroundColor="#f0f0f0">
+            BackgroundColor="{DynamicResource SecondBackGroundColor}">
             <VerticalStackLayout
                 Padding="50,0">
                 <Label 
@@ -27,14 +27,14 @@
                     Text="注册"
                     CharacterSpacing="8"
                     FontAttributes="Bold"
-                    TextColor="#512BD4"
+                    TextColor="{DynamicResource MainColor}"
                     FontSize="40"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center" />
                 <Label 
                     Margin="0,0,0,20"
                     Text="XFE Chat Room"
-                    TextColor="#512BD4"
+                    TextColor="{DynamicResource MainColor}"
                     FontSize="20"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center" />
@@ -87,10 +87,10 @@
                         Clicked="TelVerifyCodeButton_Clicked"
                         CornerRadius="30"
                         ImageSource="send"
-                        TextColor="White"
+                        TextColor="{DynamicResource BackGroundColor}"
                         IsEnabled="False"
                         Grid.Column="1"
-                        BackgroundColor="#A491E8"
+                        BackgroundColor="{DynamicResource DisabledMainColor}"
                         FontSize="12"
                         HorizontalOptions="End"
                         VerticalOptions="Center"/>
@@ -254,8 +254,8 @@
                     UseLoadingAnimation="False"
                     x:Name="NextStepButton"
                     Text="下一步"
-                    TextColor="White"
-                    BackgroundColor="#A491E8"
+                    TextColor="{DynamicResource BackGroundColor}"
+                    BackgroundColor="{DynamicResource DisabledMainColor}"
                     CornerRadius="30"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center"
@@ -264,11 +264,11 @@
                     Margin="0,20"
                     x:Name="UserRegisterButton"
                     Text="注册"
-                    TextColor="White"
+                    TextColor="{DynamicResource BackGroundColor}"
                     Opacity="0"
                     TranslationY="30"
                     IsVisible="False"
-                    BackgroundColor="#A491E8"
+                    BackgroundColor="{DynamicResource DisabledMainColor}"
                     CornerRadius="30"
                     IsEnabled="False"
                     HorizontalOptions="FillAndExpand"
@@ -278,10 +278,10 @@
                     Margin="0,0"
                     x:Name="SwtichToLoginPageButton"
                     Text="已有账户？前往登录"
-                    TextColor="#512BD4"
+                    TextColor="{DynamicResource MainColor}"
                     FontAttributes="Bold"
-                    BorderColor="#512BD4"
-                    BackgroundColor="White"
+                    BorderColor="{DynamicResource MainColor}"
+                    BackgroundColor="{DynamicResource BackGroundColor}"
                     BorderWidth="1"
                     CornerRadius="30"
                     UseLoadingAnimation="False"
