@@ -11,9 +11,9 @@ public partial class StarButton : ContentView
         {
             isStar = value;
             if (isStar)
-                starButton.Source = "star";
+                starButton.Source = "star.png";
             else
-                starButton.Source = "unstar";
+                starButton.Source = "unstar.png";
         }
     }
 

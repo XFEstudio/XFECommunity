@@ -86,7 +86,7 @@
                         Text="获取验证码"
                         Clicked="TelVerifyCodeButton_Clicked"
                         CornerRadius="30"
-                        ImageSource="send"
+                        ImageSource="send.png"
                         TextColor="{DynamicResource BackGroundColor}"
                         IsEnabled="False"
                         Grid.Column="1"

@@ -96,7 +96,7 @@ public partial class UserInfo : ContentPage
     }
     public void SwitchToLoginStyle()
     {
-        LoginButton.SetDynamicResource(Button.BackgroundColorProperty, "PureBackGroundColor");
+        LoginButton.SetDynamicResource(Button.BackgroundColorProperty, "WhiteInLightAndTransparentInDarkColor");
         LoginButton.Text = "ÍË³öµÇÂ¼";
         LoginButton.BorderColor = Color.Parse("Red");
         LoginButton.BorderWidth = 1;

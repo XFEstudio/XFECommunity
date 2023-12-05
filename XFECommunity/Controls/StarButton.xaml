@@ -4,14 +4,14 @@
              x:Class="XFECommunity.Controls.StarButton">
     <Grid>
         <ImageButton
-            Source="unstar"
+            Source="unstar.png"
+            Background="Transparent"
             x:Name="starButton"
-            Aspect="Center"
             Clicked="starButton_Clicked"/>
         <Image
-            Source="starcircle"
+            Source="starcircle.png"
+            Background="Transparent"
             x:Name="circleImage"
-            Aspect="Center"
             IsVisible="False"/>
     </Grid>
 </ContentView>

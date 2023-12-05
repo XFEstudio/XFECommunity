@@ -54,21 +54,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\biglogoicon.png" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Controls\vnlaizcf.ijs~" />
 	  <None Remove="Resources\AppIcon\logoicon.png" />
-	  <None Remove="Resources\Images\biglogoicon.png" />
-	  <None Remove="Resources\Images\edit.svg" />
-	  <None Remove="Resources\Images\home.svg" />
-	  <None Remove="Resources\Images\like.svg" />
-	  <None Remove="Resources\Images\likecircle.svg" />
-	  <None Remove="Resources\Images\star.svg" />
-	  <None Remove="Resources\Images\starcircle.svg" />
-	  <None Remove="Resources\Images\unlike.svg" />
-	  <None Remove="Resources\Images\unstar.svg" />
+	  <None Remove="Resources\Images\close.png" />
+	  <None Remove="Resources\Images\edit.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\like.png" />
+	  <None Remove="Resources\Images\likecircle.png" />
+	  <None Remove="Resources\Images\quote.png" />
+	  <None Remove="Resources\Images\send.png" />
+	  <None Remove="Resources\Images\star.png" />
+	  <None Remove="Resources\Images\starcircle.png" />
+	  <None Remove="Resources\Images\unlike.png" />
+	  <None Remove="Resources\Images\unstar.png" />
+	  <None Remove="Resources\Images\user.png" />
 	  <None Remove="Resources\Splash\biglogoicon.png" />
 	</ItemGroup>
 
@@ -77,7 +76,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Images\biglogoicon.png" />
 	  <MauiSplashScreen Include="Resources\Splash\biglogoicon.png" />
 	</ItemGroup>
 

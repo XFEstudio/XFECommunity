@@ -74,35 +74,20 @@
                     HorizontalOptions="Start"
                     VerticalOptions="Center"/>
         </Grid>
-        <Border
-            Margin="50,50,50,0"
-            StrokeThickness="0"
+        <StackLayout
+            VerticalOptions="FillAndExpand"
             Grid.Row="1"
-            StrokeShape="RoundRectangle 5,5,5,5"
-            VerticalOptions="Start"
-            HorizontalOptions="FillAndExpand">
-            <Grid
-                Background="{DynamicResource SecondBackGroundColor}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </Border>
+            Margin="150,0,150,20">
+        </StackLayout>
         <ctr:WaitableButton
-            Margin="50,0,50,20"
+            Margin="150,0,150,20"
             Grid.Row="2"
             x:Name="LoginButton"
             Text="登录"
             UseLoadingAnimation="False"
-            HorizontalOptions="FillAndExpand"
+            HorizontalOptions="Fill"
             VerticalOptions="End"
             WaitClick="LoginButton_WaitClick"
-            CornerRadius="30"/>
+            CornerRadius="20"/>
     </Grid>
 </ContentPage>

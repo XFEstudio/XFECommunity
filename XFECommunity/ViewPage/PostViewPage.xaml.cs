@@ -35,8 +35,8 @@ public partial class PostViewPage : ContentPage
                 InitializePageData();
         }
     }
-    public XFEChatRoom_CommunityPost CurrentPostData { get; set; }
-    public static PostViewPage Current { get; private set; }
+    public XFEChatRoom_CommunityPost? CurrentPostData { get; set; }
+    public static PostViewPage? Current { get; private set; }
     private readonly List<string> commentIDList = [];
     private readonly List<CommentCardView> commentCardList = [];
     private bool Editing = false;
@@ -52,14 +52,17 @@ public partial class PostViewPage : ContentPage
         Current = this;
         backButton.Command = new Command(() =>
         {
-            Shell.Current.SendBackButtonPressed();
+            SendBackButtonPressed();
         });
     }
 
     protected override bool OnBackButtonPressed()
     {
-        try { XFEExecuter.Dispose(); } catch (Exception) { }
+        try { XFEExecuter.Dispose(); } catch (Exception ex) { Console.WriteLine(ex); }
         CurrentPostData = null;
+#if WINDOWS
+        Shell.Current.GoToAsync("..");
+#endif
         return base.OnBackButtonPressed();
     }
 
@@ -324,12 +327,12 @@ public partial class PostViewPage : ContentPage
     {
         if (string.IsNullOrWhiteSpace(InputEditor.Text))
         {
-            SendButton.SetDynamicResource(Button.TextColorProperty, "DisabledMainColor");
+            SendButton.SetDynamicResource(ImageButton.BackgroundColorProperty, "DisabledMainColor");
             SendButton.IsEnabled = false;
         }
         else
         {
-            SendButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
+            SendButton.SetDynamicResource(ImageButton.BackgroundColorProperty, "MainColor");
             SendButton.IsEnabled = true;
         }
     }
@@ -355,7 +358,7 @@ public partial class PostViewPage : ContentPage
                 return;
             }
             SendButton.IsEnabled = false;
-            SendButton.SetDynamicResource(Button.TextColorProperty, "DisabledMainColor");
+            SendButton.SetDynamicResource(BackgroundColorProperty, "DisabledMainColor");
             InputEditor.IsEnabled = false;
             var tarCommentId = await IDGenerator.GetCorrectCommentId(XFEExecuter);
             try
@@ -372,7 +375,7 @@ public partial class PostViewPage : ContentPage
                 });
                 if (result == 0)
                 {
-                    SendButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
+                    SendButton.SetDynamicResource(BackgroundColorProperty, "MainColor");
                     InputEditor.IsEnabled = true;
                     SendButton.IsEnabled = true;
                     await DisplayAlert("评论失败", "请检查网络设置", "确认");
@@ -389,7 +392,7 @@ public partial class PostViewPage : ContentPage
         }
         catch (Exception ex)
         {
-            SendButton.SetDynamicResource(Button.TextColorProperty, "MainColor");
+            SendButton.SetDynamicResource(BackgroundColorProperty, "MainColor");
             InputEditor.IsEnabled = true;
             SendButton.IsEnabled = true;
             await DisplayAlert("评论失败", $"请检查网络设置\n{ex.Message}", "确认");

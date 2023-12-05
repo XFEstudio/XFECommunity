@@ -8,4 +8,6 @@
     <Color x:Key="BackGroundColor">#101010</Color>
     <Color x:Key="PureBackGroundColor">Black</Color>
     <Color x:Key="SecondBackGroundColor">Black</Color>
+    <Color x:Key="PostTitleTextColor">#7766e5</Color>
+    <Color x:Key="WhiteInLightAndTransparentInDarkColor">Transparent</Color>
 </ResourceDictionary>

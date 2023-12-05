@@ -14,7 +14,7 @@
                 x:Name="TitleEditor"
                 Placeholder="请输入标题"
                 FontSize="Title"
-                TextColor="#3e3192"
+                TextColor="{DynamicResource PostTitleTextColor}"
                 AutoSize="TextChanges"
                 VerticalOptions="Start"
                 MaxLength="32"
@@ -22,7 +22,7 @@
             <BoxView
                 Margin="5,0"
                 HeightRequest="2"
-                CornerRadius="30"
+                CornerRadius="20"
                 Opacity="0.5"
                 Color="{DynamicResource MainColor}" />
             <Editor
@@ -49,14 +49,14 @@
                         TextColor="{DynamicResource LightMainColor}"
                         FontAttributes="Bold"
                         BackgroundColor="{DynamicResource MainColor}"
-                        CornerRadius="30"
+                        CornerRadius="20"
                         Clicked="AddTagButton_Clicked"/>
                 </HorizontalStackLayout>
             </ScrollView>
             <BoxView
                 Margin="5,0"
                 HeightRequest="2"
-                CornerRadius="30"
+                CornerRadius="20"
                 Opacity="0.5"
                 Color="{DynamicResource MainColor}" />
             <Label

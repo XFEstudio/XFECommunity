@@ -26,15 +26,15 @@ public partial class PersonalInformationPage : ContentPage
         string userNameEdit = await DisplayPromptAsync("修改昵称", "请输入要修改的昵称", "确定","取消");
         if (userNameEdit is not null && userNameEdit != string.Empty)
         {
-            if (userNameEdit.UserNameEditor())
-            {
-                /*UserInfo.*/
-                await DisplayAlert("修改成功", "内容合法", "明白了");
-            }
-            else
-            {
-                await DisplayAlert("非法昵称", "请输入合法昵称", "明白了");
-            }
+            //if (userNameEdit.UserNameEditor())
+            //{
+            //    /*UserInfo.*/
+            //    await DisplayAlert("修改成功", "内容合法", "明白了");
+            //}
+            //else
+            //{
+            //    await DisplayAlert("非法昵称", "请输入合法昵称", "明白了");
+            //}
         }
     }
 

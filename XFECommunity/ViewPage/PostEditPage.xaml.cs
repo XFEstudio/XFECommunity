@@ -204,7 +204,7 @@ public partial class PostEditPage : ContentPage
                 {
                     PostViewPage.Current?.Refresh();
                 }
-                Shell.Current.SendBackButtonPressed();
+                SendBackButtonPressed();
                 Posting = false;
             })
         });
@@ -227,7 +227,7 @@ public partial class PostEditPage : ContentPage
                 if (await DisplayAlert("确定退出吗？", "未保存的内容将会丢失，请谨慎选择", "退出", "取消"))
                 {
                     SecTrigger = true;
-                    Shell.Current.SendBackButtonPressed();
+                    SendBackButtonPressed();
                 }
                 else
                 {

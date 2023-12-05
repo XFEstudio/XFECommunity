@@ -60,13 +60,10 @@
                     </Ellipse.Fill>
                 </Ellipse>
                 <ImageButton
-                    Source="edit.svg"
+                    Background="Transparent"
+                    Source="edit.png"
                     WidthRequest="30"
                     HeightRequest="30"
-                    Clicked="ImageButton_Clicked"/>
-                <ImageButton
-                    WidthRequest="55"
-                    HeightRequest="55"
                     Clicked="ImageButton_Clicked"/>
             </Grid>
         </AbsoluteLayout>
