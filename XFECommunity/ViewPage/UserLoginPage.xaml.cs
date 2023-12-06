@@ -73,7 +73,7 @@ public partial class UserLoginPage : ContentPage
     public async void ChangeForgetPassword(List<XFEChatRoom_UserInfoForm> result)
     {
         string userPassword = await DisplayPromptAsync("忘记密码", "请输入您的新密码", "确定");
-        if (userPassword is not null && userPassword.PasswordEditor())
+        if (userPassword is not null && userPassword.VerifyPassword())
         {
             /*result[0].Apassword = userPassword;*/
             UserInfo.CurrentUser = result[0];

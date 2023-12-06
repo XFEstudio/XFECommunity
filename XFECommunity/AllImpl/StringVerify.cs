@@ -2,11 +2,11 @@
 {
     public static class StringVerify
     {
-        public static string[] contrabandVocabulary = ["脏话1","脏话2","脏话3"];
+        public static string[] ContrabandVocabulary { get; } = ["脏话1", "脏话2", "脏话3"];
         public static bool VerifyString(this string verifyString)
         {
             int i = 1;
-            foreach (string word in contrabandVocabulary)
+            foreach (string word in ContrabandVocabulary)
             {
                 if (verifyString == word)
                 {
@@ -20,17 +20,17 @@
                 return false;
         }
 
-        public static bool UserNameEditor(this string NewUserName)
+        public static bool VerifyUserName(this string newUserName)
         {
-            if (!NewUserName.Contains(' ') && NewUserName.VerifyString()) { return true; }
+            if (!newUserName.Contains(' ') && newUserName.VerifyString()) { return true; }
             else { return false; }
         }
 
-        public static bool PasswordEditor(this string NewPassword)
+        public static bool VerifyPassword(this string newPassword)
         {
-            if (NewPassword is not null && NewPassword != string.Empty)
+            if (newPassword is not null && newPassword != string.Empty)
             {
-                if (!NewPassword.Contains(' ') && NewPassword.Length < 20) { return true; }
+                if (!newPassword.Contains(' ') && newPassword.Length < 20) { return true; }
                 else { return false; }
             }
             else { return false; }
