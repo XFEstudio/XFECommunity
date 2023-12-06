@@ -338,7 +338,7 @@ public partial class UserInfo : ContentPage
             {
                 if (userPasswordEdit.VerifyPassword())
                 {
-                    UserInfo.EditUserProperty(UserPropertyToEdit.Password, userPasswordEdit);
+                    EditUserProperty(UserPropertyToEdit.Password, userPasswordEdit);
                     await DisplayAlert("修改成功", "您的密码已修改", "明白了");
                 }
                 else
