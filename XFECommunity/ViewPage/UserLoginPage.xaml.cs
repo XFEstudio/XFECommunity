@@ -53,8 +53,8 @@ public partial class UserLoginPage : ContentPage
         string userTel = await DisplayPromptAsync("忘记密码", "请输入您的手机号", "确定", "取消");
         if (userTel is not null && userTel != string.Empty)
         {
-            var xFEExecuter = XCCDataBase.XFEDataBase.CreateExecuter();
-            var result = await xFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Atel == userTel);
+            var xFEExecuter = XCCDataBase.XFEDataBase?.CreateExecuter();
+            var result = await xFEExecuter?.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Atel == userTel);
             if (result is not null && result.Count == 1)
             {
                 xFEExecuter.ExecuteUpdate<XFEChatRoom_UserInfoForm>(x =>

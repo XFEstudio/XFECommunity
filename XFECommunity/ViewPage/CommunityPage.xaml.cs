@@ -16,7 +16,7 @@ public partial class CommunityPage : ContentPage
     private long totalHeight = 0;
     private bool firstRefresh = true;
     private bool refreshingIsBusy = false;
-    private ToolbarItem switchColorButton = new();
+    private readonly ToolbarItem switchColorButton = new();
     private bool RefreshingIsBusy
     {
         get => refreshingIsBusy;
@@ -312,7 +312,7 @@ public partial class CommunityPage : ContentPage
         }
         return totalHeight;
     }
-    private void postScrollView_Scrolled(object sender, ScrolledEventArgs e)
+    private void PostScrollView_Scrolled(object sender, ScrolledEventArgs e)
     {
         if (RefreshingIsBusy)
             return;
