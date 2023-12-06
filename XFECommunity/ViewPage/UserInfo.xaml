@@ -5,279 +5,281 @@
              x:Class="XFECommunity.ViewPage.UserInfo"
              Title="个人空间"
              Background="{DynamicResource LightMainColor}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="100"/>
-        </Grid.RowDefinitions>
-        <Image
-            Source="designer_desk"
-            Grid.RowSpan="3"/>
-        <BoxView
-            VerticalOptions="Fill"
-            HorizontalOptions="Fill"
-            Color="{DynamicResource BackGroundColor}"
-            Opacity="0.2"/>
-        <Grid
-            Margin="50,20,50,20"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="Center">
+    <ScrollView>
+        <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Ellipse
-                Stroke="{DynamicResource MainColor}"
-                x:Name="ellipse"
-                StrokeThickness="4"
-                Grid.RowSpan="2"
-                WidthRequest="60"
-                HeightRequest="60"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"/>
-            <Label
-                Text="{Binding UserName[0],FallbackValue=?}"
-                x:Name="charLabel"
-                x:FieldModifier="public"
-                Grid.RowSpan="2"
-                TextColor="{DynamicResource MainColor}"
-                FontSize="40"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"/>
-            <Label
-                Text="{Binding UserName,FallbackValue=未登录}"
-                Margin="10,0,0,0"
-                x:Name="nameLabel"
-                x:FieldModifier="public"
-                TextColor="{DynamicResource MainColor}"
-                FontSize="24"
-                FontAttributes="Bold"
-                Grid.Column="1"
-                HorizontalOptions="Start"
-                VerticalOptions="Center"/>
-            <Label
-                Text="{Binding UUID,FallbackValue=暂无UID}"
-                Margin="10,0,0,0"
-                x:Name="uuidLabel"
-                x:FieldModifier="public"
-                TextColor="{DynamicResource MainColor}"
-                FontSize="12"
-                Opacity="0.8"
+            <Image
+                Source="designer_desk"
+                Grid.RowSpan="3"/>
+            <BoxView
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                Color="{DynamicResource BackGroundColor}"
+                Opacity="0.2"/>
+            <Grid
+                Margin="50,20,50,20"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse
+                    Stroke="{DynamicResource MainColor}"
+                    x:Name="ellipse"
+                    StrokeThickness="4"
+                    Grid.RowSpan="2"
+                    WidthRequest="60"
+                    HeightRequest="60"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label
+                    Text="{Binding UserName[0],FallbackValue=?}"
+                    x:Name="charLabel"
+                    x:FieldModifier="public"
+                    Grid.RowSpan="2"
+                    TextColor="{DynamicResource MainColor}"
+                    FontSize="40"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label
+                    Text="{Binding UserName,FallbackValue=未登录}"
+                    Margin="10,0,0,0"
+                    x:Name="nameLabel"
+                    x:FieldModifier="public"
+                    TextColor="{DynamicResource MainColor}"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    Grid.Column="1"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"/>
+                <Label
+                    Text="{Binding UUID,FallbackValue=暂无UID}"
+                    Margin="10,0,0,0"
+                    x:Name="uuidLabel"
+                    x:FieldModifier="public"
+                    TextColor="{DynamicResource MainColor}"
+                    FontSize="12"
+                    Opacity="0.8"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"/>
+            </Grid>
+            <StackLayout
+                VerticalOptions="FillAndExpand"
                 Grid.Row="1"
-                Grid.Column="1"
-                HorizontalOptions="Start"
-                VerticalOptions="Center"/>
+                Margin="0,30">
+                <Label
+                    Margin="5"
+                    Text="用户信息"
+                    TextColor="{DynamicResource NormalTextColor}"/>
+                <Border
+                    x:Name="UserNameEditBoder"
+                    Margin="0,0"
+                    Padding="10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    StrokeShape="RoundRectangle 0"
+                    StrokeThickness="0"
+                    BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="NameEditGesture"
+                            Tapped="NameEditGesture_Tapped"/>
+                    </Border.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Text="修改用户名"
+                            FontSize="16"
+                            TextColor="{DynamicResource NormalTextColor}"/>
+                        <Image
+                            Grid.Column="1"
+                            Source="right.png"/>
+                    </Grid>
+                </Border>
+                <BoxView
+                    Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
+                    HeightRequest="1"
+                    CornerRadius="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Fill"/>
+                <Border
+                    x:Name="UserTelEditBoder"
+                    Margin="0,0"
+                    Padding="10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    StrokeShape="RoundRectangle 0"
+                    StrokeThickness="0"
+                    BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="TelEditGesture"
+                            Tapped="TelEditGesture_Tapped"/>
+                    </Border.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Text="修改手机号"
+                            FontSize="16"
+                            TextColor="{DynamicResource NormalTextColor}"/>
+                        <Image
+                            Grid.Column="1"
+                            Source="right.png"/>
+                    </Grid>
+                </Border>
+                <BoxView
+                    Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
+                    HeightRequest="1"
+                    CornerRadius="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Fill"/>
+                <Border
+                    x:Name="UserMailEditBoder"
+                    Margin="0,0"
+                    Padding="10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    StrokeShape="RoundRectangle 0"
+                    StrokeThickness="0"
+                    BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="MailEditGesture"
+                            Tapped="MailEditGesture_Tapped"/>
+                    </Border.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Text="修改邮箱"
+                            FontSize="16"
+                            TextColor="{DynamicResource NormalTextColor}"/>
+                        <Image
+                            Grid.Column="1"
+                            Source="right.png"/>
+                    </Grid>
+                </Border>
+                <BoxView
+                    Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
+                    HeightRequest="1"
+                    CornerRadius="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Fill"/>
+                <Border
+                    x:Name="UserPasswordEditBoder"
+                    Margin="0,0"
+                    Padding="10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    StrokeShape="RoundRectangle 0"
+                    StrokeThickness="0"
+                    BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="PasswordEditGesture"
+                            Tapped="PasswordEditGesture_Tapped"/>
+                    </Border.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Text="修改密码"
+                            FontSize="16"
+                            TextColor="{DynamicResource NormalTextColor}"/>
+                        <Image
+                            Grid.Column="1"
+                            Source="right.png"/>
+                    </Grid>
+                </Border>
+                <BoxView
+                    Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
+                    IsVisible="{AppThemeBinding Light=False,Dark=True}"
+                    HeightRequest="1"
+                    CornerRadius="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Fill"/>
+                <Label
+                    Margin="5,15,5,5"
+                    Text="选项设置"
+                    TextColor="{DynamicResource NormalTextColor}"/>
+                <Border
+                    x:Name="UserThemeSwitchBoder"
+                    Margin="0,0"
+                    Padding="10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    StrokeShape="RoundRectangle 0"
+                    StrokeThickness="0"
+                    BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="SwitchThemeGesture"
+                            Tapped="SwitchThemeGesture_Tapped"/>
+                    </Border.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Text="切换主题"
+                            FontSize="16"
+                            TextColor="{DynamicResource NormalTextColor}"/>
+                        <Label
+                            x:Name="ThemeShowLabel"
+                            Grid.Column="1"
+                            FontSize="16"
+                            TextColor="{DynamicResource NormalTextColor}"/>
+                        <Image
+                            x:Name="ThemeShowImage"
+                            Grid.Column="2"
+                            HeightRequest="30"
+                            WidthRequest="30"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"/>
+                    </Grid>
+                </Border>
+                <BoxView
+                    Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
+                    HeightRequest="1"
+                    IsVisible="{AppThemeBinding Light=False,Dark=True}"
+                    CornerRadius="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Fill"/>
+            </StackLayout>
+            <ctr:WaitableButton
+                Margin="150,0"
+                Grid.Row="2"
+                x:Name="LoginButton"
+                Text="登录"
+                UseLoadingAnimation="False"
+                HorizontalOptions="Fill"
+                VerticalOptions="Center"
+                WaitClick="LoginButton_WaitClick"
+                CornerRadius="20"/>
         </Grid>
-        <StackLayout
-            VerticalOptions="FillAndExpand"
-            Grid.Row="1"
-            Margin="0,30">
-            <Label
-                Margin="5"
-                Text="用户信息"
-                TextColor="{DynamicResource NormalTextColor}"/>
-            <Border
-                x:Name="UserNameEditBoder"
-                Margin="0,0"
-                Padding="10"
-                HorizontalOptions="Fill"
-                VerticalOptions="Center"
-                StrokeShape="RoundRectangle 0"
-                StrokeThickness="0"
-                BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer
-                        x:Name="NameEditGesture"
-                        Tapped="NameEditGesture_Tapped"/>
-                </Border.GestureRecognizers>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <Label
-                        Text="修改用户名"
-                        FontSize="16"
-                        TextColor="{DynamicResource NormalTextColor}"/>
-                    <Image
-                        Grid.Column="1"
-                        Source="right.png"/>
-                </Grid>
-            </Border>
-            <BoxView
-                Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
-                HeightRequest="1"
-                CornerRadius="0"
-                VerticalOptions="Center"
-                HorizontalOptions="Fill"/>
-            <Border
-                x:Name="UserTelEditBoder"
-                Margin="0,0"
-                Padding="10"
-                HorizontalOptions="Fill"
-                VerticalOptions="Center"
-                StrokeShape="RoundRectangle 0"
-                StrokeThickness="0"
-                BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer
-                        x:Name="TelEditGesture"
-                        Tapped="TelEditGesture_Tapped"/>
-                </Border.GestureRecognizers>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <Label
-                        Text="修改手机号"
-                        FontSize="16"
-                        TextColor="{DynamicResource NormalTextColor}"/>
-                    <Image
-                        Grid.Column="1"
-                        Source="right.png"/>
-                </Grid>
-            </Border>
-            <BoxView
-                Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
-                HeightRequest="1"
-                CornerRadius="0"
-                VerticalOptions="Center"
-                HorizontalOptions="Fill"/>
-            <Border
-                x:Name="UserMailEditBoder"
-                Margin="0,0"
-                Padding="10"
-                HorizontalOptions="Fill"
-                VerticalOptions="Center"
-                StrokeShape="RoundRectangle 0"
-                StrokeThickness="0"
-                BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer
-                        x:Name="MailEditGesture"
-                        Tapped="MailEditGesture_Tapped"/>
-                </Border.GestureRecognizers>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <Label
-                        Text="修改邮箱"
-                        FontSize="16"
-                        TextColor="{DynamicResource NormalTextColor}"/>
-                    <Image
-                        Grid.Column="1"
-                        Source="right.png"/>
-                </Grid>
-            </Border>
-            <BoxView
-                Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
-                HeightRequest="1"
-                CornerRadius="0"
-                VerticalOptions="Center"
-                HorizontalOptions="Fill"/>
-            <Border
-                x:Name="UserPasswordEditBoder"
-                Margin="0,0"
-                Padding="10"
-                HorizontalOptions="Fill"
-                VerticalOptions="Center"
-                StrokeShape="RoundRectangle 0"
-                StrokeThickness="0"
-                BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer
-                        x:Name="PasswordEditGesture"
-                        Tapped="PasswordEditGesture_Tapped"/>
-                </Border.GestureRecognizers>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <Label
-                        Text="修改密码"
-                        FontSize="16"
-                        TextColor="{DynamicResource NormalTextColor}"/>
-                    <Image
-                        Grid.Column="1"
-                        Source="right.png"/>
-                </Grid>
-            </Border>
-            <BoxView
-                Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
-                IsVisible="{AppThemeBinding Light=False,Dark=True}"
-                HeightRequest="1"
-                CornerRadius="0"
-                VerticalOptions="Center"
-                HorizontalOptions="Fill"/>
-            <Label
-                Margin="5,15,5,5"
-                Text="选项设置"
-                TextColor="{DynamicResource NormalTextColor}"/>
-            <Border
-                x:Name="UserThemeSwitchBoder"
-                Margin="0,0"
-                Padding="10"
-                HorizontalOptions="Fill"
-                VerticalOptions="Center"
-                StrokeShape="RoundRectangle 0"
-                StrokeThickness="0"
-                BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer
-                        x:Name="SwitchThemeGesture"
-                        Tapped="SwitchThemeGesture_Tapped"/>
-                </Border.GestureRecognizers>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <Label
-                        Text="切换主题"
-                        FontSize="16"
-                        TextColor="{DynamicResource NormalTextColor}"/>
-                    <Label
-                        x:Name="ThemeShowLabel"
-                        Grid.Column="1"
-                        FontSize="16"
-                        TextColor="{DynamicResource NormalTextColor}"/>
-                    <Image
-                        x:Name="ThemeShowImage"
-                        Grid.Column="2"
-                        HeightRequest="30"
-                        WidthRequest="30"
-                        VerticalOptions="Center"
-                        HorizontalOptions="End"/>
-                </Grid>
-            </Border>
-            <BoxView
-                Color="{AppThemeBinding Light=#444654,Dark={DynamicResource MainColor}}"
-                HeightRequest="1"
-                IsVisible="{AppThemeBinding Light=False,Dark=True}"
-                CornerRadius="0"
-                VerticalOptions="Center"
-                HorizontalOptions="Fill"/>
-        </StackLayout>
-        <ctr:WaitableButton
-            Margin="150,0,150,20"
-            Grid.Row="2"
-            x:Name="LoginButton"
-            Text="登录"
-            UseLoadingAnimation="False"
-            HorizontalOptions="Fill"
-            VerticalOptions="End"
-            WaitClick="LoginButton_WaitClick"
-            CornerRadius="20"/>
-    </Grid>
+    </ScrollView>
 </ContentPage>

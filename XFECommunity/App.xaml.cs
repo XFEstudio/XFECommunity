@@ -16,9 +16,6 @@ namespace XFECommunity
                 AutoSwitchByTheme(a.RequestedTheme);
             };
             InitializeComponent();
-            AppSystemProfile.Theme = Current!.RequestedTheme;
-            Console.WriteLine(Current!.RequestedTheme);
-            AppSystemProfile.LoadSystemProfile();
             try
             {
                 if (File.Exists(AppPath.CheckInitializePath))
@@ -35,6 +32,9 @@ namespace XFECommunity
             {
                 MainPage = new AppShell();
             }
+            AppSystemProfile.Theme = Current!.RequestedTheme;
+            Console.WriteLine(Current!.RequestedTheme);
+            AppSystemProfile.LoadSystemProfile();
             AutoSwitchByTheme(AppSystemProfile.Theme);
         }
         public static void SwitchToTheme(ResourceDictionary resourceDictionary)

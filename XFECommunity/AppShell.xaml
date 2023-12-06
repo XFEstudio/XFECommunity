@@ -6,15 +6,18 @@
     xmlns:view="clr-namespace:XFECommunity.ViewPage"
     Shell.FlyoutBehavior="Disabled"
     Title="XFECommunity"
-    TitleColor="{DynamicResource NormalTextColor}"
+    TitleColor="{DynamicResource MainColor}"
     FlyoutBackgroundColor="{DynamicResource SecondBackGroundColor}"
-    BackgroundColor="{DynamicResource SecondBackGroundColor}">
-
+    TabBarTitleColor="{DynamicResource MainColor}"
+    BackgroundColor="{DynamicResource SecondBackGroundColor}"
+    UnselectedColor="{DynamicResource NormalTextColor}"
+    TabBarUnselectedColor="{DynamicResource NormalTextColor}"
+    TabBarForegroundColor="{DynamicResource MainColor}">
     <Tab
         Title="社区"
         Icon="home.png">
         <ShellContent
-            Title="社区"
+            Title="社区测试"
             ContentTemplate="{DataTemplate view:CommunityPage}"
             Route="MainPage" />
     </Tab>

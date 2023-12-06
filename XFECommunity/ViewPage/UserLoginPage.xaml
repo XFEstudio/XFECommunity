@@ -141,6 +141,7 @@
                     IsVisible="False"
                     HorizontalTextAlignment="Start"
                     Opacity="0"
+                    WidthRequest="300"
                     TextColor="Gray"
                     FontSize="10"
                     VerticalOptions="Center" 

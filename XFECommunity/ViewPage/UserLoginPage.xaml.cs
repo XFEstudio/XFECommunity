@@ -57,11 +57,11 @@ public partial class UserLoginPage : ContentPage
             var result = await xFEExecuter?.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Atel == userTel);
             if (result is not null && result.Count == 1)
             {
-                xFEExecuter.ExecuteUpdate<XFEChatRoom_UserInfoForm>(x =>
-                {
-                    return x.Atel == userTel;
-                });
-                ChangeForgetPassword(result);
+                //xFEExecuter.ExecuteUpdate<XFEChatRoom_UserInfoForm>(x =>
+                //{
+                //    return x.Atel == userTel;
+                //});
+                //ChangeForgetPassword(result);
             }
             else
             {

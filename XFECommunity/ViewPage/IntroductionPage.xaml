@@ -37,6 +37,7 @@
             Opacity="0"
             TranslationY="100"
             Text="欢迎来到XFE聊天室，这里有一段开场白，我想自我介绍一下~"
+            TextColor="{StaticResource NormalTextColor}"
             FontSize="20"
             VerticalOptions="Start" 
             HorizontalOptions="Center"/>
@@ -51,6 +52,7 @@
                 CharacterSpacing="6"
                 FontSize="20"
                 Text="1/8"
+                TextColor="{StaticResource NormalTextColor}"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
             <Button
@@ -62,7 +64,7 @@
                 FontAttributes="Bold"
                 WidthRequest="300"
                 FontSize="18"
-                TextColor="White"
+                TextColor="{StaticResource PureBackGroundColor}"
                 BackgroundColor="{StaticResource MainColor}"
                 Text="下一项"
                 Clicked="NextButton_Clicked"

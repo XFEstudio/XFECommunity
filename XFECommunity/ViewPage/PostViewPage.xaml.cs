@@ -101,7 +101,7 @@ public partial class PostViewPage : ContentPage
                 await DisplayAlert("哦不", "无法获取帖子信息\n帖子ID：" + PostID, "啊？");
                 return;
             }
-            this.Title = "小窝：" + (CurrentPostData.PostTitle!.Length > 10 ? CurrentPostData.PostTitle[..10] + "..." : CurrentPostData.PostTitle);
+            this.Title = "小窝：" + (CurrentPostData.PostTitle!.Length > 15 ? CurrentPostData.PostTitle[..15] + "..." : CurrentPostData.PostTitle);
             TitleLabel.Text = CurrentPostData.PostTitle;
             charLabel.Text = CurrentPostData.UName![0].ToString();
             ContentLabel.Text = CurrentPostData.PostContent;

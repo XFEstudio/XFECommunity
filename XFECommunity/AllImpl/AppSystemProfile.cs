@@ -12,7 +12,7 @@ namespace XFECommunity.AllImpl
     {
         public static LoginMethod LoginMethod { get; set; } = LoginMethod.PasswordLogin;
         public static string IgnoreVersion { get; set; } = string.Empty;
-        public static AppTheme Theme { get; set; } = Application.Current is null ? AppTheme.Unspecified : Application.Current.UserAppTheme;
+        public static AppTheme Theme { get; set; } = Application.Current is null ? AppTheme.Unspecified : Application.Current.RequestedTheme;
         public static void SaveSystemProfile()
         {
             string saveString = new XFEDictionary(new string[]
