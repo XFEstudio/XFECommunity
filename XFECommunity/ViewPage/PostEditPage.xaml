@@ -14,6 +14,7 @@
                 x:Name="TitleEditor"
                 Placeholder="请输入标题"
                 FontSize="Title"
+                Background="Transparent"
                 TextColor="{DynamicResource PostTitleTextColor}"
                 AutoSize="TextChanges"
                 VerticalOptions="Start"
@@ -31,6 +32,7 @@
                 FontSize="Subtitle"
                 AutoSize="TextChanges"
                 Opacity="0.85"
+                Background="Transparent"
                 TextChanged="ContentEditor_TextChanged"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="True"
@@ -39,7 +41,7 @@
             <ScrollView
                 HorizontalScrollBarVisibility="Never"
                 Orientation="Horizontal"
-                Margin="10,0,0,30"
+                Margin="10,20,0,30"
                 VerticalOptions="End">
                 <HorizontalStackLayout
                     x:Name="TagStackLayout">
@@ -63,6 +65,7 @@
                 Margin="0,10,0,0"
                 x:Name="WordCountLabel"
                 Text="字数：0/3000"
+                TextColor="{DynamicResource NormalTextColor}"
                 FontSize="Micro"
                 Opacity="0.5"
                 HorizontalOptions="End" />

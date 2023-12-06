@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-maccatalyst;net8.0-android;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks>net8.0-maccatalyst;net8.0-android;net8.0-ios;net8.0-tizen</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -51,72 +51,54 @@
 	  <ApplicationId>com.xfegzs.xfecommunity</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>com.xfegzs.xfecommunity</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>com.xfegzs.xfecommunity</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>com.xfegzs.xfecommunity</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup>
 	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
-	  <Title>XFE社区</Title>
-	  <Authors>XFEstudio</Authors>
-	  <Company>寰宇朽力网络科技</Company>
-	  <Copyright>XFE工作室版权所有</Copyright>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <PublishTrimmed>True</PublishTrimmed>
 	  <RunAOTCompilation>False</RunAOTCompilation>
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-tizen|AnyCPU'">
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-tizen|AnyCPU'">
 	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(RunConfiguration)'=='Default'">
-	  <LaunchForBackgroundFetch>false</LaunchForBackgroundFetch>
 	</PropertyGroup>
 
 	<ItemGroup>

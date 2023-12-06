@@ -65,6 +65,7 @@
                         <Label
                             Margin="10,0,10,10"
                             x:Name="ContentLabel"
+                            TextColor="{DynamicResource NormalTextColor}"
                             FontSize="Subtitle"
                             Opacity="0.85"
                             HorizontalOptions="Fill"
@@ -72,6 +73,7 @@
                         <Label
                             Margin="10,0,10,10"
                             x:Name="TimeLabel"
+                            TextColor="{DynamicResource NormalTextColor}"
                             FontSize="Caption"
                             Opacity="0.85"
                             HorizontalOptions="End"
@@ -103,6 +105,7 @@
                                 <Label
                                     x:Name="LikeCountLabel"
                                     Text="{Binding LikeCount}"
+                                    TextColor="{DynamicResource NormalTextColor}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>
                             </VerticalStackLayout>
@@ -116,6 +119,7 @@
                                 <Label
                                     x:Name="StarCountLabel"
                                     Text="{Binding StarCount}"
+                                    TextColor="{DynamicResource NormalTextColor}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>
                             </VerticalStackLayout>
@@ -128,6 +132,7 @@
                     IsVisible="False"
                     Opacity="0.2"
                     FontSize="24"
+                    TextColor="{DynamicResource NormalTextColor}"
                     x:Name="NoneCommentLabel"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
@@ -207,6 +212,7 @@
                             Placeholder="你的评论会让小窝更温馨哦~"
                             HorizontalOptions="FillAndExpand"
                             TextChanged="InputEditor_TextChanged"
+                            TextColor="{DynamicResource NormalTextColor}"
                             AutoSize="TextChanges"
                             IsSpellCheckEnabled="False"
                             MaximumHeightRequest="300"

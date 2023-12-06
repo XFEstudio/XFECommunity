@@ -9,5 +9,6 @@
     <Color x:Key="PureBackGroundColor">White</Color>
     <Color x:Key="SecondBackGroundColor">#f0f0f0</Color>
     <Color x:Key="PostTitleTextColor">#3e3192</Color>
+    <Color x:Key="NormalTextColor">Black</Color>
     <Color x:Key="WhiteInLightAndTransparentInDarkColor">White</Color>
 </ResourceDictionary>
