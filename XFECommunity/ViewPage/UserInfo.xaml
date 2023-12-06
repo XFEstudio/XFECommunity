@@ -92,7 +92,9 @@
                 StrokeThickness="0"
                 BackgroundColor="{DynamicResource WhiteInLightAndTransparentInDarkColor}">
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer/>
+                    <TapGestureRecognizer
+                        x:Name="NameEditGesture"
+                        Tapped="NameEditGesture_Tapped"/>
                 </Border.GestureRecognizers>
                 <Grid>
                     <Grid.ColumnDefinitions>
