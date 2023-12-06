@@ -16,6 +16,13 @@ namespace XFECommunity
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                })
+                .ConfigureMauiHandlers(handlers =>
+                {
+#if WINDOWS
+                    handlers.AddHandler(typeof(Entry), typeof(Platforms.Windows.WinEntryHandler));
+                    handlers.AddHandler(typeof(Editor), typeof(Platforms.Windows.WinEditorHandler));
+#endif
                 });
 #if DEBUG
             builder.Logging.AddDebug();

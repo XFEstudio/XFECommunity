@@ -74,7 +74,7 @@
             <BoxView
                 Margin="5,20"
                 HeightRequest="2"
-                CornerRadius="30"
+                CornerRadius="20"
                 Opacity="0.5"
                 Color="{DynamicResource MainColor}"/>
             <Grid>

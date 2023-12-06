@@ -5,6 +5,7 @@
     <Color x:Key="MainColor">#512BD4</Color>
     <Color x:Key="LightMainColor">#F0ECFE</Color>
     <Color x:Key="DisabledMainColor">#A491E8</Color>
+    <Color x:Key="DeepDarkGrayColor">#444654</Color>
     <Color x:Key="BackGroundColor">White</Color>
     <Color x:Key="PureBackGroundColor">White</Color>
     <Color x:Key="SecondBackGroundColor">#f0f0f0</Color>
