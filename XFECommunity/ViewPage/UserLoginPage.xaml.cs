@@ -57,8 +57,11 @@ public partial class UserLoginPage : ContentPage
             var result = await xFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Atel == userTel);
             if (result is not null && result.Count == 1)
             {
-                
-                ChangeForgetPassword(xFEExecuter);
+                xFEExecuter.ExecuteUpdate<XFEChatRoom_UserInfoForm>(x =>
+                {
+                    return x.Atel == userTel;
+                });
+                ChangeForgetPassword(result);
             }
             else
             {
@@ -67,12 +70,13 @@ public partial class UserLoginPage : ContentPage
         }
     }
 
-    public async void ChangeForgetPassword(XFEDataBase xFEExecuter)
+    public async void ChangeForgetPassword(List<XFEChatRoom_UserInfoForm> result)
     {
         string userPassword = await DisplayPromptAsync("忘记密码", "请输入您的新密码", "确定");
         if (userPassword is not null && userPassword.PasswordEditor())
         {
-            xFEExecuter.ExecuteUpdate<XFEChatRoom_UserInfoForm>(x => x.Apassword = userPassword); 
+            /*result[0].Apassword = userPassword;*/
+            UserInfo.CurrentUser = result[0];
             UserInfo.EditUserProperty(UserPropertyToEdit.Password, userPassword);
             if (await UserInfo.UpLoadUserInfo() == 1)
             {
