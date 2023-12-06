@@ -52,8 +52,8 @@ public partial class UserLoginPage : ContentPage
     {
         if (!isAccountChanged)
         {
-            var animation = new Animation(v => UserAccountBorder.MaximumWidthRequest = v, 100, 300);
-            var animation2 = new Animation(v => UserAccountLabel.MaximumWidthRequest = v, 100, 300);
+            var animation = new Animation(v => UserAccountBorder.WidthRequest = v, 100, 300);
+            var animation2 = new Animation(v => UserAccountLabel.WidthRequest = v, 100, 300);
             animation.Commit(this, "UserAccountBorderWidthAnimation", 16, 300, Easing.CubicOut);
             animation2.Commit(this, "UserAccountLabelWidthAnimation", 16, 300, Easing.CubicOut);
             UserAccountLabel.FadeTo(1, 300, Easing.CubicOut);
@@ -68,8 +68,8 @@ public partial class UserLoginPage : ContentPage
         {
             if (isAccountChanged)
             {
-                var animation = new Animation(v => UserAccountBorder.MaximumWidthRequest = v, 300, 100);
-                var animation2 = new Animation(v => UserAccountLabel.MaximumWidthRequest = v, 300, 100);
+                var animation = new Animation(v => UserAccountBorder.WidthRequest = v, 300, 100);
+                var animation2 = new Animation(v => UserAccountLabel.WidthRequest = v, 300, 100);
                 animation.Commit(this, "UserAccountBorderWidthAnimation", 16, 200, Easing.CubicOut);
                 animation2.Commit(this, "UserAccountLabelWidthAnimation", 16, 200, Easing.CubicOut);
                 UserAccountLabel.FadeTo(0.5, 300, Easing.CubicOut);
@@ -83,8 +83,8 @@ public partial class UserLoginPage : ContentPage
     {
         if (!isPasswordChanged)
         {
-            var animation = new Animation(v => UserPasswordBorder.MaximumWidthRequest = v, 100, 300);
-            var animation2 = new Animation(v => UserPasswordLabel.MaximumWidthRequest = v, 100, 300);
+            var animation = new Animation(v => UserPasswordBorder.WidthRequest = v, 100, 300);
+            var animation2 = new Animation(v => UserPasswordLabel.WidthRequest = v, 100, 300);
             animation.Commit(this, "UserPasswordBorderWidthAnimation", 16, 300, Easing.CubicOut);
             animation2.Commit(this, "UserPasswordLabelWidthAnimation", 16, 300, Easing.CubicOut);
             UserPasswordLabel.FadeTo(1, 300, Easing.CubicOut);
@@ -99,8 +99,8 @@ public partial class UserLoginPage : ContentPage
         {
             if (isPasswordChanged)
             {
-                var animation = new Animation(v => UserPasswordBorder.MaximumWidthRequest = v, 300, 100);
-                var animation2 = new Animation(v => UserPasswordLabel.MaximumWidthRequest = v, 300, 100);
+                var animation = new Animation(v => UserPasswordBorder.WidthRequest = v, 300, 100);
+                var animation2 = new Animation(v => UserPasswordLabel.WidthRequest = v, 300, 100);
                 animation.Commit(this, "UserPasswordBorderWidthAnimation", 16, 200, Easing.CubicOut);
                 animation2.Commit(this, "UserPasswordLabelWidthAnimation", 16, 200, Easing.CubicOut);
                 UserPasswordLabel.FadeTo(0.5, 300, Easing.CubicOut);
@@ -131,8 +131,8 @@ public partial class UserLoginPage : ContentPage
     {
         if (!isTelChanged)
         {
-            var animation = new Animation(v => UserTelBorder.MaximumWidthRequest = v, 100, 300);
-            var animation2 = new Animation(v => UserTelLabel.MaximumWidthRequest = v, 100, 300);
+            var animation = new Animation(v => UserTelBorder.WidthRequest = v, 100, 300);
+            var animation2 = new Animation(v => UserTelLabel.WidthRequest = v, 100, 300);
             animation.Commit(this, "UserAccountBorderWidthAnimation", 16, 300, Easing.CubicOut);
             animation2.Commit(this, "UserAccountLabelWidthAnimation", 16, 300, Easing.CubicOut);
             UserTelLabel.FadeTo(1, 300, Easing.CubicOut);
@@ -147,8 +147,8 @@ public partial class UserLoginPage : ContentPage
         {
             if (isTelChanged)
             {
-                var animation = new Animation(v => UserTelBorder.MaximumWidthRequest = v, 300, 100);
-                var animation2 = new Animation(v => UserTelLabel.MaximumWidthRequest = v, 300, 100);
+                var animation = new Animation(v => UserTelBorder.WidthRequest = v, 300, 100);
+                var animation2 = new Animation(v => UserTelLabel.WidthRequest = v, 300, 100);
                 animation.Commit(this, "UserAccountBorderWidthAnimation", 16, 200, Easing.CubicOut);
                 animation2.Commit(this, "UserAccountLabelWidthAnimation", 16, 200, Easing.CubicOut);
                 UserTelLabel.FadeTo(0.5, 300, Easing.CubicOut);
@@ -228,7 +228,7 @@ public partial class UserLoginPage : ContentPage
             isTelEditorEmpty = false;
             UserTelLabel.Text = "手机号";
             UserTelLabel.TextColor = Color.Parse("Black");
-            UserTelBorder.Stroke = Color.FromArgb("#444654");
+            UserTelBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
             if (!isCoolDown)
             {
                 TelVerifyCodeButton.IsEnabled = true;
@@ -253,10 +253,10 @@ public partial class UserLoginPage : ContentPage
             switch (AppSystemProfile.LoginMethod)
             {
                 case LoginMethod.PasswordLogin:
-                    UserAccountBorder.Stroke = Color.FromArgb("#444654");
+                    UserAccountBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
                     UserAccountLabel.Text = "手机号/邮箱";
                     UserAccountLabel.TextColor = Color.Parse("Gray");
-                    UserPasswordBorder.Stroke = Color.FromArgb("#444654");
+                    UserPasswordBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
                     UserPasswordLabel.Text = "用户密码";
                     UserPasswordLabel.TextColor = Color.Parse("Gray");
                     var mailResult = await XFEExecuter.ExecuteGet<XFEChatRoom_UserInfoForm>(x => x.Amail == UserAccountEditor.Text);
@@ -281,10 +281,10 @@ public partial class UserLoginPage : ContentPage
                     }).StartNewTask();
                     break;
                 case LoginMethod.VerifyCodeLogin:
-                    TelVerifyCodeBorder.Stroke = Color.FromArgb("#444654");
+                    TelVerifyCodeBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
                     TelVerifyCodeLabel.TextColor = Color.Parse("Gray");
                     TelVerifyCodeLabel.Text = "验证码";
-                    UserTelBorder.Stroke = Color.FromArgb("#444654");
+                    UserTelBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
                     UserTelLabel.TextColor = Color.Parse("Gray");
                     UserTelLabel.Text = "手机号";
                     if (TelVerifyCodeEditor.Text == randomCode)

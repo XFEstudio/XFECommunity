@@ -30,10 +30,10 @@ public partial class UserRegisterPage : ContentPage
     {
         try
         {
-            TelVerifyCodeBorder.Stroke = Color.FromArgb("#444654");
+            TelVerifyCodeBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
             TelVerifyCodeLabel.TextColor = Color.Parse("Gray");
             TelVerifyCodeLabel.Text = "验证码";
-            UserTelBorder.Stroke = Color.FromArgb("#444654");
+            UserTelBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
             UserTelLabel.TextColor = Color.Parse("Gray");
             UserTelLabel.Text = "手机号";
             if (TelVerifyCodeEditor.Text == randomCode)
@@ -244,7 +244,7 @@ public partial class UserRegisterPage : ContentPage
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };
-            successfulLabel.SetDynamicResource(Label.TextColorProperty, "PureBackGroundColor");
+            successfulLabel.SetDynamicResource(Label.TextColorProperty, "NormalTextColor");
             this.Content = successfulLabel;
             await successfulLabel.FadeTo(1, 800, Easing.CubicOut);
             await Task.Delay(500);
@@ -291,7 +291,7 @@ public partial class UserRegisterPage : ContentPage
             IsTelEditor = true;
             UserTelLabel.Text = "手机号";
             UserTelLabel.TextColor = Color.Parse("Black");
-            UserTelBorder.Stroke = Color.FromArgb("#444654");
+            UserTelBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
             if (!IsCoolDown)
             {
                 TelVerifyCodeButton.IsEnabled = true;
@@ -315,7 +315,7 @@ public partial class UserRegisterPage : ContentPage
             IsMailEditor = true;
             UserMailLabel.Text = "邮箱";
             UserMailLabel.TextColor = Color.Parse("Black");
-            UserMailBorder.Stroke = Color.FromArgb("#444654");
+            UserMailBorder.SetDynamicResource(Border.StrokeProperty, "DeepDarkGray");
         }
         else
         {

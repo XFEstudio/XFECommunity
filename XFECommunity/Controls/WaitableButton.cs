@@ -16,7 +16,7 @@
                     if (UseLoadingAnimation)
                         this.ImageSource = "whiteloader";
                     if (TextColor is null)
-                        SetDynamicResource(TextColorProperty, "PureBackGroundColor");
+                        SetDynamicResource(TextColorProperty, "NormalTextColor");
                     if (BackgroundColor is null)
                         SetDynamicResource(TextColorProperty, "MainColor");
                     else

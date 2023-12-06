@@ -37,7 +37,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-		<PackageCertificateThumbprint>B3F7F00A5A2AE2A55BCFD5745403F9521A81F9C7</PackageCertificateThumbprint>
+		<PackageCertificateThumbprint>C2DE5837E93340B269515B7FA6975DF45D057168</PackageCertificateThumbprint>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
 		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
@@ -81,6 +81,7 @@
 	  <Authors>XFEstudio</Authors>
 	  <Company>寰宇朽力网络科技</Company>
 	  <Copyright>XFE工作室版权所有</Copyright>
+	  <DefaultLanguage>zh-CN</DefaultLanguage>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
@@ -137,17 +138,28 @@
 	<ItemGroup>
 	  <None Remove="Controls\vnlaizcf.ijs~" />
 	  <None Remove="Resources\AppIcon\logoicon.png" />
+	  <None Remove="Resources\Images\about_our_team.png" />
+	  <None Remove="Resources\Images\artificial_intelligence.png" />
+	  <None Remove="Resources\Images\being_creative.png" />
+	  <None Remove="Resources\Images\beta_testing.png" />
 	  <None Remove="Resources\Images\close.png" />
 	  <None Remove="Resources\Images\edit.png" />
+	  <None Remove="Resources\Images\emoji_discuss.png" />
+	  <None Remove="Resources\Images\facetime_meeting.png" />
+	  <None Remove="Resources\Images\get_inspired.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\like.png" />
 	  <None Remove="Resources\Images\likecircle.png" />
+	  <None Remove="Resources\Images\mars_rover.png" />
 	  <None Remove="Resources\Images\moon.png" />
+	  <None Remove="Resources\Images\protect_privacy.png" />
 	  <None Remove="Resources\Images\quote.png" />
 	  <None Remove="Resources\Images\right.png" />
 	  <None Remove="Resources\Images\send.png" />
 	  <None Remove="Resources\Images\star.png" />
 	  <None Remove="Resources\Images\starcircle.png" />
+	  <None Remove="Resources\Images\startup.png" />
+	  <None Remove="Resources\Images\success.png" />
 	  <None Remove="Resources\Images\sun.png" />
 	  <None Remove="Resources\Images\sunandmoon.png" />
 	  <None Remove="Resources\Images\unlike.png" />
@@ -202,6 +214,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="ViewPage\CommunityPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ViewPage\IntroductionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="ViewPage\PostEditPage.xaml">

@@ -1,5 +1,7 @@
 ﻿using XFECommunity.AllImpl;
 using XFECommunity.Resources.Styles;
+using XFECommunity.ViewPage;
+using XFE各类拓展.NetCore.FileExtension;
 
 namespace XFECommunity
 {
@@ -17,7 +19,22 @@ namespace XFECommunity
             AppSystemProfile.Theme = Current!.RequestedTheme;
             Console.WriteLine(Current!.RequestedTheme);
             AppSystemProfile.LoadSystemProfile();
-            MainPage = new AppShell();
+            try
+            {
+                if (File.Exists(AppPath.CheckInitializePath))
+                {
+                    MainPage = new AppShell();
+                }
+                else
+                {
+                    "1".WriteIn(AppPath.CheckInitializePath);
+                    MainPage = new IntroductionPage();
+                }
+            }
+            catch
+            {
+                MainPage = new AppShell();
+            }
             AutoSwitchByTheme(AppSystemProfile.Theme);
         }
         public static void SwitchToTheme(ResourceDictionary resourceDictionary)
