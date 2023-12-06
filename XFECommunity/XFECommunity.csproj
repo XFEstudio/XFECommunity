@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-maccatalyst;net8.0-android;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -23,18 +23,14 @@
 		<ApplicationTitle>XFECommunity</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.xfecommunity</ApplicationId>
+		<ApplicationId>com.xfegzs.xfecommunity</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 		<PackageCertificateThumbprint>C2DE5837E93340B269515B7FA6975DF45D057168</PackageCertificateThumbprint>
@@ -45,27 +41,6 @@
 		<AppInstallerUri>D:\XFECommunity</AppInstallerUri>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<AppxPackageDir>D:\XFECommunitySummon\</AppxPackageDir>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
-	  <ApplicationId>com.xfegzs.xfecommunity</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationId>com.xfegzs.xfecommunity</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
-	  <ApplicationId>com.xfegzs.xfecommunity</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
@@ -82,38 +57,6 @@
 	  <Company>寰宇朽力网络科技</Company>
 	  <Copyright>XFE工作室版权所有</Copyright>
 	  <DefaultLanguage>zh-CN</DefaultLanguage>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <PublishTrimmed>True</PublishTrimmed>
-	  <RunAOTCompilation>False</RunAOTCompilation>
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-tizen|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-tizen|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationTitle>XFE社区</ApplicationTitle>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(RunConfiguration)'=='Default'">

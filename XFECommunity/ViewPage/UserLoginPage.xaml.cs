@@ -58,7 +58,7 @@ public partial class UserLoginPage : ContentPage
             if (result is not null && result.Count == 1)
             {
                 
-                ChangeForgetPassword(xFEExecuter);
+                //ChangeForgetPassword(xFEExecuter);
             }
             else
             {
@@ -72,7 +72,7 @@ public partial class UserLoginPage : ContentPage
         string userPassword = await DisplayPromptAsync("忘记密码", "请输入您的新密码", "确定");
         if (userPassword is not null && userPassword.PasswordEditor())
         {
-            xFEExecuter.ExecuteUpdate<XFEChatRoom_UserInfoForm>(x => x.Apassword = userPassword); 
+            //xFEExecuter.ExecuteUpdate<XFEChatRoom_UserInfoForm>(x => x.Apassword = userPassword); 
             UserInfo.EditUserProperty(UserPropertyToEdit.Password, userPassword);
             if (await UserInfo.UpLoadUserInfo() == 1)
             {
